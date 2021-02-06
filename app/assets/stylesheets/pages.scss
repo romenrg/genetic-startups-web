@@ -11,6 +11,25 @@ header {
   .map {
     padding: 1rem;
     background: cornflowerblue;
+    .grid {
+      .row {
+        border-top:    1px solid  #ddd;
+        border-left:   1px solid  #ddd;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: flex-start;
+        display: flex;
+        .col {
+          flex: 1;
+          height: 40px;
+          border-right:  1px solid #ddd;
+        }
+      }
+      .row:last-child {
+        border-bottom: 1px solid #ddd;
+      }
+    }
   }
 }
 
