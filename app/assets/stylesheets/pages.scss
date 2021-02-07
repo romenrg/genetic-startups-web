@@ -23,24 +23,23 @@ header {
   padding: 1rem;
   .map {
     padding: 1rem;
-    .grid {
-      .row {
+    .grid-container {
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(80px, 0fr));
+      grid-auto-rows: 80px;
+      grid-gap: 1px;
+      place-items: center;
+      width: 405px;
+      .cell {
         background: #f5f5f5;
-        border-top:    1px solid  #ddd;
-        border-left:   1px solid  #ddd;
-        width: 200px;
-        margin-left: auto;
-        margin-right: auto;
-        align-items: flex-start;
+        border: 1px solid #ddd;
+        width: 80px;
+        height: 80px;
         display: flex;
-        .col {
-          flex: 1;
-          height: 40px;
-          border-right:  1px solid #ddd;
-        }
-      }
-      .row:last-child {
-        border-bottom: 1px solid #ddd;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
