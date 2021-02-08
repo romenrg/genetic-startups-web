@@ -2,26 +2,20 @@ import React, { Component } from 'react'
 
 class Map extends Component {
   render() {
+    const cellWidthHeight = 81
     const cssValues = {
-      "--numCols": '6',
-      "--gridWidth": '486px'
+      "--numCols": this.props.numCols,
+      "--gridWidth": cellWidthHeight*this.props.numCols+"px"
+    }
+    var cells = []
+    for (var i = 0; i < this.props.numRows * this.props.numCols; i++) {
+      cells.push(<div className="cell">{i}</div>)
     }
     let className = 'map';
     return (
       <div className={className}>
         <div className="grid-container" style={cssValues}>
-          <div className="cell">A</div>
-          <div className="cell">B</div>
-          <div className="cell">C</div>
-          <div className="cell">D</div>
-          <div className="cell">E</div>
-          <div className="cell">F</div>
-          <div className="cell">G</div>
-          <div className="cell">H</div>
-          <div className="cell">I</div>
-          <div className="cell">J</div>
-          <div className="cell">K</div>
-          <div className="cell">L</div>
+          {cells}
         </div>
       </div>
     )

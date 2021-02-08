@@ -7,8 +7,11 @@ import ReactDOM from 'react-dom'
 import Map from "../components/Map";
 
 document.addEventListener('DOMContentLoaded', () => {
+  const node = document.getElementById("map_props")
+  const numRows = node.getAttribute('numRows')
+  const numCols = node.getAttribute('numCols')
   ReactDOM.render(
-    <Map />,
+    <Map numRows={numRows} numCols={numCols}/>,
     document.getElementById('main'),
   )
 })

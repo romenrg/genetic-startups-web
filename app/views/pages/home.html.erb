@@ -4,9 +4,15 @@
 
 <div id="main">
   <p>Find me in app/views/pages/home.html.erb</p>
-  <p>Find the React stuff in app/javascript/packs/hello_react.jsx</p>
-  <%= javascript_pack_tag 'hello_react' %>
+  <p>Find the React stuff in app/javascript/packs/map_react.jsx</p>
+  <%= javascript_pack_tag 'map_react' %>
 </div>
+
+<%= content_tag :div,
+  id: "map_props",
+  numRows: @numRows,
+  numCols: @numCols do %>
+<% end %>
 
 <footer>
   Genetic Startups
