@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 
 class Map extends Component {
   render() {
+    const cssValues = {
+      "--numCols": '6',
+      "--gridWidth": '486px'
+    }
     let className = 'map';
     return (
       <div className={className}>
-        <div className="grid-container">
+        <div className="grid-container" style={cssValues}>
           <div className="cell">A</div>
           <div className="cell">B</div>
           <div className="cell">C</div>
@@ -16,6 +20,8 @@ class Map extends Component {
           <div className="cell">H</div>
           <div className="cell">I</div>
           <div className="cell">J</div>
+          <div className="cell">K</div>
+          <div className="cell">L</div>
         </div>
       </div>
     )
