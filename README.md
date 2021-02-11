@@ -10,4 +10,9 @@ in a map where investors, product launches, team members, sad news and sales, am
  
 ## Running it
 
- * Locally: `rails s`
+### Locally for development
+`rails s`
+
+### In a container
+ * First build it:  `docker build -t <imageName> .`
+ * Then run it: `docker run -p 3000:3000 <imageName>`
