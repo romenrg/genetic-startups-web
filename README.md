@@ -7,8 +7,15 @@ in a map where investors, product launches, team members, sad news and sales, am
 
  * This project was created with: `rails new . --webpack=react`
  * The homepage controller was later created with: `rails g controller pages home`
- 
-## Running it
+
+## Running tests
+
+Seems it is necessary to run `rails db:migrate` prior to the tests (or disable the DB config).
+
+Then, run: `rails test <test_file.rb>` (e.g. `rails test test/models/map_model_test.rb`)
+
+
+## Deploying it
 
 ### Locally for development
 `rails s`
