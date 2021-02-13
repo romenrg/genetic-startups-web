@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @numRows = 4
-    @numCols = 8
+    @map = MapModel.new 3, 6
   end
 end
