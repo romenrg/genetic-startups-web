@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Advisor from "images/cells/advisor_greedy.jpg"
 
 class Map extends Component {
   render() {
@@ -9,7 +10,7 @@ class Map extends Component {
     }
     var cells = []
     for (var i = 0; i < this.props.numRows * this.props.numCols; i++) {
-      cells.push(<div className="cell">{i}</div>)
+      cells.push(<div className="cell"><img src={Advisor}/></div>)
     }
     let className = 'map';
     return (
