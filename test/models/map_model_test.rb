@@ -8,13 +8,13 @@ class MapModelTest < ActiveSupport::TestCase
 
   test "actionProbabilityPerQ matrix is generated correctly" do
     @map = MapModel.new 3, 6
-    assert_equal MapModel::NUM_QUARTERS, @map.actionProbabilitiesPerQ.size
-    assert_equal MapModel::NUM_ACTIONS, @map.actionProbabilitiesPerQ[0].size
+    assert_equal MapModel::NUM_QUARTERS, @map.action_probabilities_per_q.size
+    assert_equal MapModel::NUM_ACTIONS, @map.action_probabilities_per_q[0].size
   end
 
   test "probabilities per map quarter should amount to 100" do
     @map = MapModel.new 3, 6
-    @map.actionProbabilitiesPerQ.each do |quarter|
+    @map.action_probabilities_per_q.each do |quarter|
       total_probabilities = 0
       total_probabilities += quarter[MapModel::ACTIONS["None"]]
       total_probabilities += quarter[MapModel::ACTIONS["Advisor"]]
