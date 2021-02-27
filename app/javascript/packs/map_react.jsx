@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById("map_props")
   const numRows = node.getAttribute('numRows')
   const numCols = node.getAttribute('numCols')
+  const matrix = node.getAttribute('matrix').split(' ').map(Number)
   ReactDOM.render(
-    <Map numRows={numRows} numCols={numCols}/>,
+    <Map numRows={numRows} numCols={numCols} matrix={matrix}/>,
     document.getElementById('main'),
   )
 })
