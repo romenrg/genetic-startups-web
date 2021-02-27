@@ -45,15 +45,15 @@ class Map extends Component {
     return image
   }
 
-  getCellValue(col, row) {
+  getCellValue(row, col) {
     return this.props.matrix[col * this.props.numRows + row]
   }
 
   createBoard() {
     var cells = []
-    for (var j = 0; j < this.props.numCols; j++) {
-      for (var i = 0; i < this.props.numRows; i++) {
-        cells.push(<div className="cell">{this.getCellContentFromValue(this.getCellValue(j, i))}</div>)
+    for (var i = 0; i < this.props.numRows; i++) {
+      for (var j = 0; j < this.props.numCols; j++) {
+        cells.push(<div className="cell">{this.getCellContentFromValue(this.getCellValue(i, j))}</div>)
       }
     }
     return cells
