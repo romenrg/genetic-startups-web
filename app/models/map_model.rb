@@ -52,7 +52,7 @@ class MapModel
     current_action = 0
     current_range = @action_probabilities_per_q[q][current_action]
     i = 1
-    while current_range < random_num
+    while current_range < num
       current_action = i
       current_range += @action_probabilities_per_q[q][current_action]
       i+=1
