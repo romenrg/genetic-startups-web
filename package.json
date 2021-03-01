@@ -17,13 +17,17 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@testing-library/react": "^11.2.5",
     "webpack-dev-server": "^3.11.2"
   },
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
       "<rootDir>/config/webpack/test.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/app/javascript/components/__mocks__/fileMock.js"
+    }
   },
   "scripts": {
     "test": "jest"
