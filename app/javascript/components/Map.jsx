@@ -11,6 +11,11 @@ import BadNews from "images/cells/entrepreneur_failure.jpg"
 
 class Map extends Component {
 
+  constructor(props) {
+    super(props)
+    this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
+  }
+
   getCellContentFromValue(value) {
     let image = <div className='cell-none'></div>
     switch (value) {
@@ -59,6 +64,10 @@ class Map extends Component {
     return cells
   }
 
+  handleStartEvolutionClick(e) {
+    alert(this.props.numCols)
+  }
+
   render() {
     const cellWidthHeight = 81
     const cssValues = {
@@ -72,6 +81,9 @@ class Map extends Component {
         <div className="grid-container" style={cssValues}>
           {cells}
         </div>
+        <button className="start-button" onClick={this.handleStartEvolutionClick}>
+          Start Evolution
+        </button>
       </div>
     )
   }
