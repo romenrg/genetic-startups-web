@@ -9,10 +9,14 @@ import Doubts from "images/cells/entrepreneur_starting.jpg"
 import Sales from "images/cells/entrepreneur_success.jpg"
 import BadNews from "images/cells/entrepreneur_failure.jpg"
 
+const DEFAULT_POPULATION_SIZE = 25
+const POSSIBLE_MOVES = 4
+
 class Map extends Component {
 
   constructor(props) {
     super(props)
+    this.numSteps = this.props.numCols + this.props.numRows // TODO: Maybe another prp in future
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
@@ -64,8 +68,23 @@ class Map extends Component {
     return cells
   }
 
+  getBaseLog(base, y) {
+    return Math.log(y) / Math.log(base);
+  }
+
+  generatePopulation(populationSize) {
+    let numOfBinaryDigitsForStartCells = Math.ceil(this.getBaseLog(2, this.props.numRows))
+    let numOfBinaryDigitsForSteps = Math.ceil(this.getBaseLog(2, POSSIBLE_MOVES)) * this.numSteps
+    alert("Population size: "+populationSize+"\n"+
+          "Number of rows: "+this.props.numRows+"\n"+
+          "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
+          "Number of cols: "+this.props.numCols+"\n"+
+          "Number of steps: "+this.numSteps+"\n"+
+          "Number of binary digits for steps: "+numOfBinaryDigitsForSteps)
+  }
+
   handleStartEvolutionClick(e) {
-    alert(this.props.numCols)
+    this.generatePopulation(DEFAULT_POPULATION_SIZE)
   }
 
   render() {
