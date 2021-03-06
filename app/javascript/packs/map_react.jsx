@@ -8,8 +8,8 @@ import Map from "../components/Map";
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById("map_props")
-  const numRows = node.getAttribute('numRows')
-  const numCols = node.getAttribute('numCols')
+  const numRows = parseInt(node.getAttribute('numRows'))
+  const numCols = parseInt(node.getAttribute('numCols'))
   const matrix = node.getAttribute('matrix').split(' ').map(Number)
   ReactDOM.render(
     <Map numRows={numRows} numCols={numCols} matrix={matrix}/>,
