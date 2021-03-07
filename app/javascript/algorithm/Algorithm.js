@@ -12,16 +12,16 @@ class Algorithm {
 
   static calculateNextCell(previousCell, movement) {
     let newCell = { row: previousCell.row, col: previousCell.col }
-    if (this._movingRight(movement)) {
+    if (this._isMovingRight(movement)) {
       newCell.col += 1;
     }
-    else if (this._movingDown(movement)) {
+    else if (this._isMovingDown(movement)) {
       newCell.row += 1;
     }
-    else if (this._movingLeft(movement)) {
+    else if (this._isMovingLeft(movement)) {
       newCell.col -= 1;
     }
-    else if (this._movingUp(movement)) {
+    else if (this._isMovingUp(movement)) {
       newCell.row -= 1;
     }
     return newCell
@@ -49,19 +49,19 @@ class Algorithm {
     return Math.log(y) / Math.log(base);
   }
 
-  static _movingRight(movement) {
+  static _isMovingRight(movement) {
     return ((movement[0] === 0) && (movement[1] === 0)) || ((movement[0] === 1) && (movement[1] === 0));
   }
 
-  static _movingDown(movement) {
+  static _isMovingDown(movement) {
     return (movement[0] === 0) && (movement[1] === 1);
   }
 
-  static _movingLeft(movement) {
+  static _isMovingLeft(movement) {
     return false;
   }
 
-  static _movingUp(movement) {
+  static _isMovingUp(movement) {
     return (movement[0] === 1) && (movement[1] === 1);
   }
 }
