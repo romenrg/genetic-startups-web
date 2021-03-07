@@ -10,6 +10,23 @@ class Algorithm {
     return startCell
   }
 
+  static calculateNextCell(previousCell, movement) {
+    let newCell = { row: previousCell.row, col: previousCell.col }
+    if (this._movingRight(movement)) {
+      newCell.col += 1;
+    }
+    else if (this._movingDown(movement)) {
+      newCell.row += 1;
+    }
+    else if (this._movingLeft()) {
+      newCell.col -= 1;
+    }
+    else if (this._movingUp()) {
+      newCell.row -= 1;
+    }
+    return newCell
+  }
+
   static binaryToDecimal(binary) {
     let decimal = 0;
     for (let i = 0; i < binary.length; i++) {
@@ -30,6 +47,22 @@ class Algorithm {
 
   static _getBaseLog(base, y) {
     return Math.log(y) / Math.log(base);
+  }
+
+  static _movingRight(movement) {
+    return ((movement[0] === 0) && (movement[1] === 0)) || ((movement[0] === 1) && (movement[1] === 0));
+  }
+
+  static _movingDown(movement) {
+    return (movement[0] === 0) && (movement[1] === 1);
+  }
+
+  static _movingLeft(movement) {
+    return false;
+  }
+
+  static _movingUp(movement) {
+    return (movement[0] === 1) && (movement[1] === 1);
   }
 }
 

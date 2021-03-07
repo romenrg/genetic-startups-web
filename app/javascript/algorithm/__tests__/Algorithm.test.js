@@ -16,4 +16,7 @@ describe("Algorithm tests", () => {
   it("calculateStartingCell (outside range, should be circular)", () => {
     expect(Algorithm.calculateStartingCell([1,1,0,1,1], 3)).toEqual({row: 0, col: 0})
   })
+  it("calculateNextCell (2 option for move right)", () => {
+    expect(Algorithm.calculateNextCell({ row: 1, col: 1}, [1,0])).toEqual({row: 1, col: 2})
+  })
 });
