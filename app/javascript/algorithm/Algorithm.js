@@ -4,7 +4,8 @@ class Algorithm {
   static calculateStartingCell(individual, numRows) {
     let numOfBinaryDigitsForStartingRow = this.calculateNumOfBinaryDigitsForStartCell(numRows)
     let startRowInBinary = individual.slice(0,numOfBinaryDigitsForStartingRow)
-    let startRowInDecimal = this.binaryToDecimal(startRowInBinary)
+    let potentialStartRowInDecimal = this.binaryToDecimal(startRowInBinary)
+    let startRowInDecimal = potentialStartRowInDecimal % numRows
     let startCell = { row: startRowInDecimal, col: 0}
     return startCell
   }
