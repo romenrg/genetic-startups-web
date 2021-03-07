@@ -104,6 +104,34 @@ class Map extends Component {
   }
 
 
+  sortPopulationByScore() {
+    //TODO
+  }
+
+  setBestCandidatePath(selectedIndividualPathInMatrix) {
+    this.setState({
+      selectedIndividualPathInMatrix: selectedIndividualPathInMatrix
+    })
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async selectBestCandidate() {
+    this.selectedIndividual = this.population[0]
+    let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
+    let step = 0
+    let cell = Algorithm.calculateStartingCell(this.selectedIndividual, this.props.numRows)
+    do {
+      selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(cell.row, cell.col)] = true
+      this.setBestCandidatePath(selectedIndividualPathInMatrix)
+      await this.sleep(1000)
+      cell = {row: cell.row, col: step} //TODO: To be replaced with calculation based on previous cell and moves
+      step++;
+    } while (step < this.numSteps + 1)
+  }
+
   handleStartEvolutionClick(e) {
     this.generatePopulation(DEFAULT_POPULATION_SIZE)
     this.sortPopulationByScore()
