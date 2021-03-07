@@ -122,12 +122,14 @@ class Map extends Component {
     this.selectedIndividual = this.population[0]
     let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
     let step = 0
+    let movements = this.selectedIndividual.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows), this.selectedIndividual.length)
     let cell = Algorithm.calculateStartingCell(this.selectedIndividual, this.props.numRows)
     do {
       selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(cell.row, cell.col)] = true
       this.setBestCandidatePath(selectedIndividualPathInMatrix)
       await this.sleep(1000)
-      cell = {row: cell.row, col: step} //TODO: To be replaced with calculation based on previous cell and moves
+      cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
+      movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
     } while (step < this.numSteps + 1)
   }
