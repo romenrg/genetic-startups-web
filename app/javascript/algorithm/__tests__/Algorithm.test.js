@@ -8,7 +8,7 @@ describe("Algorithm tests", () => {
     expect(Algorithm.calculateNumOfBinaryDigitsForStartCell(10)).toBe(4)
   });
   it("calculateNumBinaryDigitsForSteps", () => {
-    expect(Algorithm.calculateNumBinaryDigitsForSteps(47)).toBe(94)
+    expect(Algorithm.calculateNumBinaryDigitsForEachStep()).toBe(2)
   })
   it("calculateStartingCell (within range)", () => {
     expect(Algorithm.calculateStartingCell([1,0,0,1,1], 3)).toEqual({row: 2, col: 0})

@@ -83,7 +83,7 @@ class Map extends Component {
 
   generatePopulation(populationSize) {
     let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows)
-    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForSteps(this.numSteps)
+    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * this.numSteps
     let population = []
     for (let i = 0; i < populationSize; i++) {
       let individual = []

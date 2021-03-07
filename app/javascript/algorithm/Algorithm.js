@@ -41,8 +41,8 @@ class Algorithm {
     return Math.ceil(this._getBaseLog(2, numRows))
   }
 
-  static calculateNumBinaryDigitsForSteps(numSteps) {
-    return Math.ceil(this._getBaseLog(2, POSSIBLE_MOVES)) * numSteps
+  static calculateNumBinaryDigitsForEachStep() {
+    return Math.ceil(this._getBaseLog(2, POSSIBLE_MOVES))
   }
 
   static _getBaseLog(base, y) {
