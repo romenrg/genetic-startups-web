@@ -18,10 +18,10 @@ class Algorithm {
     else if (this._movingDown(movement)) {
       newCell.row += 1;
     }
-    else if (this._movingLeft()) {
+    else if (this._movingLeft(movement)) {
       newCell.col -= 1;
     }
-    else if (this._movingUp()) {
+    else if (this._movingUp(movement)) {
       newCell.row -= 1;
     }
     return newCell
