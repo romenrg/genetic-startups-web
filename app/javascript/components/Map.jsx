@@ -16,6 +16,7 @@ class Map extends Component {
 
   constructor(props) {
     super(props)
+    this.state = { selectedIndividualPathInMatrix: new Array(this.props.numRows * this.props.numCols) }
     this.numSteps = this.props.numCols + this.props.numRows // TODO: Maybe another prp in future
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
@@ -58,11 +59,15 @@ class Map extends Component {
     return this.props.matrix[col * this.props.numRows + row]
   }
 
-  createBoard() {
+  drawBoard() {
     var cells = []
     for (var i = 0; i < this.props.numRows; i++) {
       for (var j = 0; j < this.props.numCols; j++) {
-        cells.push(<div className="cell">{this.getCellContentFromValue(this.getCellValue(i, j))}</div>)
+        let cellClasses = "cell"
+        if (this.state.selectedIndividualPathInMatrix[j * this.props.numRows + i]) {
+          cellClasses += " highlight"
+        }
+        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(this.getCellValue(i, j))}</div>)
       }
     }
     return cells
@@ -76,15 +81,43 @@ class Map extends Component {
     let numOfBinaryDigitsForStartCells = Math.ceil(this.getBaseLog(2, this.props.numRows))
     let numOfBinaryDigitsForSteps = Math.ceil(this.getBaseLog(2, POSSIBLE_MOVES)) * this.numSteps
     alert("Population size: "+populationSize+"\n"+
-          "Number of rows: "+this.props.numRows+"\n"+
-          "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
-          "Number of cols: "+this.props.numCols+"\n"+
-          "Number of steps: "+this.numSteps+"\n"+
-          "Number of binary digits for steps: "+numOfBinaryDigitsForSteps)
+      "Number of rows: "+this.props.numRows+"\n"+
+      "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
+      "Number of cols: "+this.props.numCols+"\n"+
+      "Number of steps: "+this.numSteps+"\n"+
+      "Number of binary digits for steps: "+numOfBinaryDigitsForSteps)
+  }
+
+  sortPopulationByScore() {
+    //TODO
+  }
+
+  drawPath(selectedIndividualPathInMatrix) {
+    this.setState({
+      selectedIndividualPathInMatrix: selectedIndividualPathInMatrix
+    })
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async selectBestCandidate() {
+    let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
+    for (let i = 0; i < this.numSteps + 1; i++) {
+      //TODO: set one cell in the individual path at a time. Currently test data below (to be replaced).
+      let col = i
+      let row = 1
+      selectedIndividualPathInMatrix[col * this.props.numRows + row] = true
+      this.drawPath(selectedIndividualPathInMatrix)
+      await this.sleep(1000)
+    }
   }
 
   handleStartEvolutionClick(e) {
     this.generatePopulation(DEFAULT_POPULATION_SIZE)
+    this.sortPopulationByScore()
+    this.selectBestCandidate()
   }
 
   render() {
@@ -93,7 +126,7 @@ class Map extends Component {
       "--numCols": this.props.numCols,
       "--gridWidth": cellWidthHeight*this.props.numCols+"px"
     }
-    var cells = this.createBoard();
+    let cells = this.drawBoard();
     let className = 'map';
     return (
       <div className={className}>
