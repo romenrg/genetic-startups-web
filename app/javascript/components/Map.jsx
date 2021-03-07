@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Algorithm from "../algorithm/Algorithm";
 import Advisor from "images/cells/advisor_greedy.jpg"
 import Circus from "images/cells/startups_circus.jpg"
 import Team from "images/cells/entrepreneur_team.jpg"
@@ -10,7 +11,6 @@ import Sales from "images/cells/entrepreneur_success.jpg"
 import BadNews from "images/cells/entrepreneur_failure.jpg"
 
 const DEFAULT_POPULATION_SIZE = 25
-const POSSIBLE_MOVES = 4
 
 class Map extends Component {
 
@@ -82,8 +82,8 @@ class Map extends Component {
   }
 
   generatePopulation(populationSize) {
-    let numOfBinaryDigitsForStartCells = Math.ceil(this.getBaseLog(2, this.props.numRows))
-    let numOfBinaryDigitsForSteps = Math.ceil(this.getBaseLog(2, POSSIBLE_MOVES)) * this.numSteps
+    let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows)
+    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForSteps(this.numSteps)
     let population = []
     for (let i = 0; i < populationSize; i++) {
       let individual = []
@@ -103,32 +103,6 @@ class Map extends Component {
       "Population[0]: "+this.population[0])
   }
 
-  sortPopulationByScore() {
-    //TODO
-  }
-
-  drawPath(selectedIndividualPathInMatrix) {
-    this.setState({
-      selectedIndividualPathInMatrix: selectedIndividualPathInMatrix
-    })
-  }
-
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  async selectBestCandidate() {
-    this.selectedIndividual = this.population[0]
-    let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
-    for (let i = 0; i < this.numSteps + 1; i++) {
-      //TODO: set one cell in the individual path at a time. Currently test data below (to be replaced).
-      let col = i
-      let row = 1
-      selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(row, col)] = true
-      this.drawPath(selectedIndividualPathInMatrix)
-      await this.sleep(1000)
-    }
-  }
 
   handleStartEvolutionClick(e) {
     this.generatePopulation(DEFAULT_POPULATION_SIZE)
