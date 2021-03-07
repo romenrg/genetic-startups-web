@@ -55,8 +55,12 @@ class Map extends Component {
     return image
   }
 
+  calculateOneDimensionalPos(row, col) {
+    return col * this.props.numRows + row;
+  }
+
   getCellValue(row, col) {
-    return this.props.matrix[col * this.props.numRows + row]
+    return this.props.matrix[this.calculateOneDimensionalPos(row, col)]
   }
 
   drawBoard() {
@@ -64,7 +68,7 @@ class Map extends Component {
     for (var i = 0; i < this.props.numRows; i++) {
       for (var j = 0; j < this.props.numCols; j++) {
         let cellClasses = "cell"
-        if (this.state.selectedIndividualPathInMatrix[j * this.props.numRows + i]) {
+        if (this.state.selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(i, j)]) {
           cellClasses += " highlight"
         }
         cells.push(<div className={cellClasses}>{this.getCellContentFromValue(this.getCellValue(i, j))}</div>)
@@ -120,7 +124,7 @@ class Map extends Component {
       //TODO: set one cell in the individual path at a time. Currently test data below (to be replaced).
       let col = i
       let row = 1
-      selectedIndividualPathInMatrix[col * this.props.numRows + row] = true
+      selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(row, col)] = true
       this.drawPath(selectedIndividualPathInMatrix)
       await this.sleep(1000)
     }
