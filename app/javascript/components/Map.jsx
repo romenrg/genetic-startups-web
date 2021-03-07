@@ -80,12 +80,23 @@ class Map extends Component {
   generatePopulation(populationSize) {
     let numOfBinaryDigitsForStartCells = Math.ceil(this.getBaseLog(2, this.props.numRows))
     let numOfBinaryDigitsForSteps = Math.ceil(this.getBaseLog(2, POSSIBLE_MOVES)) * this.numSteps
+    let population = []
+    for (let i = 0; i < populationSize; i++) {
+      let individual = []
+      for (let j = 0; j < numOfBinaryDigitsForStartCells + numOfBinaryDigitsForSteps; j++) {
+        let chromosome = Math.round(Math.random())
+        individual.push(chromosome)
+      }
+      population.push(individual)
+    }
+    this.population = population
     alert("Population size: "+populationSize+"\n"+
       "Number of rows: "+this.props.numRows+"\n"+
       "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
       "Number of cols: "+this.props.numCols+"\n"+
       "Number of steps: "+this.numSteps+"\n"+
-      "Number of binary digits for steps: "+numOfBinaryDigitsForSteps)
+      "Number of binary digits for steps: "+numOfBinaryDigitsForSteps+"\n"+
+      "Population[0]: "+this.population[0])
   }
 
   sortPopulationByScore() {
@@ -103,6 +114,7 @@ class Map extends Component {
   }
 
   async selectBestCandidate() {
+    this.selectedIndividual = this.population[0]
     let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
     for (let i = 0; i < this.numSteps + 1; i++) {
       //TODO: set one cell in the individual path at a time. Currently test data below (to be replaced).
