@@ -77,10 +77,6 @@ class Map extends Component {
     return cells
   }
 
-  getBaseLog(base, y) {
-    return Math.log(y) / Math.log(base);
-  }
-
   generatePopulation(populationSize) {
     let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows)
     let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * this.numSteps
