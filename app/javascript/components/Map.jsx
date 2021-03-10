@@ -108,9 +108,18 @@ class Map extends Component {
       "Population[0]: "+this.population[0])
   }
 
-
+//TODO: Fitness needs to access the map matrix, probably extract shared pieces to a 3rd class "MapData"?
   sortPopulationByScore() {
-    //TODO
+    console.log("BEFORE SORTING -----------")
+    for (let i = 0; i < this.population.length; i++) {
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this, this.population[i]))
+    }
+    console.log("SORTING -----------")
+    this.population.sort((a, b) => Algorithm.fitness(this, b) - Algorithm.fitness(this, a))
+    console.log("AFTER SORTING -----------")
+    for (let i = 0; i < this.population.length; i++) {
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this, this.population[i]))
+    }
   }
 
   setBestCandidatePath(selectedIndividualPathInMatrix) {
