@@ -60,7 +60,16 @@ class Map extends Component {
   }
 
   getCellValue(row, col) {
-    return this.props.matrix[this.calculateOneDimensionalPos(row, col)]
+    if (this._isCellInMap(row, col)) {
+      return this.props.matrix[this.calculateOneDimensionalPos(row, col)]
+    }
+    else {
+      return 0
+    }
+  }
+
+  _isCellInMap(row, col) {
+    return ((row >= 0) && (col >= 0) && (row < this.props.numRows) && (col < this.props.numCols))
   }
 
   drawBoard() {
