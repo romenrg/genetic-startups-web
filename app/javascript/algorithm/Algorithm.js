@@ -1,6 +1,20 @@
 const POSSIBLE_MOVES = 3
 
 class Algorithm {
+  static fitness(map, individual) {
+    let score = 0;
+    let step = 0;
+    let cell = this.calculateStartingCell(individual, map.props.numRows)
+    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(map.props.numRows), individual.length)
+    do {
+      score += map.getCellValue(cell.row, cell.col); //TODO: Should be the actual value, not the action num
+      cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
+      movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
+      step++;
+    } while (step < map.numSteps + 1)
+    return score;
+  }
+
   static calculateStartingCell(individual, numRows) {
     let numOfBinaryDigitsForStartingRow = this.calculateNumOfBinaryDigitsForStartCell(numRows)
     let startRowInBinary = individual.slice(0,numOfBinaryDigitsForStartingRow)
@@ -10,6 +24,7 @@ class Algorithm {
     return startCell
   }
 
+  //TODO: If out of bounds, don't move?
   static calculateNextCell(previousCell, movement) {
     let newCell = { row: previousCell.row, col: previousCell.col }
     if (this._isMovingRight(movement)) {

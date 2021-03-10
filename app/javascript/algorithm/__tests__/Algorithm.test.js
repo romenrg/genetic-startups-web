@@ -1,4 +1,5 @@
 import Algorithm from "../Algorithm";
+import Map from "../../components/Map"
 
 describe("Algorithm tests", () => {
   it("binaryToDecimal", () => {
@@ -18,5 +19,11 @@ describe("Algorithm tests", () => {
   })
   it("calculateNextCell (2 option for move right)", () => {
     expect(Algorithm.calculateNextCell({ row: 1, col: 1}, [1,0])).toEqual({row: 1, col: 2})
+  })
+  it("fitness",() => {
+    let props = {numRows: 2, numCols: 2, matrix: [0, 1, 2, 0]}
+    let map = new Map(props);
+    let score = Algorithm.fitness(map, [0, 0, 1, 0, 0, 1, 1, 0, 0])
+    expect(score).toBe(3)
   })
 });
