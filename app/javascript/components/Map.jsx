@@ -59,7 +59,7 @@ class Map extends Component {
     return col * this.props.numRows + row;
   }
 
-  getCellValue(row, col) {
+  getCellAction(row, col) {
     if (this._isCellInMap(row, col)) {
       return this.props.matrix[this.calculateOneDimensionalPos(row, col)]
     }
@@ -80,7 +80,7 @@ class Map extends Component {
         if (this.state.selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(i, j)]) {
           cellClasses += " highlight"
         }
-        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(this.getCellValue(i, j))}</div>)
+        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(this.getCellAction(i, j))}</div>)
       }
     }
     return cells

@@ -7,7 +7,7 @@ class Algorithm {
     let cell = this.calculateStartingCell(individual, map.props.numRows)
     let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(map.props.numRows), individual.length)
     do {
-      score += map.getCellValue(cell.row, cell.col); //TODO: Should be the actual value, not the action num
+      score += map.getCellAction(cell.row, cell.col); //TODO: Should be the actual value, not the action num
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
