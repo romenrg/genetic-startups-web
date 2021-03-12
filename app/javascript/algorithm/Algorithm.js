@@ -1,17 +1,17 @@
 const POSSIBLE_MOVES = 3
 
 class Algorithm {
-  static fitness(map, individual) {
+  static fitness(individual, mapData) {
     let score = 0;
     let step = 0;
-    let cell = this.calculateStartingCell(individual, map.props.numRows)
-    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(map.props.numRows), individual.length)
+    let cell = this.calculateStartingCell(individual, mapData.numRows)
+    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individual.length)
     do {
-      score += map.getCellAction(cell.row, cell.col); //TODO: Should be the actual value, not the action num
+      score += Algorithm.getCellAction(cell.row, cell.col, mapData); //TODO: Should be the actual value, not the action num
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
-    } while (step < map.numSteps + 1)
+    } while (step < Algorithm.getNumSteps(mapData) + 1)
     return score;
   }
 
@@ -58,6 +58,28 @@ class Algorithm {
 
   static calculateNumBinaryDigitsForEachStep() {
     return Math.ceil(this._getBaseLog(2, POSSIBLE_MOVES))
+  }
+
+  static getNumSteps(mapData) {
+    return mapData.numCols + mapData.numRows
+  }
+
+  static calculateOneDimensionalPos(row, col, mapData) {
+    return col * mapData.numRows + row;
+  }
+
+  //TODO: Add test
+  static getCellAction(row, col, mapData) {
+    if (this._isCellInMap(row, col, mapData)) {
+      return mapData.cells[Algorithm.calculateOneDimensionalPos(row, col, mapData)]
+    }
+    else {
+      return 0
+    }
+  }
+
+  static _isCellInMap(row, col, mapData) {
+    return ((row >= 0) && (col >= 0) && (row < mapData.numRows) && (col < mapData.numCols))
   }
 
   static _getBaseLog(base, y) {

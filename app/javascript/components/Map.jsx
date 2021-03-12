@@ -16,8 +16,7 @@ class Map extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { selectedIndividualPathInMatrix: new Array(this.props.numRows * this.props.numCols) }
-    this.numSteps = this.props.numCols + this.props.numRows // TODO: Maybe another prp in future
+    this.state = { selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols) }
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
@@ -55,40 +54,23 @@ class Map extends Component {
     return image
   }
 
-  calculateOneDimensionalPos(row, col) {
-    return col * this.props.numRows + row;
-  }
-
-  getCellAction(row, col) {
-    if (this._isCellInMap(row, col)) {
-      return this.props.matrix[this.calculateOneDimensionalPos(row, col)]
-    }
-    else {
-      return 0
-    }
-  }
-
-  _isCellInMap(row, col) {
-    return ((row >= 0) && (col >= 0) && (row < this.props.numRows) && (col < this.props.numCols))
-  }
-
   drawBoard() {
     var cells = []
-    for (var i = 0; i < this.props.numRows; i++) {
-      for (var j = 0; j < this.props.numCols; j++) {
+    for (var i = 0; i < this.props.data.numRows; i++) {
+      for (var j = 0; j < this.props.data.numCols; j++) {
         let cellClasses = "cell"
-        if (this.state.selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(i, j)]) {
+        if (this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.props.data)]) {
           cellClasses += " highlight"
         }
-        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(this.getCellAction(i, j))}</div>)
+        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
       }
     }
     return cells
   }
 
   generatePopulation(populationSize) {
-    let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows)
-    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * this.numSteps
+    let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows)
+    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.props.data)
     let population = []
     for (let i = 0; i < populationSize; i++) {
       let individual = []
@@ -100,10 +82,10 @@ class Map extends Component {
     }
     this.population = population
     alert("Population size: "+populationSize+"\n"+
-      "Number of rows: "+this.props.numRows+"\n"+
+      "Number of rows: "+this.props.data.numRows+"\n"+
       "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
-      "Number of cols: "+this.props.numCols+"\n"+
-      "Number of steps: "+this.numSteps+"\n"+
+      "Number of cols: "+this.props.data.numCols+"\n"+
+      "Number of steps: "+Algorithm.getNumSteps(this.props.data)+"\n"+
       "Number of binary digits for steps: "+numOfBinaryDigitsForSteps+"\n"+
       "Population[0]: "+this.population[0])
   }
@@ -112,19 +94,19 @@ class Map extends Component {
   sortPopulationByScore() {
     console.log("BEFORE SORTING -----------")
     for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this, this.population[i]))
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.props.data))
     }
     console.log("SORTING -----------")
-    this.population.sort((a, b) => Algorithm.fitness(this, b) - Algorithm.fitness(this, a))
+    this.population.sort((a, b) => Algorithm.fitness(b, this.props.data) - Algorithm.fitness(a, this.props.data))
     console.log("AFTER SORTING -----------")
     for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this, this.population[i]))
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.props.data))
     }
   }
 
-  setBestCandidatePath(selectedIndividualPathInMatrix) {
+  setBestCandidatePath(selectedIndividualPath) {
     this.setState({
-      selectedIndividualPathInMatrix: selectedIndividualPathInMatrix
+      selectedIndividualPath: selectedIndividualPath
     })
   }
 
@@ -134,18 +116,18 @@ class Map extends Component {
 
   async selectBestCandidate() {
     this.selectedIndividual = this.population[0]
-    let selectedIndividualPathInMatrix = new Array(this.props.numRows * this.props.numCols)
+    let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols)
     let step = 0
-    let movements = this.selectedIndividual.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.numRows), this.selectedIndividual.length)
-    let cell = Algorithm.calculateStartingCell(this.selectedIndividual, this.props.numRows)
+    let movements = this.selectedIndividual.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.selectedIndividual.length)
+    let cell = Algorithm.calculateStartingCell(this.selectedIndividual, this.props.data.numRows)
     do {
-      selectedIndividualPathInMatrix[this.calculateOneDimensionalPos(cell.row, cell.col)] = true
-      this.setBestCandidatePath(selectedIndividualPathInMatrix)
+      selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] = true
+      this.setBestCandidatePath(selectedIndividualPath)
       await this.sleep(1000)
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
-    } while (step < this.numSteps + 1)
+    } while (step < Algorithm.getNumSteps(this.props.data) + 1)
   }
 
   handleStartEvolutionClick(e) {
@@ -157,8 +139,8 @@ class Map extends Component {
   render() {
     const cellWidthHeight = 81
     const cssValues = {
-      "--numCols": this.props.numCols,
-      "--gridWidth": cellWidthHeight*this.props.numCols+"px"
+      "--numCols": this.props.data.numCols,
+      "--gridWidth": cellWidthHeight*this.props.data.numCols+"px"
     }
     let cells = this.drawBoard();
     let className = 'map';

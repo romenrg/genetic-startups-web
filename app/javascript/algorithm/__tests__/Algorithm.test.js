@@ -21,9 +21,8 @@ describe("Algorithm tests", () => {
     expect(Algorithm.calculateNextCell({ row: 1, col: 1}, [1,0])).toEqual({row: 1, col: 2})
   })
   it("fitness",() => {
-    let props = {numRows: 2, numCols: 2, matrix: [0, 1, 2, 0]}
-    let map = new Map(props);
-    let score = Algorithm.fitness(map, [0, 0, 1, 0, 0, 1, 1, 0, 0])
+    let mapData = {numRows: 2, numCols: 2, cells: [0, 1, 2, 0]}
+    let score = Algorithm.fitness([0, 0, 1, 0, 0, 1, 1, 0, 0], mapData)
     expect(score).toBe(3)
   })
 });
