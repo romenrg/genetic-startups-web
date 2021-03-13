@@ -55,7 +55,6 @@ header {
     .start-button {
       margin: 1rem auto;
       display: block;
-      cursor: pointer;
       padding: .5rem 1rem;
       font-size: 1.25rem;
       line-height: 1.5;
@@ -69,20 +68,26 @@ header {
       vertical-align: middle;
       border: 1px solid #6c757d;
       transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    }
-    .start-button:hover {
-      color: #fff;
-      background-color: #5a6268;
-      border-color: #545b62;
-    }
-    .start-button:active {
-      color: #fff;
-      background-color: #545b62;
-      border-color: #4e555b;
-    }
-    .start-button:focus {
-      box-shadow: 0 0 0 0.2rem RGB(108 117 125 / 50%);
-      outline: 0;
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+      &:disabled {
+        opacity: 0.5;
+      }
+      &:not(:disabled):hover {
+        color: #fff;
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+      &:not(:disabled):active {
+        color: #fff;
+        background-color: #545b62;
+        border-color: #4e555b;
+      }
+      &:not(:disabled):focus {
+        box-shadow: 0 0 0 0.2rem RGB(108 117 125 / 50%);
+        outline: 0;
+      }
     }
   }
 }
