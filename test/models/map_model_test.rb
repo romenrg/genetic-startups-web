@@ -51,8 +51,8 @@ class MapModelTest < ActiveSupport::TestCase
   test "board matrix is properly generated" do
     @map = MapModel.new 3, 40
     @map.generate_random_cells
-    assert_equal 40, @map.matrix.size()
-    assert_equal 3, @map.matrix[0].size()
+    assert_equal 40, @map.cells.size()
+    assert_equal 3, @map.cells[0].size()
   end
 
 end

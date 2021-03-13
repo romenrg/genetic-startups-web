@@ -23,13 +23,13 @@ class MapModel
   attr_reader :num_rows
   attr_reader :num_cols
   attr_reader :action_probabilities_per_q
-  attr_reader :matrix
+  attr_reader :cells
 
   attr_writer :num_rows
   attr_writer :num_cols
 
   def generate_random_cells()
-    @matrix = Array.new(num_cols) { Array.new(num_rows) }
+    @cells = Array.new(num_cols) { Array.new(num_rows) }
     q = 0
     for i in 0..num_cols-1 do
       if i < num_cols / 4
@@ -43,7 +43,7 @@ class MapModel
       end
       for j in 0..num_rows-1 do
         random_num = rand(101)
-        @matrix[i][j] = get_action_from_q_and_num(q, random_num)
+        @cells[i][j] = get_action_from_q_and_num(q, random_num)
       end
     end
   end
