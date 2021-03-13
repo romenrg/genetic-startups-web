@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Algorithm from "../algorithm/Algorithm";
+import {Algorithm, AlgorithmConsts} from "../algorithm/Algorithm";
+import StartButton from "./StartButton";
 import Advisor from "images/cells/advisor_greedy.jpg"
 import Circus from "images/cells/startups_circus.jpg"
 import Team from "images/cells/entrepreneur_team.jpg"
@@ -10,13 +11,14 @@ import Doubts from "images/cells/entrepreneur_starting.jpg"
 import Sales from "images/cells/entrepreneur_success.jpg"
 import BadNews from "images/cells/entrepreneur_failure.jpg"
 
-const DEFAULT_POPULATION_SIZE = 25
-
 class Map extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols) }
+    this.state = {
+      selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols),
+      isEvolutionInProgress: false
+    }
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
@@ -131,13 +133,20 @@ class Map extends Component {
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
     } while (step < Algorithm.getNumSteps(this.props.data) + 1)
+    return true
   }
 
-  handleStartEvolutionClick(e) {
-    this.generatePopulation(DEFAULT_POPULATION_SIZE)
-    this.sortPopulationByScore()
-    this.storeBestCandidateOfGeneration()
-    this.drawPathOfBestCandidate()
+  async handleStartEvolutionClick(e) {
+    this.setState({isEvolutionInProgress: true})
+    this.generatePopulation(AlgorithmConsts.DEFAULT_POPULATION_SIZE)
+    let generation = 0;
+    do {
+      this.sortPopulationByScore()
+      this.storeBestCandidateOfGeneration()
+      await this.drawPathOfBestCandidate()
+      generation++;
+    } while (generation < AlgorithmConsts.NUM_GENERATIONS)
+    this.setState({isEvolutionInProgress: false})
   }
 
   render() {
@@ -153,9 +162,7 @@ class Map extends Component {
         <div className="grid-container" style={cssValues}>
           {cells}
         </div>
-        <button className="start-button" onClick={this.handleStartEvolutionClick}>
-          Start Evolution
-        </button>
+        <StartButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress}/>
       </div>
     )
   }
