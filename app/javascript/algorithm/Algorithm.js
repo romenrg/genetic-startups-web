@@ -1,4 +1,8 @@
-const POSSIBLE_MOVES = 3
+const AlgorithmConsts = {
+  DEFAULT_POPULATION_SIZE: 25,
+  POSSIBLE_MOVES: 3,
+  NUM_GENERATIONS: 10
+}
 
 class Algorithm {
   static fitness(individual, mapData) {
@@ -57,7 +61,7 @@ class Algorithm {
   }
 
   static calculateNumBinaryDigitsForEachStep() {
-    return Math.ceil(this._getBaseLog(2, POSSIBLE_MOVES))
+    return Math.ceil(this._getBaseLog(2, AlgorithmConsts.POSSIBLE_MOVES))
   }
 
   static getNumSteps(mapData) {
@@ -103,4 +107,7 @@ class Algorithm {
   }
 }
 
-export default Algorithm
+export {
+  Algorithm,
+  AlgorithmConsts
+}
