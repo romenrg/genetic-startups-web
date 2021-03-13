@@ -114,12 +114,15 @@ class Map extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async selectBestCandidate() {
-    this.selectedIndividual = this.population[0]
+  storeBestCandidateOfGeneration() { //TODO: Expect to receive a parameter with the index of the generation
+    this.selectedIndividual = this.population[0] //TODO: Expect to be array of a pair <generationNum, bestCandidate>
+  }
+
+  async drawPathOfBestCandidate() {
     let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols)
     let step = 0
-    let movements = this.selectedIndividual.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.selectedIndividual.length)
-    let cell = Algorithm.calculateStartingCell(this.selectedIndividual, this.props.data.numRows)
+    let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
+    let cell = Algorithm.calculateStartingCell(this.population[0], this.props.data.numRows)
     do {
       selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] = true
       this.setBestCandidatePath(selectedIndividualPath)
@@ -133,7 +136,8 @@ class Map extends Component {
   handleStartEvolutionClick(e) {
     this.generatePopulation(DEFAULT_POPULATION_SIZE)
     this.sortPopulationByScore()
-    this.selectBestCandidate()
+    this.storeBestCandidateOfGeneration()
+    this.drawPathOfBestCandidate()
   }
 
   render() {
