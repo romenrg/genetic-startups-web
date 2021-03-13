@@ -10,6 +10,7 @@ import Investor from "images/cells/investor.jpg"
 import Doubts from "images/cells/entrepreneur_starting.jpg"
 import Sales from "images/cells/entrepreneur_success.jpg"
 import BadNews from "images/cells/entrepreneur_failure.jpg"
+import Output from "./Output";
 
 class Map extends Component {
 
@@ -17,8 +18,10 @@ class Map extends Component {
     super(props)
     this.state = {
       selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols),
-      isEvolutionInProgress: false
+      isEvolutionInProgress: false,
+      outputMessages: ["Map -> numCols:"+this.props.data.numCols+"; numRows:"+this.props.data.numRows+"; cells:"+this.props.data.cells]
     }
+    this.selectedIndividualPerGen =[]
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
@@ -70,6 +73,14 @@ class Map extends Component {
     return cells
   }
 
+  writeMessages() {
+    let messages = []
+    for (let i = 0; i < this.state.outputMessages.length; i++) {
+      messages.push(<span className="line">{this.state.outputMessages[i]}</span>)
+    }
+    return messages;
+  }
+
   generatePopulation(populationSize) {
     let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows)
     let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.props.data)
@@ -116,8 +127,16 @@ class Map extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  storeBestCandidateOfGeneration() { //TODO: Expect to receive a parameter with the index of the generation
-    this.selectedIndividual = this.population[0] //TODO: Expect to be array of a pair <generationNum, bestCandidate>
+  storeBestCandidateOfGeneration(generation) {
+    this.selectedIndividualPerGen.push({
+      individual: this.population[0],
+      score: Algorithm.fitness(this.population[0], this.props.data)
+    })
+    this.setState({
+      outputMessages: this.state.outputMessages.concat("Selected Individual for generation "+generation+": ["+
+                                                       this.selectedIndividualPerGen[generation].individual+"]. Score:"+
+                                                       this.selectedIndividualPerGen[generation].score)
+    })
   }
 
   async drawPathOfBestCandidate() {
@@ -142,7 +161,7 @@ class Map extends Component {
     let generation = 0;
     do {
       this.sortPopulationByScore()
-      this.storeBestCandidateOfGeneration()
+      this.storeBestCandidateOfGeneration(generation)
       await this.drawPathOfBestCandidate()
       generation++;
     } while (generation < AlgorithmConsts.NUM_GENERATIONS)
@@ -156,6 +175,7 @@ class Map extends Component {
       "--gridWidth": cellWidthHeight*this.props.data.numCols+"px"
     }
     let cells = this.drawBoard();
+    let messages = this.writeMessages();
     let className = 'map';
     return (
       <div className={className}>
@@ -163,6 +183,9 @@ class Map extends Component {
           {cells}
         </div>
         <StartButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress}/>
+        <Output>
+          {messages}
+        </Output>
       </div>
     )
   }

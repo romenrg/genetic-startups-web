@@ -89,6 +89,15 @@ header {
         outline: 0;
       }
     }
+    .output {
+      background: #DADADA;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+      .line {
+        display: block;
+      }
+    }
   }
 }
 
