@@ -5,6 +5,7 @@
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   margin: 0;
+  color: #333;
 }
 
 header {
@@ -90,12 +91,20 @@ header {
       }
     }
     .output {
-      background: #DADADA;
+      margin: 0 1rem;
+      padding: 1rem;
+      background: #EFEFEF;
+      border: 1px solid #DADADA;
       overflow-wrap: break-word;
       word-wrap: break-word;
       hyphens: auto;
+      border-radius: .3rem;
       .line {
         display: block;
+        margin-bottom: 1rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
