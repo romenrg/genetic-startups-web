@@ -17,7 +17,7 @@ class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols),
+      selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols).fill(0),
       isEvolutionInProgress: false,
       outputMessages: ["Map -> numCols:"+this.props.data.numCols+"; numRows:"+this.props.data.numRows+"; cells: ["+this.props.data.cells+"]"]
     }
@@ -60,12 +60,13 @@ class Map extends Component {
   }
 
   drawBoard() {
-    var cells = []
-    for (var i = 0; i < this.props.data.numRows; i++) {
-      for (var j = 0; j < this.props.data.numCols; j++) {
+    let cells = []
+    for (let i = 0; i < this.props.data.numRows; i++) {
+      for (let j = 0; j < this.props.data.numCols; j++) {
         let cellClasses = "cell"
-        if (this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.props.data)]) {
-          cellClasses += " highlight"
+        let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.props.data)]
+        if (cellNumVisits) {
+          cellClasses += " highlight-"+cellNumVisits
         }
         cells.push(<div className={cellClasses}>{this.getCellContentFromValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
       }
@@ -140,12 +141,12 @@ class Map extends Component {
   }
 
   async drawPathOfBestCandidate() {
-    let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols)
+    let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols).fill(0)
     let step = 0
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
     let cell = Algorithm.calculateStartingCell(this.population[0], this.props.data.numRows)
     do {
-      selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] = true
+      selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
       this.setBestCandidatePath(selectedIndividualPath)
       await this.sleep(1000)
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
