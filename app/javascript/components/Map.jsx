@@ -19,7 +19,7 @@ class Map extends Component {
     this.state = {
       selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols),
       isEvolutionInProgress: false,
-      outputMessages: ["Map -> numCols:"+this.props.data.numCols+"; numRows:"+this.props.data.numRows+"; cells:"+this.props.data.cells]
+      outputMessages: ["Map -> numCols:"+this.props.data.numCols+"; numRows:"+this.props.data.numRows+"; cells: ["+this.props.data.cells+"]"]
     }
     this.selectedIndividualPerGen =[]
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
