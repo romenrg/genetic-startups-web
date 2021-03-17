@@ -164,10 +164,11 @@ class Map extends Component {
   }
 
   render() {
-    const cellWidthHeight = 81
+    const gridWidthInVW = 90
     const cssValues = {
       "--numCols": this.props.data.numCols,
-      "--gridWidth": cellWidthHeight*this.props.data.numCols+"px"
+      "--gridWidth": gridWidthInVW+"vw",
+      "--cellWidth": (gridWidthInVW / this.props.data.numCols)+"vw"
     }
     let cells = this.drawBoard();
     let messages = this.writeMessages();
