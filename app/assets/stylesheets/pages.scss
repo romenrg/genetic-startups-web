@@ -59,9 +59,37 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
-        img {
+        .cell-content {
           width: 70px;
           height: 70px;
+          background-size: 70px 70px
+        }
+        .cell-advisor {
+          background-image: image-url("cells/advisor_greedy.jpg");
+        }
+        .cell-circus {
+          background-image: image-url("cells/startups_circus.jpg");
+        }
+        .cell-team {
+          background-image: image-url("cells/entrepreneur_team.jpg");
+        }
+        .cell-product {
+          background-image: image-url("cells/product_release.jpg");
+        }
+        .cell-feedback {
+          background-image: image-url("cells/entrepreneur_customer_feedback.jpg");
+        }
+        .cell-investor {
+          background-image: image-url("cells/investor.jpg");
+        }
+        .cell-doubts {
+          background-image: image-url("cells/entrepreneur_starting.jpg");
+        }
+        .cell-sales {
+          background-image: image-url("cells/entrepreneur_success.jpg");
+        }
+        .cell-badnews {
+          background-image: image-url("cells/entrepreneur_failure.jpg");
         }
       }
     }
