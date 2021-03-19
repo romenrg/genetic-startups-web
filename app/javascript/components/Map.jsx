@@ -16,7 +16,7 @@ class Map extends Component {
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
-  getCellContentFromValue(value) {
+  cellTagFromActionValue(value) {
     let cellClass = "cell-content "
     switch (value) {
       case 1:
@@ -62,7 +62,7 @@ class Map extends Component {
         if (cellNumVisits) {
           cellClasses += " highlight-"+cellNumVisits
         }
-        cells.push(<div className={cellClasses}>{this.getCellContentFromValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
+        cells.push(<div className={cellClasses}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
       }
     }
     return cells
