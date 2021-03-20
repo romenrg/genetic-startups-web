@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Algorithm, AlgorithmConsts} from "../algorithm/Algorithm";
 import StartButton from "./StartButton";
 import Output from "./Output";
+import ACTIONS from "../algorithm/Actions";
 
 class Map extends Component {
 
@@ -16,40 +17,8 @@ class Map extends Component {
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
-  cellTagFromActionValue(value) {
-    let cellClass = "cell-content "
-    switch (value) {
-      case 1:
-        cellClass += "cell-advisor"
-        break;
-      case 2:
-        cellClass += "cell-circus"
-        break;
-      case 3:
-        cellClass += "cell-team"
-        break;
-      case 4:
-        cellClass += "cell-product"
-        break;
-      case 5:
-        cellClass += "cell-feedback"
-        break;
-      case 6:
-        cellClass += "cell-investor"
-        break;
-      case 7:
-        cellClass += "cell-doubts"
-        break;
-      case 8:
-        cellClass += "cell-sales"
-        break;
-      case 9:
-        cellClass += "cell-badnews"
-        break;
-      default:
-        cellClass += "cell-none"
-        break
-    }
+  cellTagFromActionValue(action) {
+    let cellClass = "cell-content cell-"+ACTIONS[action].name
     return <div className={cellClass}/>
   }
 
