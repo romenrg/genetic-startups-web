@@ -29,4 +29,16 @@ describe("Algorithm tests", () => {
     let score = Algorithm.fitness([0, 0, 1, 0, 0, 1, 1, 0, 0], mapData)
     expect(score).toBe(3)
   })
+  it("calculateScore", () =>{
+    expect(Algorithm.calculateScore(0)).toBe(0)
+    expect(Algorithm.calculateScore(1)).toBe(-32)
+    expect(Algorithm.calculateScore(2)).toBe(-15)
+    expect(Algorithm.calculateScore(3)).toBe(10)
+    expect(Algorithm.calculateScore(4)).toBe(29)
+    expect(Algorithm.calculateScore(5)).toBe(41)
+    expect(Algorithm.calculateScore(6)).toBe(77)
+    expect(Algorithm.calculateScore(7)).toBe(-2)
+    expect(Algorithm.calculateScore(8)).toBe(104)
+    expect(Algorithm.calculateScore(9)).toBe(-55)
+  })
 });

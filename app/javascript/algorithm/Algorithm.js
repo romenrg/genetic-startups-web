@@ -1,3 +1,6 @@
+import React from "react";
+import ACTIONS from "./Actions";
+
 const AlgorithmConsts = {
   DEFAULT_POPULATION_SIZE: 25,
   POSSIBLE_MOVES: 3,
@@ -17,6 +20,14 @@ class Algorithm {
       step++;
     } while (step < Algorithm.getNumSteps(mapData) + 1)
     return score;
+  }
+
+  static calculateScore(action) {
+    const sumObj = ACTIONS[action].values.reduce((partialsum, nextValue) => {
+      partialsum = {score: partialsum.score + nextValue.score}
+      return partialsum
+    });
+    return sumObj.score
   }
 
   static calculateStartingCell(individual, numRows) {
