@@ -106,8 +106,8 @@ class MapModel
     @action_probabilities_per_q[3][ACTIONS["Feedback"]] = 5
     @action_probabilities_per_q[3][ACTIONS["Investor"]] = 3
     @action_probabilities_per_q[3][ACTIONS["Doubts"]] = 0
-    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 0
-    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 0
+    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 7
+    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 3
   end
 
 end
