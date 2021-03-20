@@ -31,19 +31,19 @@ class MapModel
   def generate_random_cells()
     @cells = Array.new(num_cols) { Array.new(num_rows) }
     q = 0
-    for i in 0..num_cols-1 do
-      if i < num_cols / 4
+    for j in 0..num_cols-1 do
+      if j < num_cols / 4
         q = 0
-      elsif i < 2 * num_cols / 4
+      elsif j < 2 * num_cols / 4
         q = 1
-      elsif i < 3 * num_cols / 4
+      elsif j < 3 * num_cols / 4
         q = 2
       else
         q = 3
       end
-      for j in 0..num_rows-1 do
+      for i in 0..num_rows-1 do
         random_num = rand(101)
-        @cells[i][j] = get_action_from_q_and_num(q, random_num)
+        @cells[j][i] = get_action_from_q_and_num(q, random_num)
       end
     end
   end
@@ -106,8 +106,8 @@ class MapModel
     @action_probabilities_per_q[3][ACTIONS["Feedback"]] = 5
     @action_probabilities_per_q[3][ACTIONS["Investor"]] = 3
     @action_probabilities_per_q[3][ACTIONS["Doubts"]] = 0
-    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 7
-    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 3
+    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 0
+    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 0
   end
 
 end
