@@ -57,12 +57,13 @@ class Map extends Component {
     let cells = []
     for (let i = 0; i < this.props.data.numRows; i++) {
       for (let j = 0; j < this.props.data.numCols; j++) {
-        let cellClasses = "cell"
         let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.props.data)]
         if (cellNumVisits) {
-          cellClasses += " highlight-"+cellNumVisits
+          cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
         }
-        cells.push(<div className={cellClasses}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
+        else {
+          cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
+        }
       }
     }
     return cells

@@ -7,10 +7,10 @@ describe("Map component tests", () => {
     render(<Map data = { { numRows:4, numCols:2, cells:[0, 0, 0, 0, 0, 0, 0, 0] } }/>)
     expect(document.querySelectorAll(".cell").length).toBe(8)
   });
-  it("", () => {
-    render(<Map data = { { numRows:4, numCols:2, cells:[0, 1, 0, 2, 0, 1, 0, 0] } }/>)
+  it("There should be visited classes when evolution has started", () => {
+    const { map } = render(<Map data = { { numRows:4, numCols:2, cells:[0, 1, 0, 2, 0, 1, 0, 0] } }/>)
     fireEvent.click(screen.getByText('Start Evolution'))
-    expect(document.querySelectorAll(".cell.highlight").length).toBeGreaterThan(0)
-    // expect(document.querySelectorAll(".cell.highlight").length).toBe(0)
+    let numVisitedCells = screen.getAllByTestId("visited-cell")
+    expect(numVisitedCells.length).toBeGreaterThan(0)
   });
 });
