@@ -14,7 +14,7 @@ class Algorithm {
     let cell = this.calculateStartingCell(individual, mapData.numRows)
     let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individual.length)
     do {
-      score += Algorithm.getCellAction(cell.row, cell.col, mapData); //TODO: Should be the actual value, not the action num
+      score += Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, mapData));
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
