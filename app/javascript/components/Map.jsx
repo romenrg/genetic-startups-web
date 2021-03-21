@@ -116,7 +116,7 @@ class Map extends Component {
       selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
       this.setBestCandidatePath(selectedIndividualPath)
       this.setState(state => {
-        const outputMessages = [("Cell: ["+cell.col+","+cell.row+"] : "+
+        const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
                                 ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
                                 Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
                                ].concat(state.outputMessages)
