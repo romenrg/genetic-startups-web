@@ -13,7 +13,7 @@ class Map extends Component {
       isEvolutionInProgress: false,
       outputMessages: ["Map of "+this.props.data.numCols+" cols x "+this.props.data.numRows+" rows. Cells values are: ["+this.props.data.cells+"]"]
     }
-    this.selectedIndividualPerGen =[]
+    this.selectedIndividualPerGen = []
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
   }
 
