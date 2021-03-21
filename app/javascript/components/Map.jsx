@@ -11,7 +11,7 @@ class Map extends Component {
     this.state = {
       selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols).fill(0),
       isEvolutionInProgress: false,
-      outputMessages: ["Map -> numCols:"+this.props.data.numCols+"; numRows:"+this.props.data.numRows+"; cells: ["+this.props.data.cells+"]"]
+      outputMessages: ["Map of "+this.props.data.numCols+" cols x "+this.props.data.numRows+" rows. Cells values are: ["+this.props.data.cells+"]"]
     }
     this.selectedIndividualPerGen =[]
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
@@ -97,14 +97,16 @@ class Map extends Component {
       individual: this.population[0],
       score: Algorithm.fitness(this.population[0], this.props.data)
     })
-    this.setState({
-      outputMessages: this.state.outputMessages.concat("Selected Individual for generation "+generation+": ["+
-                                                       this.selectedIndividualPerGen[generation].individual+"]. Score:"+
-                                                       this.selectedIndividualPerGen[generation].score)
+    this.setState(state => {
+      const outputMessages = state.outputMessages.concat("Selected Individual for generation "+generation+": ["+
+                                                         this.selectedIndividualPerGen[generation].individual+"]. Score:"+
+                                                         this.selectedIndividualPerGen[generation].score)
+      return { outputMessages }
     })
   }
 
   async drawPathOfBestCandidate() {
+    // await this.sleep(500)
     let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols).fill(0)
     let step = 0
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
@@ -112,6 +114,12 @@ class Map extends Component {
     do {
       selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
       this.setBestCandidatePath(selectedIndividualPath)
+      this.setState(state => {
+        const outputMessages = state.outputMessages.concat("Cell: ["+cell.col+","+cell.row+"] : "+
+                               ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
+                               Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+        return { outputMessages }
+      })
       await this.sleep(1000)
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
