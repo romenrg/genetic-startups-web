@@ -143,13 +143,15 @@ header {
       .line {
         display: block;
         margin-bottom: 1rem;
-        opacity: 0.0;
-        animation: fadeIn ease-in 0.75s forwards;
         color: #666;
-        &:last-child {
-          margin-bottom: 0;
+        &:first-child {
+          opacity: 0.0;
+          animation: fadeIn ease-in 0.75s forwards;
           font-weight: 500;
           color: #333;
+        }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
     }

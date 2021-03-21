@@ -98,15 +98,16 @@ class Map extends Component {
       score: Algorithm.fitness(this.population[0], this.props.data)
     })
     this.setState(state => {
-      const outputMessages = state.outputMessages.concat("Selected Individual for generation "+generation+": ["+
-                                                         this.selectedIndividualPerGen[generation].individual+"]. Score:"+
-                                                         this.selectedIndividualPerGen[generation].score)
+      const outputMessages = [("Selected Individual for generation "+generation+": ["+
+                              this.selectedIndividualPerGen[generation].individual+"]. Score:"+
+                              this.selectedIndividualPerGen[generation].score)
+                             ].concat(state.outputMessages)
       return { outputMessages }
     })
   }
 
   async drawPathOfBestCandidate() {
-    // await this.sleep(500)
+    await this.sleep(1000)
     let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols).fill(0)
     let step = 0
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
@@ -115,9 +116,10 @@ class Map extends Component {
       selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
       this.setBestCandidatePath(selectedIndividualPath)
       this.setState(state => {
-        const outputMessages = state.outputMessages.concat("Cell: ["+cell.col+","+cell.row+"] : "+
-                               ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
-                               Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+        const outputMessages = [("Cell: ["+cell.col+","+cell.row+"] : "+
+                                ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
+                                Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+                               ].concat(state.outputMessages)
         return { outputMessages }
       })
       await this.sleep(1000)
