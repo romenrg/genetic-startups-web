@@ -4,7 +4,8 @@ import ACTIONS from "./Actions";
 const AlgorithmConsts = {
   DEFAULT_POPULATION_SIZE: 25,
   POSSIBLE_MOVES: 3,
-  NUM_GENERATIONS: 10
+  NUM_GENERATIONS: 10,
+  CELL_OUT_OF_MAP_ACTION: 9
 }
 
 class Algorithm {
@@ -39,7 +40,6 @@ class Algorithm {
     return startCell
   }
 
-  //TODO: If out of bounds, don't move?
   static calculateNextCell(previousCell, movement) {
     let newCell = { row: previousCell.row, col: previousCell.col }
     if (this._isMovingRight(movement)) {
@@ -83,13 +83,12 @@ class Algorithm {
     return col * mapData.numRows + row;
   }
 
-  //TODO: Add test
   static getCellAction(row, col, mapData) {
     if (this._isCellInMap(row, col, mapData)) {
       return mapData.cells[Algorithm.calculateOneDimensionalPos(row, col, mapData)]
     }
     else {
-      return 0
+      return AlgorithmConsts.CELL_OUT_OF_MAP_ACTION
     }
   }
 

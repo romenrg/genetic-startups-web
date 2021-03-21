@@ -16,7 +16,7 @@ describe("Algorithm tests", () => {
   it("calculateStartingCell (outside range, should be circular)", () => {
     expect(Algorithm.calculateStartingCell([1,1,0,1,1], 3)).toEqual({row: 0, col: 0})
   })
-  it("calculateNextCell (2 option for move right)", () => {
+  it("calculateNextCell (2nd option for move right)", () => {
     expect(Algorithm.calculateNextCell({ row: 1, col: 1}, [1,0])).toEqual({row: 1, col: 2})
   })
   it("getCellAction", () => {
@@ -24,10 +24,20 @@ describe("Algorithm tests", () => {
     let actionNumber = Algorithm.getCellAction(0, 1, mapData)
     expect(actionNumber).toBe(2)
   })
-  it("fitness",() => {
+  it("getCellAction (outside map)", () => {
     let mapData = {numRows: 2, numCols: 2, cells: [0, 1, 2, 0]}
+    let actionNumber = Algorithm.getCellAction(2, 1, mapData)
+    expect(actionNumber).toBe(9)
+  })
+  it("fitness",() => {
+    let mapData = {numRows: 2, numCols: 2, cells: [0, 3, 6, 0]}
     let score = Algorithm.fitness([0, 0, 1, 0, 0, 1, 1, 0, 0], mapData)
-    expect(score).toBe(3)
+    expect(score).toBe(32)
+  })
+  it("fitness (goes outside map after first move)",() => {
+    let mapData = {numRows: 2, numCols: 2, cells: [0, 1, 2, 0]}
+    let score = Algorithm.fitness([0, 1, 1, 1, 1, 1, 1, 1, 1], mapData)
+    expect(score).toBe(-220)
   })
   it("calculateScore", () =>{
     expect(Algorithm.calculateScore(0)).toBe(0)

@@ -113,15 +113,26 @@ class Map extends Component {
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
     let cell = Algorithm.calculateStartingCell(this.population[0], this.props.data.numRows)
     do {
-      selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
-      this.setBestCandidatePath(selectedIndividualPath)
-      this.setState(state => {
-        const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
-                                ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
-                                Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
-                               ].concat(state.outputMessages)
-        return { outputMessages }
-      })
+      if (Algorithm._isCellInMap(cell.row, cell.col, this.props.data)) {
+        selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
+        this.setBestCandidatePath(selectedIndividualPath)
+        this.setState(state => {
+          const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
+                                  ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
+                                  Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+                                 ].concat(state.outputMessages)
+          return { outputMessages }
+        })
+      }
+      else {
+        this.setState(state => {
+          const outputMessages = [("Cell: [Out of bounds] : "+
+            ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
+            Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+          ].concat(state.outputMessages)
+          return { outputMessages }
+        })
+      }
       await this.sleep(1000)
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
