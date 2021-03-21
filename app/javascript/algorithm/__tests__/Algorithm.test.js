@@ -51,4 +51,8 @@ describe("Algorithm tests", () => {
     expect(Algorithm.calculateScore(8)).toBe(104)
     expect(Algorithm.calculateScore(9)).toBe(-55)
   })
+  it("selection", () => {
+    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1, 1]]
+    expect(Algorithm.selection(1, population)).toEqual([[0, 0, 1, 0, 0, 1, 1, 0, 0]])
+  })
 });

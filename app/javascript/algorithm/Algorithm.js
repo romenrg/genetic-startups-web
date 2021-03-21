@@ -23,6 +23,10 @@ class Algorithm {
     return score;
   }
 
+  static selection(numIndividuals, sortedPopulation) {
+    return sortedPopulation.slice(0, numIndividuals)
+  }
+
   static calculateScore(action) {
     const sumObj = ACTIONS[action].values.reduce((partialsum, nextValue) => {
       partialsum = {score: partialsum.score + nextValue.score}
