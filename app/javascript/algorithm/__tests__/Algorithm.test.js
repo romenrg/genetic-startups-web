@@ -55,4 +55,11 @@ describe("Algorithm tests", () => {
     let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1, 1]]
     expect(Algorithm.selection(1, population)).toEqual([[0, 0, 1, 0, 0, 1, 1, 0, 0]])
   })
+  it("crossover", () => {
+    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0]]
+    let crossoverResult = Algorithm.crossover(2, population)
+    expect(crossoverResult.length).toBe(2)
+    expect(crossoverResult).toContainEqual([0, 0, 1, 0, 1, 1, 1, 0, 0])
+    expect(crossoverResult).toContainEqual([1, 0, 0, 0, 0, 1, 1, 0, 0])
+  })
 });

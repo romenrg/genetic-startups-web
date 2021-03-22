@@ -27,6 +27,26 @@ class Algorithm {
     return sortedPopulation.slice(0, numIndividuals)
   }
 
+  static crossover(numIndividuals, sortedPopulation) {
+    let individualLength = sortedPopulation[0].length
+    let splitIndex = Math.floor(individualLength / 2)
+    let resultingIndividuals = []
+    for (let i = 0; i < numIndividuals; i+=2) {
+      let tmpCrossedIndividual
+      let randomIndexFirstIndividual = Math.floor(Math.random() * sortedPopulation.length)
+      let randomIndexSecondIndividual = Math.floor(Math.random() * sortedPopulation.length)
+      while (sortedPopulation.length > 1 && randomIndexSecondIndividual === randomIndexFirstIndividual)
+        randomIndexSecondIndividual = Math.floor(Math.random() * sortedPopulation.length)
+      tmpCrossedIndividual = sortedPopulation[randomIndexFirstIndividual].slice(0, splitIndex)
+      tmpCrossedIndividual = tmpCrossedIndividual.concat(sortedPopulation[randomIndexSecondIndividual].slice(splitIndex, individualLength))
+      resultingIndividuals.push(tmpCrossedIndividual)
+      tmpCrossedIndividual = sortedPopulation[randomIndexSecondIndividual].slice(0, splitIndex)
+      tmpCrossedIndividual = tmpCrossedIndividual.concat(sortedPopulation[randomIndexFirstIndividual].slice(splitIndex, individualLength))
+      resultingIndividuals.push(tmpCrossedIndividual)
+    }
+    return resultingIndividuals
+  }
+
   static calculateScore(action) {
     const sumObj = ACTIONS[action].values.reduce((partialsum, nextValue) => {
       partialsum = {score: partialsum.score + nextValue.score}
