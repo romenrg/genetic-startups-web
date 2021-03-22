@@ -47,6 +47,18 @@ class Algorithm {
     return resultingIndividuals
   }
 
+  static mutation(numIndividuals, sortedPopulation) {
+    let resultingIndividuals = []
+    for (let i = 0; i < numIndividuals; i++) {
+      let randomIndexIndividualToMutate = Math.floor(Math.random() * sortedPopulation.length)
+      let tmpIndividualToMutate = [...sortedPopulation[randomIndexIndividualToMutate]]
+      let randomIndexChromosomeToMutate = Math.floor(Math.random() * tmpIndividualToMutate.length)
+      tmpIndividualToMutate[randomIndexChromosomeToMutate] = (1 - tmpIndividualToMutate[randomIndexChromosomeToMutate])
+      resultingIndividuals.push(tmpIndividualToMutate)
+    }
+    return resultingIndividuals
+  }
+
   static calculateScore(action) {
     const sumObj = ACTIONS[action].values.reduce((partialsum, nextValue) => {
       partialsum = {score: partialsum.score + nextValue.score}

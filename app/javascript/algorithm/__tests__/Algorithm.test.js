@@ -62,4 +62,16 @@ describe("Algorithm tests", () => {
     expect(crossoverResult).toContainEqual([0, 0, 1, 0, 1, 1, 1, 0, 0])
     expect(crossoverResult).toContainEqual([1, 0, 0, 0, 0, 1, 1, 0, 0])
   })
+  it("mutation", () => {
+    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0]]
+    let mutationResult = Algorithm.mutation(1, population)
+    expect(mutationResult.length).toBe(1)
+    let countDifferences = 0
+    for (let i = 0; i < population[0].length; i++) {
+      if (population[0][i] !== mutationResult[0][i]) {
+        countDifferences++
+      }
+    }
+    expect(countDifferences).toBe(1)
+  })
 });
