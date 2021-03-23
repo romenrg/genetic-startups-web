@@ -141,6 +141,15 @@ class Map extends Component {
     return true
   }
 
+  createNewGeneration() {
+    let numIndividualsToSelect = this.population.length / 3
+    let numIndividualsToCross = (numIndividualsToSelect % 2) === 0 ? numIndividualsToSelect : numIndividualsToSelect + 1
+    let selectedIndividuals = Algorithm.selection(numIndividualsToSelect, this.population)
+    let crossedIndividuals = Algorithm.crossover(numIndividualsToCross, this.population)
+    let mutatedIndividuals = Algorithm.mutation(this.population.length - numIndividualsToSelect - numIndividualsToCross, this.population)
+    this.population = selectedIndividuals.concat(crossedIndividuals).concat(mutatedIndividuals)
+  }
+
   async handleStartEvolutionClick(e) {
     this.setState({isEvolutionInProgress: true})
     this.generatePopulation(AlgorithmConsts.DEFAULT_POPULATION_SIZE)
@@ -149,6 +158,7 @@ class Map extends Component {
       this.sortPopulationByScore()
       this.storeBestCandidateOfGeneration(generation)
       await this.drawPathOfBestCandidate()
+      this.createNewGeneration()
       generation++;
     } while (generation < AlgorithmConsts.NUM_GENERATIONS)
     this.setState({isEvolutionInProgress: false})
