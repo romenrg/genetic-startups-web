@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import {Algorithm, AlgorithmConsts} from "../algorithm/Algorithm";
-import StartButton from "./StartButton";
+import ActionButton from "./ActionButton";
 import Output from "./Output";
 import ACTIONS from "../algorithm/Actions";
+import axios from "axios";
 
 class Map extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      data: this.props.data,
       selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols).fill(0),
       isEvolutionInProgress: false,
       outputMessages: ["Map of "+this.props.data.numCols+" cols x "+this.props.data.numRows+" rows. Cells values are: ["+this.props.data.cells+"]"]
     }
     this.selectedIndividualPerGen = []
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
+    this.handleNewMapClick = this.handleNewMapClick.bind(this);
   }
 
   cellTagFromActionValue(action) {
@@ -24,14 +27,14 @@ class Map extends Component {
 
   drawBoard() {
     let cells = []
-    for (let i = 0; i < this.props.data.numRows; i++) {
-      for (let j = 0; j < this.props.data.numCols; j++) {
-        let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.props.data)]
+    for (let i = 0; i < this.state.data.numRows; i++) {
+      for (let j = 0; j < this.state.data.numCols; j++) {
+        let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.state.data)]
         if (cellNumVisits) {
-          cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
+          cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
         }
         else {
-          cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.props.data))}</div>)
+          cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
         }
       }
     }
@@ -47,8 +50,8 @@ class Map extends Component {
   }
 
   generatePopulation(populationSize) {
-    let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows)
-    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.props.data)
+    let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows)
+    let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.state.data)
     let population = []
     for (let i = 0; i < populationSize; i++) {
       let individual = []
@@ -60,10 +63,10 @@ class Map extends Component {
     }
     this.population = population
     alert("Population size: "+populationSize+"\n"+
-      "Number of rows: "+this.props.data.numRows+"\n"+
+      "Number of rows: "+this.state.data.numRows+"\n"+
       "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
-      "Number of cols: "+this.props.data.numCols+"\n"+
-      "Number of steps: "+Algorithm.getNumSteps(this.props.data)+"\n"+
+      "Number of cols: "+this.state.data.numCols+"\n"+
+      "Number of steps: "+Algorithm.getNumSteps(this.state.data)+"\n"+
       "Number of binary digits for steps: "+numOfBinaryDigitsForSteps+"\n"+
       "Population[0]: "+this.population[0])
   }
@@ -72,13 +75,13 @@ class Map extends Component {
   sortPopulationByScore() {
     console.log("BEFORE SORTING -----------")
     for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.props.data))
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.state.data))
     }
     console.log("SORTING -----------")
-    this.population.sort((a, b) => Algorithm.fitness(b, this.props.data) - Algorithm.fitness(a, this.props.data))
+    this.population.sort((a, b) => Algorithm.fitness(b, this.state.data) - Algorithm.fitness(a, this.state.data))
     console.log("AFTER SORTING -----------")
     for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.props.data))
+      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.state.data))
     }
   }
 
@@ -95,7 +98,7 @@ class Map extends Component {
   storeBestCandidateOfGeneration(generation) {
     this.selectedIndividualPerGen.push({
       individual: this.population[0],
-      score: Algorithm.fitness(this.population[0], this.props.data)
+      score: Algorithm.fitness(this.population[0], this.state.data)
     })
     this.setState(state => {
       const outputMessages = [("Selected Individual for generation "+generation+": ["+
@@ -108,18 +111,18 @@ class Map extends Component {
 
   async drawPathOfBestCandidate() {
     await this.sleep(1000)
-    let selectedIndividualPath = new Array(this.props.data.numRows * this.props.data.numCols).fill(0)
+    let selectedIndividualPath = new Array(this.state.data.numRows * this.state.data.numCols).fill(0)
     let step = 0
-    let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.props.data.numRows), this.population[0].length)
-    let cell = Algorithm.calculateStartingCell(this.population[0], this.props.data.numRows)
+    let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].length)
+    let cell = Algorithm.calculateStartingCell(this.population[0], this.state.data.numRows)
     do {
-      if (Algorithm._isCellInMap(cell.row, cell.col, this.props.data)) {
-        selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.props.data)] += 1
+      if (Algorithm._isCellInMap(cell.row, cell.col, this.state.data)) {
+        selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.state.data)] += 1
         this.setBestCandidatePath(selectedIndividualPath)
         this.setState(state => {
           const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
-                                  ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
-                                  Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+                                  ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
+                                  Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
                                  ].concat(state.outputMessages)
           return { outputMessages }
         })
@@ -127,8 +130,8 @@ class Map extends Component {
       else {
         this.setState(state => {
           const outputMessages = [("Cell: [Out of bounds] : "+
-            ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.props.data)].name+" : "+
-            Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.props.data)))
+            ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
+            Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
           ].concat(state.outputMessages)
           return { outputMessages }
         })
@@ -137,7 +140,7 @@ class Map extends Component {
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
-    } while (step < Algorithm.getNumSteps(this.props.data) + 1)
+    } while (step < Algorithm.getNumSteps(this.state.data) + 1)
     return true
   }
 
@@ -164,12 +167,23 @@ class Map extends Component {
     this.setState({isEvolutionInProgress: false})
   }
 
+  async handleNewMapClick(e) {
+    const response = await axios.get('/api/v1/content?rows='+this.state.data.numRows+'&cols='+this.state.data.numCols);
+    let newData = {
+      numRows: this.state.data.numRows,
+      numCols: this.state.data.numCols,
+      cells: response.data,
+  }
+    console.log("Response: "+response)
+    this.setState({data: newData })
+  }
+
   render() {
     const gridWidthInVW = 90
     const cssValues = {
-      "--numCols": this.props.data.numCols,
+      "--numCols": this.state.data.numCols,
       "--gridWidth": gridWidthInVW+"vw",
-      "--cellWidth": (gridWidthInVW / this.props.data.numCols)+"vw"
+      "--cellWidth": (gridWidthInVW / this.state.data.numCols)+"vw"
     }
     let cells = this.drawBoard();
     let messages = this.writeMessages();
@@ -179,7 +193,10 @@ class Map extends Component {
         <div className="grid-container" style={cssValues}>
           {cells}
         </div>
-        <StartButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress}/>
+        <div className="action-buttons">
+          <ActionButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Start evolution" />
+          <ActionButton clickHandler={this.handleNewMapClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Generate new map" />
+        </div>
         <Output>
           {messages}
         </Output>

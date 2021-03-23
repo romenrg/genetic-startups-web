@@ -1,22 +1,22 @@
 import React from 'react'
 
-function StartButton(props) {
+function ActionButton(props) {
   const isEvolutionInProgress = props.isEvolutionInProgress;
   const clickHandler = props.clickHandler;
   if (isEvolutionInProgress) {
     return (
       <button className="start-button" onClick={clickHandler} disabled>
-        Evolution in progress
+        Evolution in progress...
       </button>
     )
   }
   else {
     return (
       <button className="start-button" onClick={clickHandler}>
-        Start Evolution
+        {props.text}
       </button>
     )
   }
 }
 
-export default StartButton;
+export default ActionButton;
