@@ -88,27 +88,10 @@ class Map extends Component {
       population.push(individual)
     }
     this.population = population
-    alert("Population size: "+populationSize+"\n"+
-      "Number of rows: "+this.state.data.numRows+"\n"+
-      "Number of binary digits for start cell: "+numOfBinaryDigitsForStartCells+"\n"+
-      "Number of cols: "+this.state.data.numCols+"\n"+
-      "Number of steps: "+Algorithm.getNumSteps(this.state.data)+"\n"+
-      "Number of binary digits for steps: "+numOfBinaryDigitsForSteps+"\n"+
-      "Population[0]: "+this.population[0])
   }
 
-//TODO: Fitness needs to access the map matrix, probably extract shared pieces to a 3rd class "MapData"?
   sortPopulationByScore() {
-    console.log("BEFORE SORTING -----------")
-    for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.state.data))
-    }
-    console.log("SORTING -----------")
     this.population.sort((a, b) => Algorithm.fitness(b, this.state.data) - Algorithm.fitness(a, this.state.data))
-    console.log("AFTER SORTING -----------")
-    for (let i = 0; i < this.population.length; i++) {
-      console.log(i+":\n - "+this.population[i]+"\n - "+Algorithm.fitness(this.population[i], this.state.data))
-    }
   }
 
   setBestCandidatePath(selectedIndividualPath) {
