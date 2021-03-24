@@ -5,19 +5,43 @@ import Output from "./Output";
 import ACTIONS from "../algorithm/Actions";
 import axios from "axios";
 
+const MapConsts = {
+  DEFAULT_NUM_COLS: 20,
+  DEFAULT_NUM_ROWS: 5
+}
+
 class Map extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      data: this.props.data,
-      selectedIndividualPath: new Array(this.props.data.numRows * this.props.data.numCols).fill(0),
+      data: {
+        numCols: MapConsts.DEFAULT_NUM_COLS,
+        numRows: MapConsts.DEFAULT_NUM_ROWS,
+        cells: undefined
+      },
+      selectedIndividualPath: new Array(MapConsts.DEFAULT_NUM_ROWS * MapConsts.DEFAULT_NUM_COLS).fill(0),
       isEvolutionInProgress: false,
-      outputMessages: ["Map of "+this.props.data.numCols+" cols x "+this.props.data.numRows+" rows. Cells values are: ["+this.props.data.cells+"]"]
+      outputMessages: []
     }
     this.selectedIndividualPerGen = []
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
     this.handleNewMapClick = this.handleNewMapClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchCellsData(MapConsts.DEFAULT_NUM_ROWS, MapConsts.DEFAULT_NUM_COLS).then(
+      response => {
+        this.setState({
+          data: {
+            numCols: MapConsts.DEFAULT_NUM_COLS,
+            numRows: MapConsts.DEFAULT_NUM_ROWS,
+            cells: response.data
+          },
+          outputMessages: ["Map of "+MapConsts.DEFAULT_NUM_COLS+" cols x "+MapConsts.DEFAULT_NUM_ROWS+" rows. Cells values are: ["+response.data+"]"]
+        })
+      }
+    )
   }
 
   cellTagFromActionValue(action) {
@@ -27,14 +51,16 @@ class Map extends Component {
 
   drawBoard() {
     let cells = []
-    for (let i = 0; i < this.state.data.numRows; i++) {
-      for (let j = 0; j < this.state.data.numCols; j++) {
-        let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.state.data)]
-        if (cellNumVisits) {
-          cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
-        }
-        else {
-          cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
+    if (this.state.data.cells) {
+      for (let i = 0; i < this.state.data.numRows; i++) {
+        for (let j = 0; j < this.state.data.numCols; j++) {
+          let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.state.data)]
+          if (cellNumVisits) {
+            cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
+          }
+          else {
+            cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
+          }
         }
       }
     }
@@ -167,15 +193,24 @@ class Map extends Component {
     this.setState({isEvolutionInProgress: false})
   }
 
-  async handleNewMapClick(e) {
-    const response = await axios.get('/api/v1/content?rows='+this.state.data.numRows+'&cols='+this.state.data.numCols);
-    let newData = {
-      numRows: this.state.data.numRows,
-      numCols: this.state.data.numCols,
-      cells: response.data,
+  async fetchCellsData(numRows, numCols) {
+    return await axios.get('/api/v1/content?rows='+numRows+'&cols='+numCols);
   }
-    console.log("Response: "+response)
-    this.setState({data: newData })
+
+  handleNewMapClick() {
+    this.fetchCellsData(this.state.data.numRows, this.state.data.numCols).then(
+      response => {
+        let newData = {
+          numRows: this.state.data.numRows,
+          numCols: this.state.data.numCols,
+          cells: response.data,
+        }
+        this.setState({
+          data: newData,
+          outputMessages: ["Map of "+this.state.data.numCols+" cols x "+this.state.data.numRows+" rows. Cells values are: ["+response.data+"]"]
+        })
+      }
+    )
   }
 
   render() {
