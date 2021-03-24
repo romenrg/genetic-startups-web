@@ -4,7 +4,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Map from "../components/Map";
+import App from "../components/App";
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById("map_props")
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cells: cells,
   }
   ReactDOM.render(
-    <Map data={data}/>,
-    document.getElementById('main'),
+    <App data={data}/>,
+    document.getElementById('react-app-container'),
   )
 })

@@ -6,8 +6,8 @@ import ACTIONS from "../algorithm/Actions";
 import axios from "axios";
 
 const MapConsts = {
-  DEFAULT_NUM_COLS: 20,
-  DEFAULT_NUM_ROWS: 5
+  DEFAULT_NUM_COLS: 16,
+  DEFAULT_NUM_ROWS: 8
 }
 
 class Map extends Component {
