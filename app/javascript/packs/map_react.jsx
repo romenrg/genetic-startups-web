@@ -7,17 +7,8 @@ import ReactDOM from 'react-dom'
 import App from "../components/App";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const node = document.getElementById("map_props")
-  const numRows = parseInt(node.getAttribute('numRows'))
-  const numCols = parseInt(node.getAttribute('numCols'))
-  const cells = node.getAttribute('cells').split(' ').map(Number)
-  const data = {
-    numRows: numRows,
-    numCols: numCols,
-    cells: cells,
-  }
   ReactDOM.render(
-    <App data={data}/>,
+    <App />,
     document.getElementById('react-app-container'),
   )
 })
