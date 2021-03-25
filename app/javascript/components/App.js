@@ -8,10 +8,7 @@ import {
   Link
 } from "react-router-dom";
 
-const App = (props) => {
-
-  // const [count, setCount] = useState(0);
-
+const App = () => {
   return (
     <>
       <Router>
