@@ -78,33 +78,6 @@ nav {
           height: calc(var(--cellWidth) - 1vw);
           background-size: calc(var(--cellWidth) - 1vw) calc(var(--cellWidth) - 1vw);
         }
-        .cell-advisor {
-          background-image: image-url("cells/advisor_greedy.jpg");
-        }
-        .cell-circus {
-          background-image: image-url("cells/startups_circus.jpg");
-        }
-        .cell-team {
-          background-image: image-url("cells/entrepreneur_team.jpg");
-        }
-        .cell-product {
-          background-image: image-url("cells/product_release.jpg");
-        }
-        .cell-feedback {
-          background-image: image-url("cells/entrepreneur_customer_feedback.jpg");
-        }
-        .cell-investor {
-          background-image: image-url("cells/investor.jpg");
-        }
-        .cell-doubts {
-          background-image: image-url("cells/entrepreneur_starting.jpg");
-        }
-        .cell-sales {
-          background-image: image-url("cells/entrepreneur_success.jpg");
-        }
-        .cell-badnews {
-          background-image: image-url("cells/entrepreneur_failure.jpg");
-        }
       }
     }
     .action-buttons {
@@ -172,6 +145,80 @@ nav {
       }
     }
   }
+}
+
+#info {
+  .info-grid {
+    background-color: #fff;
+    margin: 3rem 10rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 3fr;
+    border: 1px solid #eee;
+    >span, >div {
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .odd-row {
+      background-color: #f5f5f5;
+    }
+    .even-row {
+    }
+    .info-item-values-list {
+      display: block;
+    }
+    .info-item-value {
+      display: flex;
+      span {
+        padding: 0.25rem;
+      }
+      .info-item-value-number {
+        flex: 0 0 3rem;
+      }
+      .info-item-value-msg {
+      }
+    }
+    .info-item-title {
+      font-weight: bold;
+      font-size: 1.25rem;
+      padding: 0 0.25rem 2rem 0.25rem;
+    }
+    .info-item-image {
+      padding: 0;
+      width: 100px;
+      height: 100px;
+      background-size: 100px 100px;
+    }
+  }
+}
+
+.cell-advisor {
+  background-image: image-url("cells/advisor_greedy.jpg");
+}
+.cell-circus {
+  background-image: image-url("cells/startups_circus.jpg");
+}
+.cell-team {
+  background-image: image-url("cells/entrepreneur_team.jpg");
+}
+.cell-product {
+  background-image: image-url("cells/product_release.jpg");
+}
+.cell-feedback {
+  background-image: image-url("cells/entrepreneur_customer_feedback.jpg");
+}
+.cell-investor {
+  background-image: image-url("cells/investor.jpg");
+}
+.cell-doubts {
+  background-image: image-url("cells/entrepreneur_starting.jpg");
+}
+.cell-sales {
+  background-image: image-url("cells/entrepreneur_success.jpg");
+}
+.cell-badnews {
+  background-image: image-url("cells/entrepreneur_failure.jpg");
 }
 
 footer {
