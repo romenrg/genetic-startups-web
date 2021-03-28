@@ -12,12 +12,12 @@ const App = () => {
   return (
     <>
       <Router>
-        <div>
+        <div className="react-app">
           <nav>
             <h1><Link to="/">Genetic Startups</Link></h1>
             <ul>
               <li>
-                <Link to="/info">Info</Link>
+                <Link to="/info">Algorithm details</Link>
               </li>
             </ul>
           </nav>

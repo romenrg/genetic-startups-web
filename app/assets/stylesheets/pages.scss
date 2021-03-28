@@ -7,8 +7,13 @@ body {
   margin: 0;
   color: #333;
   a {
-    color: #fff;
-    text-decoration: none;
+    color: #0d6efd;
+  }
+  .react-app {
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 }
 
@@ -29,6 +34,9 @@ nav {
     display: flex;
     margin: 1em;
     padding: 0;
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }
 
