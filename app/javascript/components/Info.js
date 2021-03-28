@@ -23,7 +23,7 @@ const Info = () => {
                          {values}
                        </div>
                        <span className={evenRow}>{Algorithm.calculateScore(i)}</span>
-                       <span className={evenRow}>Description</span>
+                       <span className={evenRow}>{action.description}</span>
                      </>)
   })
   return (
