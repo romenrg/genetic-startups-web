@@ -28,7 +28,7 @@ const Info = () => {
   })
   return (
     <div id="info">
-      <h2>Info</h2>
+      <h2>Algorithm details</h2>
       <p>In the map, multiple different cell types can be found. Each type represents a possible event in the life of the
          startup. And each one can have different impacts on the startup. For that reason, each one has 10 possible values
          and a score (the average of those possible values).</p>
