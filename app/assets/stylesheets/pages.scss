@@ -18,12 +18,12 @@ body {
 }
 
 nav {
-  height: 3rem;
   padding: 1rem 0.5rem;
   background: #24292e;
   color: #fff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   h1 {
     font-size: 1.5rem;
     font-weight: 300;
