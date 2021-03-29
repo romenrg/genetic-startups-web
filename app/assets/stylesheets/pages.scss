@@ -32,8 +32,11 @@ nav {
   ul {
     list-style: none;
     display: flex;
-    margin: 1em;
+    margin: 0.5rem;
     padding: 0;
+    li {
+      margin-left: 1.5rem;
+    }
     a:hover {
       text-decoration: underline;
     }
