@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 
 const SettingsPanel = () => {
+  const history = useHistory();
+  const handleOnClose = useCallback(() => history.push('/'), [history]);
+
   return (
     <section className="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
       <div className="absolute inset-0 overflow-hidden">
@@ -8,7 +12,7 @@ const SettingsPanel = () => {
         <div className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
           <div className="relative w-screen max-w-md">
             <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
-              <button className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+              <button className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" onClick={handleOnClose}>
                 <span className="sr-only">Close panel</span>
                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
