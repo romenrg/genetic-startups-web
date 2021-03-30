@@ -1,9 +1,21 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 
 const SettingsPanel = () => {
   const history = useHistory();
   const handleOnClose = useCallback(() => history.push('/'), [history]);
+  const handleEscKeydown = useCallback((event) => {
+    if(event.keyCode === 27) {
+      handleOnClose();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscKeydown, false);
+    return () => {
+      document.removeEventListener("keydown", handleEscKeydown, false);
+    };
+  }, []);
 
   return (
     <section className="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
