@@ -31,8 +31,7 @@ const App = () => {
                 <Info />
               </Route>
               <Route path="/settings">
-                <Map />
-                <SettingsPanel />
+                <Map displaySettings={true}/>
               </Route>
               <Route path="/">
                 <Map />

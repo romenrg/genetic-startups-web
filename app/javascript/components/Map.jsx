@@ -4,6 +4,7 @@ import ActionButton from "./ActionButton";
 import Output from "./Output";
 import ACTIONS from "../algorithm/Actions";
 import axios from "axios";
+import SettingsPanel from "./SettingsPanel";
 
 const MapConsts = {
   DEFAULT_NUM_COLS: 16,
@@ -27,6 +28,7 @@ class Map extends Component {
     this.selectedIndividualPerGen = []
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
     this.handleNewMapClick = this.handleNewMapClick.bind(this);
+    this.handleSetRowsCols = this.handleSetRowsCols.bind(this);
   }
 
   componentDidMount() {
@@ -190,10 +192,31 @@ class Map extends Component {
         }
         this.setState({
           data: newData,
-          outputMessages: ["Map of "+this.state.data.numCols+" cols x "+this.state.data.numRows+" rows. Cells values are: ["+response.data+"]"]
+          outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
         })
       }
     )
+  }
+
+  handleSetRowsCols(numRows, numCols) {
+    if (!this.state.isEvolutionInProgress) {
+      this.fetchCellsData(numRows, numCols).then(
+        response => {
+          let newData = {
+            numRows: numRows,
+            numCols: numCols,
+            cells: response.data,
+          }
+          this.setState({
+            data: newData,
+            outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
+          })
+        }
+      )
+    }
+    else {
+      console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
+    }
   }
 
   render() {
@@ -206,6 +229,7 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
+    let settings = this.props.displaySettings ? <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols} handleSetRowsCols={this.handleSetRowsCols} /> : undefined;
     return (
       <div className={className}>
         <div className="grid-container" style={cssValues}>
@@ -218,6 +242,7 @@ class Map extends Component {
         <Output>
           {messages}
         </Output>
+        {settings}
       </div>
     )
   }
