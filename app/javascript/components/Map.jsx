@@ -182,39 +182,35 @@ class Map extends Component {
     return await axios.get('/api/v1/content?rows='+numRows+'&cols='+numCols);
   }
 
+  generateNewMap(numRows, numCols) {
+    this.fetchCellsData(numRows, numCols).then(
+      response => {
+        let newData = {
+          numRows: numRows,
+          numCols: numCols,
+          cells: response.data,
+        }
+        this.setState({
+          data: newData,
+          selectedIndividualPath: new Array(numRows * numCols).fill(0),
+          outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
+        })
+      }
+    )
+  }
+
   handleNewMapClick() {
     if (!this.state.isEvolutionInProgress) {
-      this.fetchCellsData(this.state.data.numRows, this.state.data.numCols).then(
-        response => {
-          let newData = {
-            numRows: this.state.data.numRows,
-            numCols: this.state.data.numCols,
-            cells: response.data,
-          }
-          this.setState({
-            data: newData,
-            outputMessages: ["Map of " + newData.numCols + " cols x " + newData.numRows + " rows. Cells values are: [" + newData.cells + "]"]
-          })
-        }
-      )
+      this.generateNewMap(this.state.data.numRows, this.state.data.numCols);
+    }
+    else {
+      console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
     }
   }
 
   handleSetRowsCols(numRows, numCols) {
     if (!this.state.isEvolutionInProgress) {
-      this.fetchCellsData(numRows, numCols).then(
-        response => {
-          let newData = {
-            numRows: numRows,
-            numCols: numCols,
-            cells: response.data,
-          }
-          this.setState({
-            data: newData,
-            outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
-          })
-        }
-      )
+      this.generateNewMap(numRows, numCols)
     }
     else {
       console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
