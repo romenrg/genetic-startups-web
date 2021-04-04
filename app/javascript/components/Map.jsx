@@ -183,19 +183,21 @@ class Map extends Component {
   }
 
   handleNewMapClick() {
-    this.fetchCellsData(this.state.data.numRows, this.state.data.numCols).then(
-      response => {
-        let newData = {
-          numRows: this.state.data.numRows,
-          numCols: this.state.data.numCols,
-          cells: response.data,
+    if (!this.state.isEvolutionInProgress) {
+      this.fetchCellsData(this.state.data.numRows, this.state.data.numCols).then(
+        response => {
+          let newData = {
+            numRows: this.state.data.numRows,
+            numCols: this.state.data.numCols,
+            cells: response.data,
+          }
+          this.setState({
+            data: newData,
+            outputMessages: ["Map of " + newData.numCols + " cols x " + newData.numRows + " rows. Cells values are: [" + newData.cells + "]"]
+          })
         }
-        this.setState({
-          data: newData,
-          outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
-        })
-      }
-    )
+      )
+    }
   }
 
   handleSetRowsCols(numRows, numCols) {
@@ -229,7 +231,10 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
-    let settings = this.props.displaySettings ? <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols} handleSetRowsCols={this.handleSetRowsCols} /> : undefined;
+    let settings = this.props.displaySettings ? <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
+                                                               isEvolutionInProgress={this.state.isEvolutionInProgress}
+                                                               handleSetRowsCols={this.handleSetRowsCols} />
+                                              : undefined;
     return (
       <div className={className}>
         <div className="grid-container" style={cssValues}>

@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import ActionButton from "./ActionButton";
 
 const SettingsPanel = (props) => {
   const history = useHistory();
@@ -47,20 +48,18 @@ const SettingsPanel = (props) => {
               <div className="mt-6 relative flex-1 px-4 sm:px-6">
                 <div className="absolute inset-0 px-4 sm:px-6">
                   <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
-                    <form onSubmit={handleSubmit} className="m-4">
+                    <form className="m-4">
                       <div className="flex flex-col mb-4">
                         <label for="num-rows-input" className="mb-2 font-medium text-grey-darkest">Number of rows:</label>
                         <input type="number" name="num-rows-input" value={numRows} onChange={e => setNumRows(e.target.value)}
-                               className="border py-2 px-3 text-grey-darkest" />
+                               className="border py-2 px-3 text-grey-darkest" disabled={props.isEvolutionInProgress} />
                       </div>
                       <div className="flex flex-col mb-4">
                         <label for="num-cols-input" className="mb-2 font-medium text-grey-darkest">Number of columns:</label>
                         <input type="number" name="num-cols-input" value={numCols}  onChange={e => setNumCols(e.target.value)}
-                               className="border py-2 px-3 text-grey-darkest" />
+                               className="border py-2 px-3 text-grey-darkest" disabled={props.isEvolutionInProgress} />
                       </div>
-                      <input type="submit" value="Submit" className="lock bg-gray-600 hover:bg-gray-800 text-white text-lg
-                                                                     mx-auto p-3 rounded focus:outline-none cursor-pointer
-                                                                     focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"/>
+                      <ActionButton clickHandler={handleSubmit} isEvolutionInProgress={props.isEvolutionInProgress} text="Save changes" />
                     </form>
                   </div>
                 </div>

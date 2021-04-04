@@ -5,14 +5,14 @@ function ActionButton(props) {
   const clickHandler = props.clickHandler;
   if (isEvolutionInProgress) {
     return (
-      <button className="start-button" onClick={clickHandler} disabled>
+      <button className="action-button" onClick={clickHandler} disabled>
         Evolution in progress...
       </button>
     )
   }
   else {
     return (
-      <button className="start-button" onClick={clickHandler}>
+      <button className="action-button" onClick={clickHandler}>
         {props.text}
       </button>
     )
