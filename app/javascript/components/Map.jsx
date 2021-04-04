@@ -184,12 +184,13 @@ class Map extends Component {
   }
 
   async handleStartEvolutionClick(e) {
-    let oldData = this.state.data
+    let oldData = JSON.parse(JSON.stringify(this.state.data));
     this.setState({
-      isEvolutionInProgress: true,
-      selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
-      outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
+        isEvolutionInProgress: true,
+        selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
+        outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
     })
+    this.selectedIndividualPerGen = [];
     this.generatePopulation(AlgorithmConsts.DEFAULT_POPULATION_SIZE)
     let generation = 0;
     do {
@@ -219,6 +220,7 @@ class Map extends Component {
           selectedIndividualPath: new Array(numRows * numCols).fill(0),
           outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
         })
+        this.selectedIndividualPerGen = [];
       }
     )
   }
