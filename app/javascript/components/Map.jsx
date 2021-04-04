@@ -5,6 +5,7 @@ import Output from "./Output";
 import ACTIONS from "../algorithm/Actions";
 import axios from "axios";
 import SettingsPanel from "./SettingsPanel";
+import DisplayOptions from "../algorithm/Display"
 
 const MapConsts = {
   DEFAULT_NUM_COLS: 16,
@@ -23,12 +24,14 @@ class Map extends Component {
       },
       selectedIndividualPath: new Array(MapConsts.DEFAULT_NUM_ROWS * MapConsts.DEFAULT_NUM_COLS).fill(0),
       isEvolutionInProgress: false,
+      display: DisplayOptions.DISPLAY_GENERATIONS_QUICK.value,
       outputMessages: []
     }
     this.selectedIndividualPerGen = []
     this.handleStartEvolutionClick = this.handleStartEvolutionClick.bind(this);
     this.handleNewMapClick = this.handleNewMapClick.bind(this);
     this.handleSetRowsCols = this.handleSetRowsCols.bind(this);
+    this.handleDisplay = this.handleDisplay.bind(this)
   }
 
   componentDidMount() {
@@ -111,34 +114,45 @@ class Map extends Component {
       individual: this.population[0],
       score: Algorithm.fitness(this.population[0], this.state.data)
     })
-    this.setState(state => {
-      const outputMessages = [("Selected Individual for generation "+generation+": ["+
-                              this.selectedIndividualPerGen[generation].individual+"]. Score:"+
-                              this.selectedIndividualPerGen[generation].score)
-                             ].concat(state.outputMessages)
-      return { outputMessages }
-    })
+    if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmConsts.NUM_GENERATIONS - 1) {
+      this.setState(state => {
+        const outputMessages = [("Selected Individual for generation "+generation+": ["+
+                                this.selectedIndividualPerGen[generation].individual+"]. Score:"+
+                                this.selectedIndividualPerGen[generation].score)
+                               ].concat(state.outputMessages)
+        return { outputMessages }
+      })
+    }
   }
 
   async drawPathOfBestCandidate() {
-    await this.sleep(1000)
+    if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+      await this.sleep(500)
+    }
+    else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
+      await this.sleep(50)
+    }
     let selectedIndividualPath = new Array(this.state.data.numRows * this.state.data.numCols).fill(0)
     let step = 0
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].length)
     let cell = Algorithm.calculateStartingCell(this.population[0], this.state.data.numRows)
     do {
       if (Algorithm._isCellInMap(cell.row, cell.col, this.state.data)) {
-        selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.state.data)] += 1
-        this.setBestCandidatePath(selectedIndividualPath)
-        this.setState(state => {
-          const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
-                                  ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
-                                  Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
-                                 ].concat(state.outputMessages)
-          return { outputMessages }
-        })
+        if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY || (step === Algorithm.getNumSteps(this.state.data))) {
+          selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.state.data)] += 1
+          this.setBestCandidatePath(selectedIndividualPath)
+        }
+        if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+          this.setState(state => {
+            const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
+                                    ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
+                                    Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
+                                   ].concat(state.outputMessages)
+            return { outputMessages }
+          })
+        }
       }
-      else {
+      else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
         this.setState(state => {
           const outputMessages = [("Cell: [Out of bounds] : "+
             ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
@@ -147,7 +161,12 @@ class Map extends Component {
           return { outputMessages }
         })
       }
-      await this.sleep(1000)
+      if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+        await this.sleep(500)
+      }
+      else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
+        await this.sleep(50)
+      }
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, Algorithm.calculateNumBinaryDigitsForEachStep()))
       movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
       step++;
@@ -165,7 +184,12 @@ class Map extends Component {
   }
 
   async handleStartEvolutionClick(e) {
-    this.setState({isEvolutionInProgress: true})
+    let oldData = this.state.data
+    this.setState({
+      isEvolutionInProgress: true,
+      selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
+      outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
+    })
     this.generatePopulation(AlgorithmConsts.DEFAULT_POPULATION_SIZE)
     let generation = 0;
     do {
@@ -209,12 +233,24 @@ class Map extends Component {
   }
 
   handleSetRowsCols(numRows, numCols) {
-    if (!this.state.isEvolutionInProgress) {
+    if (!this.state.isEvolutionInProgress && (numRows !== this.state.data.numRows || numCols !== this.state.data.numCols)) {
       this.generateNewMap(numRows, numCols)
     }
-    else {
+    else if (this.state.isEvolutionInProgress) {
       console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
     }
+    else {
+      this.setState({
+        selectedIndividualPath: new Array(numRows * numCols).fill(0),
+        outputMessages: ["Map of "+numCols+" cols x "+numRows+" rows. Cells values are: ["+this.state.data.cells+"]"]
+      })
+    }
+  }
+
+  handleDisplay(value) {
+    this.setState({
+      display: value
+    })
   }
 
   render() {
@@ -228,8 +264,10 @@ class Map extends Component {
     let messages = this.writeMessages();
     let className = 'map';
     let settings = this.props.displaySettings ? <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
+                                                               display={this.state.display}
                                                                isEvolutionInProgress={this.state.isEvolutionInProgress}
-                                                               handleSetRowsCols={this.handleSetRowsCols} />
+                                                               handleSetRowsCols={this.handleSetRowsCols}
+                                                               handleDisplay={this.handleDisplay}/>
                                               : undefined;
     return (
       <div className={className}>

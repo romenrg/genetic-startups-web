@@ -1,11 +1,13 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import ActionButton from "./ActionButton";
+import DisplayOptions from "../algorithm/Display"
 
 const SettingsPanel = (props) => {
   const history = useHistory();
   const [numRows, setNumRows] = useState(props.numRows);
   const [numCols, setNumCols] = useState(props.numCols);
+  const [display, setDisplay] = useState(props.display);
   const handleOnClose = useCallback(() => history.push('/'), [history]);
   const handleEscKeydown = useCallback((event) => {
     if(event.keyCode === 27) {
@@ -15,6 +17,8 @@ const SettingsPanel = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleSetRowsCols(parseInt(numRows), parseInt(numCols));
+    console.log("Display is: "+display)
+    props.handleDisplay(parseInt(display));
     handleOnClose();
   };
 
@@ -24,6 +28,12 @@ const SettingsPanel = (props) => {
       document.removeEventListener("keydown", handleEscKeydown, false);
     };
   }, []);
+
+  let selectOptions = Object.keys(DisplayOptions).map(key => {
+    return (
+      <option value={DisplayOptions[key].value}>{DisplayOptions[key].text}</option>
+    )
+  });
 
   return (
     <section className="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -41,23 +51,36 @@ const SettingsPanel = (props) => {
             </div>
             <div className="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
               <div className="px-4 sm:px-6">
-                <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">
+                <h2 className="text-2xl font-medium text-gray-900" id="slide-over-title">
                   Settings
                 </h2>
               </div>
-              <div className="mt-6 relative flex-1 px-4 sm:px-6">
+              <div className="mt-5 relative flex-1 px-4 sm:px-6">
                 <div className="absolute inset-0 px-4 sm:px-6">
                   <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
                     <form className="m-4">
-                      <div className="flex flex-col mb-4">
-                        <label for="num-rows-input" className="mb-2 font-medium text-grey-darkest">Number of rows:</label>
-                        <input type="number" name="num-rows-input" value={numRows} onChange={e => setNumRows(e.target.value)}
-                               className="border py-2 px-3 text-grey-darkest" disabled={props.isEvolutionInProgress} />
+                      <div className="mb-6 settings-map-size">
+                        <h3 className="text-xl font-medium text-gray-900">Map size</h3>
+                        <div className="flex flex-col mb-4">
+                          <label for="num-rows-input" className="mb-2 font-medium text-grey-darkest">Number of rows:</label>
+                          <input type="number" name="num-rows-input" value={numRows} onChange={e => setNumRows(e.target.value)}
+                                 className="border py-2 px-3 text-grey-darkest cursor-text" disabled={props.isEvolutionInProgress} />
+                        </div>
+                        <div className="flex flex-col mb-4">
+                          <label for="num-cols-input" className="mb-2 font-medium text-grey-darkest">Number of columns:</label>
+                          <input type="number" name="num-cols-input" value={numCols}  onChange={e => setNumCols(e.target.value)}
+                                 className="border py-2 px-3 text-grey-darkest cursor-text" disabled={props.isEvolutionInProgress} />
+                        </div>
                       </div>
-                      <div className="flex flex-col mb-4">
-                        <label for="num-cols-input" className="mb-2 font-medium text-grey-darkest">Number of columns:</label>
-                        <input type="number" name="num-cols-input" value={numCols}  onChange={e => setNumCols(e.target.value)}
-                               className="border py-2 px-3 text-grey-darkest" disabled={props.isEvolutionInProgress} />
+                      <div className="mb-6 settings-display">
+                        <h3 className="text-xl font-medium text-gray-900">Display</h3>
+                        <div className="flex flex-col mb-4">
+                          <label htmlFor="display-select" className="mb-2 font-medium text-grey-darkest">Choose information to display:</label>
+                          <select name="display-select" className="border py-2 px-3 text-grey-darkest cursor-pointer"
+                                  value={display} onChange={e => setDisplay(e.target.value)} disabled={props.isEvolutionInProgress}>
+                            {selectOptions}
+                          </select>
+                        </div>
                       </div>
                       <ActionButton clickHandler={handleSubmit} isEvolutionInProgress={props.isEvolutionInProgress} text="Save changes" />
                     </form>

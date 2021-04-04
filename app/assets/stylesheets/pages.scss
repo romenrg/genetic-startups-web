@@ -20,6 +20,29 @@ body {
     font-weight: 500;
     margin: 0.5rem 0;
   }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+  }
+  ul.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    border-bottom: 1px solid #dee2e6;
+    .nav-item {
+      border: 1px solid transparent;
+      border-top-left-radius: .25rem;
+      border-top-right-radius: .25rem;
+    }
+    .nav-item-active {
+      color: #495057;
+      background-color: #fff;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
+  }
 }
 
 nav {
