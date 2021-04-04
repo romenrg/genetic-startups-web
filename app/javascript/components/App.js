@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Map from "./Map";
 import Info from "./Info"
+import SettingsPanel from "./SettingsPanel";
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,12 +20,18 @@ const App = () => {
               <li>
                 <Link to="/info">Algorithm details</Link>
               </li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
             </ul>
           </nav>
           <div id="main">
             <Switch>
               <Route path="/info">
                 <Info />
+              </Route>
+              <Route path="/settings">
+                <Map displaySettings={true}/>
               </Route>
               <Route path="/">
                 <Map />
