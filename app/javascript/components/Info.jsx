@@ -5,9 +5,9 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 const Action = (props) => {
-  let values = props.action.values.map(value => {
+  let values = props.action.values.map((value, i) => {
     return (
-      <div className="info-item-value">
+      <div className="info-item-value" key={i}>
         <span className="info-item-value-number">{value.score}: </span>
         <span className="info-item-value-msg">{value.msg}</span>
       </div>
@@ -22,7 +22,7 @@ const Action = (props) => {
       <div className={"info-item-values-list "+props.evenOrOddRow}>
         {values}
       </div>
-      <span className={props.evenOrOddRow}>{Algorithm.calculateScore(props.i)}</span>
+      <span className={props.evenOrOddRow}>{Algorithm.calculateScore(props.actionIndex)}</span>
       <span className={props.evenOrOddRow}>{props.action.description}</span>
     </>
   );
@@ -32,7 +32,7 @@ const Info = () => {
   let actionsInfo = []
   ACTIONS.forEach( (action, i) => {
     let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
-    actionsInfo.push(<Action action={action} evenOrOddRow={evenOrOddRow} i={i}/>)
+    actionsInfo.push(<Action action={action} evenOrOddRow={evenOrOddRow} actionIndex={i} key={i}/>)
   })
   return (
     <div id="info">
