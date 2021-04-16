@@ -4,29 +4,35 @@ import {Algorithm} from "../algorithm/Algorithm";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+const Action = (props) => {
+  let values = props.action.values.map(value => {
+    return (
+      <div className="info-item-value">
+        <span className="info-item-value-number">{value.score}: </span>
+        <span className="info-item-value-msg">{value.msg}</span>
+      </div>
+    )
+  })
+  return (
+    <>
+      <div className={"info-item-image-container "+props.evenOrOddRow}>
+        <div className={"info-item-image cell-"+props.action.name}/>
+      </div>
+      <span className={props.evenOrOddRow}>{props.action.name}</span>
+      <div className={"info-item-values-list "+props.evenOrOddRow}>
+        {values}
+      </div>
+      <span className={props.evenOrOddRow}>{Algorithm.calculateScore(props.i)}</span>
+      <span className={props.evenOrOddRow}>{props.action.description}</span>
+    </>
+  );
+};
+
 const Info = () => {
   let actionsInfo = []
   ACTIONS.forEach( (action, i) => {
-    let evenRow = i % 2 ? "even-row" : "odd-row"
-    let values = action.values.map(value => {
-      return (
-        <div className="info-item-value">
-          <span className="info-item-value-number">{value.score}: </span>
-          <span className="info-item-value-msg">{value.msg}</span>
-        </div>
-      )
-    })
-    actionsInfo.push(<>
-                       <div className={"info-item-image-container "+evenRow}>
-                         <div className={"info-item-image cell-"+action.name}/>
-                       </div>
-                       <span className={evenRow}>{action.name}</span>
-                       <div className={"info-item-values-list "+evenRow}>
-                         {values}
-                       </div>
-                       <span className={evenRow}>{Algorithm.calculateScore(i)}</span>
-                       <span className={evenRow}>{action.description}</span>
-                     </>)
+    let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
+    actionsInfo.push(<Action action={action} evenOrOddRow={evenOrOddRow} i={i}/>)
   })
   return (
     <div id="info">
