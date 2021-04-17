@@ -40,6 +40,7 @@ const Info = () => {
   return (
     <div id="info">
       <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
+        <h2 className="section-title">Information</h2>
         <TabList>
           <Tab>Algorithm details</Tab>
           <Tab>The map</Tab>
