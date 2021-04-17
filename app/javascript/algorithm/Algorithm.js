@@ -2,9 +2,9 @@ import React from "react";
 import ACTIONS from "./Actions";
 
 const AlgorithmConsts = {
-  DEFAULT_POPULATION_SIZE: 21,
+  DEFAULT_POPULATION_SIZE: 25,
   POSSIBLE_MOVES: 3,
-  NUM_GENERATIONS: 10,
+  NUM_GENERATIONS: 15,
   CELL_OUT_OF_MAP_ACTION: 9
 }
 
