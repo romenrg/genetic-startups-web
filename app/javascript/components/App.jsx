@@ -18,7 +18,7 @@ const App = () => {
             <h1><Link to="/">Genetic Startups</Link></h1>
             <ul>
               <li>
-                <Link to="/info">Algorithm details</Link>
+                <Link to="/info">Information</Link>
               </li>
               <li>
                 <Link to="/settings">Settings</Link>
