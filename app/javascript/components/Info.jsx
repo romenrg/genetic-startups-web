@@ -39,7 +39,7 @@ const Info = () => {
       <Tabs>
         <TabList>
           <Tab>Algorithm details</Tab>
-          <Tab>Cell types</Tab>
+          <Tab>The map</Tab>
         </TabList>
 
         <TabPanel>
@@ -48,11 +48,28 @@ const Info = () => {
             <p>This application is based on Genetic Algorithms, representing possible lives of startups.
                The algorithm improves startup choices over generations, to achieve the most successful outcome possible;
                in a map where investors, product launches, team members, sad news and sales, among other options, appear.</p>
+            <h3>Introduction to Genetic Algorithms</h3>
+            <p>In the field of artificial intelligence, Genetic algorithms are grouped in the larger class of evolutionary
+              algorithms (EA). Are often used as a search heuristic, to generate solutions to optimization problems. </p>
+            <p>Genetic Algorithms use techniques inspired by natural evolution, such as selection, crossover and mutation,
+              in order to evolve a random population of possible solutions into better and better solutions, over generations.</p>
+            <h3>The problem of Startup life evolution</h3>
+            <p>Startups are surrounded with huge uncertainty and have limited resources and time to find product/market-fit.
+              Besides, the life of a startup is full of challenges and tough choices. As founders, we must be very careful
+              when choosing one path or another.</p>
+            <p>In this application, we generate random "maps" that represent the space of possible choices for the
+              life of a startup. Since time and resources are limited, finding the best path possible is key to success.
+              Pursuing that goal, we have developed a genetic algorithm that tries to pick the best possible outcome
+              for the startup, learning with each new generation.</p>
+            <p>Learn more about the map in the corresponding information tab.</p>
           </div>
         </TabPanel>
         <TabPanel>
           <div id="cell-types" className="tab-panel">
-            <h2>Cell types</h2>
+            <h2>The map</h2>
+            <p>As a starting point, we generate a random map that represents the space of possible choices for the
+            life of your startup.</p>
+            <h3>Cell types</h3>
             <p>In the map, multiple different cell types can be found. Each type represents a possible event in the life of the
               startup. And each one can have different impacts on the startup. For that reason, each one has 10 possible values
               and a score (the average of those possible values).</p>
@@ -64,6 +81,8 @@ const Info = () => {
               <span className="info-item-title">Description</span>
               {actionsInfo}
             </div>
+            <h3>Probabilities per quarter</h3>
+            <p>The map is divided in quarters. Each quarter has different probabilities for the different types of cells: </p>
           </div>
         </TabPanel>
       </Tabs>
