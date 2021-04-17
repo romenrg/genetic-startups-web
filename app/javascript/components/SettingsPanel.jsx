@@ -38,7 +38,7 @@ const SettingsPanel = (props) => {
   return (
     <section className="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity settings-panel-bg" aria-hidden="true"></div>
         <div className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
           <div className="relative w-screen max-w-md">
             <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
