@@ -112,7 +112,7 @@ class Algorithm {
   }
 
   static getNumSteps(mapData) {
-    return mapData.numCols + mapData.numRows
+    return Math.floor(mapData.numCols * 1.75)
   }
 
   static calculateOneDimensionalPos(row, col, mapData) {
