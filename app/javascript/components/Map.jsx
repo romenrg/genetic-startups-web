@@ -59,12 +59,13 @@ class Map extends Component {
     if (this.state.data.cells) {
       for (let i = 0; i < this.state.data.numRows; i++) {
         for (let j = 0; j < this.state.data.numCols; j++) {
-          let cellNumVisits = this.state.selectedIndividualPath[Algorithm.calculateOneDimensionalPos(i, j, this.state.data)]
+          let cellIndex = Algorithm.calculateOneDimensionalPos(i, j, this.state.data)
+          let cellNumVisits = this.state.selectedIndividualPath[cellIndex]
           if (cellNumVisits) {
-            cells.push(<div data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
+            cells.push(<div key={cellIndex} data-testid="visited-cell" className={"cell highlight-"+cellNumVisits}>{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
           }
           else {
-            cells.push(<div className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
+            cells.push(<div key={cellIndex} className="cell">{this.cellTagFromActionValue(Algorithm.getCellAction(i, j, this.state.data))}</div>)
           }
         }
       }
@@ -75,7 +76,7 @@ class Map extends Component {
   writeMessages() {
     let messages = []
     for (let i = 0; i < this.state.outputMessages.length; i++) {
-      messages.push(<span className="line">{this.state.outputMessages[i]}</span>)
+      messages.push(<span key={i} className="line">{this.state.outputMessages[i]}</span>)
     }
     return messages;
   }
