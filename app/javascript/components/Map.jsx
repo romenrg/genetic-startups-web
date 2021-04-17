@@ -176,8 +176,9 @@ class Map extends Component {
   }
 
   createNewGeneration() {
-    let numIndividualsToSelect = this.population.length / 3
-    let numIndividualsToCross = (numIndividualsToSelect % 2) === 0 ? numIndividualsToSelect : numIndividualsToSelect + 1
+    let numIndividualsToSelect = Math.floor(this.population.length / 4)
+    let numIndividualsPerOp = Math.floor((this.population.length - numIndividualsToSelect) / 2)
+    let numIndividualsToCross = (numIndividualsPerOp % 2) === 0 ? numIndividualsPerOp : numIndividualsPerOp + 1
     let selectedIndividuals = Algorithm.selection(numIndividualsToSelect, this.population)
     let crossedIndividuals = Algorithm.crossover(numIndividualsToCross, this.population)
     let mutatedIndividuals = Algorithm.mutation(this.population.length - numIndividualsToSelect - numIndividualsToCross, this.population)
