@@ -11,12 +11,7 @@ body {
   }
   a {
     color: #0d6efd;
-  }
-  .react-app {
-    a {
-      color: #fff;
-      text-decoration: none;
-    }
+    cursor: pointer;
   }
   h2 {
     font-size: 1.35rem;
@@ -37,6 +32,10 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
   h1 {
     font-size: 1.5rem;
     font-weight: 300;

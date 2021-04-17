@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ACTIONS from "../algorithm/Actions";
 import {Algorithm} from "../algorithm/Algorithm";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -29,14 +29,17 @@ const Action = (props) => {
 };
 
 const Info = () => {
+  const [tabIndex, setTabIndex] = useState(0);
+
   let actionsInfo = []
   ACTIONS.forEach( (action, i) => {
     let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
     actionsInfo.push(<Action action={action} evenOrOddRow={evenOrOddRow} actionIndex={i} key={i}/>)
   })
+
   return (
     <div id="info">
-      <Tabs>
+      <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
         <TabList>
           <Tab>Algorithm details</Tab>
           <Tab>The map</Tab>
@@ -61,7 +64,7 @@ const Info = () => {
               life of a startup. Since time and resources are limited, finding the best path possible is key to success.
               Pursuing that goal, we have developed a genetic algorithm that tries to pick the best possible outcome
               for the startup, learning with each new generation.</p>
-            <p>Learn more about the map in the corresponding information tab.</p>
+            <p>Learn more about the map the dedicated information tab <a onClick={() => setTabIndex(1)}>"The map"</a>.</p>
           </div>
         </TabPanel>
         <TabPanel>
