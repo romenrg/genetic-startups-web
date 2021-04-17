@@ -74,9 +74,9 @@ const Info = () => {
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
             life of your startup.</p>
             <h3>Cell types</h3>
-            <p>In the map, multiple different cell types can be found. Each type represents a possible event in the life of the
-              startup. And each one can have different impacts on the startup. For that reason, each one has 10 possible values
-              and a score (the average of those possible values).</p>
+            <p>In the map, different cell types appear. Each one represents a possible event in the life of a
+              startup, having a different impact. For that reason, each type has 10 possible values,
+              and a score (calculated as the average of those possible values):</p>
             <div className="info-grid">
               <span className="info-item-title">Element</span>
               <span className="info-item-title">Name</span>
