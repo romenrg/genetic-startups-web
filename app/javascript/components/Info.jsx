@@ -96,10 +96,10 @@ const Info = () => {
           <div id="info-alg-details" className="tab-panel">
             <h2>Algorithm details</h2>
             <p>The key aspects of applying genetic algorithms to this problem are:</p>
-            <ol>
-              <li>defining how individuals are represented,</li>
-              <li>defining the selection, crossover and mutation operations,</li>
-              <li>the fitness function, used to evaluate individuals</li>
+            <ol className="text-list">
+              <li>Defining how individuals are represented,</li>
+              <li>Designing the selection, crossover and mutation operations, and</li>
+              <li>Building the fitness function, used to evaluate individuals</li>
             </ol>
           </div>
         </TabPanel>
@@ -107,9 +107,9 @@ const Info = () => {
           <div id="info-architecture" className="tab-panel">
             <h2>Architecture</h2>
             <p>This application is composed of</p>
-            <ol>
+            <ol className="text-list">
               <li>A Rails backend, providing a REST API; and</li>
-              <li>A React frontend</li>
+              <li>A React frontend application</li>
             </ol>
             <h3>The Rails backend</h3>
             <p>The backend Rails application includes the functionality to generate the random maps</p>
