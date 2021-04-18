@@ -1,27 +1,19 @@
-import React, { Fragment, useCallback, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import {useHistory} from 'react-router-dom';
 import ActionButton from "./ActionButton";
 import DisplayOptions from "../algorithm/Display"
 
 const SettingsPanel = (props) => {
-  const history = useHistory();
   const [numRows, setNumRows] = useState(props.numRows);
   const [numCols, setNumCols] = useState(props.numCols);
   const [display, setDisplay] = useState(props.display);
-  const [open, setOpen] = useState(true)
-
-  const handleOnClose = useCallback(() => {
-    setOpen(false)
-    history.push('/')
-  }, [history]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleSetRowsCols(parseInt(numRows), parseInt(numCols));
     console.log("Display is: "+display)
     props.handleDisplay(parseInt(display));
-    handleOnClose();
+    props.setAreSettingsShown(false);
   };
 
   let selectOptions = Object.keys(DisplayOptions).map(key => {
@@ -31,8 +23,8 @@ const SettingsPanel = (props) => {
   });
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" static className="fixed inset-0 overflow-hidden" open={open} onClose={setOpen}>
+    <Transition.Root show={props.areSettingsShown} as={Fragment}>
+      <Dialog as="div" static className="fixed inset-0 overflow-hidden" open={props.areSettingsShown} onClose={() => props.setAreSettingsShown(false)}>
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
             as={Fragment}
@@ -68,7 +60,7 @@ const SettingsPanel = (props) => {
                   <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
                     <button
                       className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                      onClick={() => handleOnClose()}
+                      onClick={() => props.setAreSettingsShown(false)}
                     >
                       <span className="sr-only">Close panel</span>
                       <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

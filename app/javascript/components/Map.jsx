@@ -267,12 +267,6 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
-    let settings = this.props.displaySettings ? <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
-                                                               display={this.state.display}
-                                                               isEvolutionInProgress={this.state.isEvolutionInProgress}
-                                                               handleSetRowsCols={this.handleSetRowsCols}
-                                                               handleDisplay={this.handleDisplay}/>
-                                              : undefined;
     return (
       <div className={className}>
         <div className="grid-container" style={cssValues}>
@@ -285,7 +279,13 @@ class Map extends Component {
         <Output>
           {messages}
         </Output>
-        {settings}
+        <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
+                       display={this.state.display}
+                       isEvolutionInProgress={this.state.isEvolutionInProgress}
+                       handleSetRowsCols={this.handleSetRowsCols}
+                       handleDisplay={this.handleDisplay}
+                       areSettingsShown={this.props.areSettingsShown}
+                       setAreSettingsShown={this.props.setAreSettingsShown}/>
       </div>
     )
   }

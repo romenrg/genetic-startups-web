@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Map from "./Map";
 import Info from "./Info"
-import SettingsPanel from "./SettingsPanel";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,6 +9,8 @@ import {
 } from "react-router-dom";
 
 const App = () => {
+  const [areSettingsShown, setAreSettingsShown] = useState(false);
+
   return (
     <>
       <Router>
@@ -21,7 +22,7 @@ const App = () => {
                 <Link to="/info">Information</Link>
               </li>
               <li>
-                <Link to="/settings">Settings</Link>
+                <a onClick={() => setAreSettingsShown(true)}>Settings</a>
               </li>
             </ul>
           </nav>
@@ -30,11 +31,8 @@ const App = () => {
               <Route path="/info">
                 <Info />
               </Route>
-              <Route path="/settings">
-                <Map displaySettings={true}/>
-              </Route>
               <Route path="/">
-                <Map />
+                <Map areSettingsShown={areSettingsShown} setAreSettingsShown={setAreSettingsShown}/>
               </Route>
             </Switch>
           </div>
