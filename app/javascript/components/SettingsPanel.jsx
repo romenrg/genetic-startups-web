@@ -17,7 +17,7 @@ const SettingsPanel = (props) => {
 
   let selectOptions = Object.keys(DisplayOptions).map(key => {
     return (
-      <option value={DisplayOptions[key].value}>{DisplayOptions[key].text}</option>
+      <option key={DisplayOptions[key].value} value={DisplayOptions[key].value}>{DisplayOptions[key].text}</option>
     )
   });
 
