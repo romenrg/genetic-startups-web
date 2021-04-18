@@ -11,7 +11,6 @@ const SettingsPanel = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleSetRowsCols(parseInt(numRows), parseInt(numCols));
-    console.log("Display is: "+display)
     props.handleDisplay(parseInt(display));
     props.setAreSettingsShown(false);
   };
