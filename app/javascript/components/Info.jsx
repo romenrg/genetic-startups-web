@@ -45,6 +45,7 @@ const Info = () => {
           <Tab>Introduction</Tab>
           <Tab>The map</Tab>
           <Tab>Algorithm details</Tab>
+          <Tab>Using the application</Tab>
         </TabList>
 
         <TabPanel>
@@ -98,6 +99,22 @@ const Info = () => {
               <li>defining how individuals are represented,</li>
               <li>defining the selection, crossover and mutation operations,</li>
               <li>the fitness function, used to evaluate individuals</li>
+            </ol>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div id="info-using-app" className="tab-panel">
+            <h2>Using the application</h2>
+            <p>The main features opf this application are:</p>
+            <ol className="text-list">
+              <li>Generating a random map (either reloading the page or clicking the "Generate new map" button</li>
+              <li>Customize settings: map size (rows and columns) and information to display:</li>
+              <ul className="text-list">
+                <li>Show all information: </li>
+                <li>Quick loop over generations: </li>
+                <li>Only show final individual: </li>
+              </ul>
+              <li>Start the evolution, clicking the corresponding button</li>
             </ol>
           </div>
         </TabPanel>

@@ -185,10 +185,15 @@ nav {
   .tab-panel {
     margin: 1.5rem 0.75rem 1rem 0.75rem;
   }
-  ol {
-    list-style-type: decimal;
+  ol.text-list, ul.text-list {
     margin: 1rem 0;
     padding-left: 3rem;
+  }
+  ol.text-list {
+    list-style-type: decimal;
+  }
+  ul.text-list {
+    list-style-type: circle;
   }
 }
 
