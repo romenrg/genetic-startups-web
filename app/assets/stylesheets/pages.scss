@@ -185,6 +185,11 @@ nav {
   .tab-panel {
     margin: 1.5rem 0.75rem 1rem 0.75rem;
   }
+  ol {
+    list-style-type: decimal;
+    margin: 1rem 0;
+    padding-left: 3rem;
+  }
 }
 
 .cell-advisor {

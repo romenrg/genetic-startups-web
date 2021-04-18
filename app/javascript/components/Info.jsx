@@ -42,17 +42,18 @@ const Info = () => {
       <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
         <h2 className="section-title">Information</h2>
         <TabList>
-          <Tab>Algorithm details</Tab>
+          <Tab>Introduction</Tab>
           <Tab>The map</Tab>
+          <Tab>Algorithm details</Tab>
         </TabList>
 
         <TabPanel>
-          <div id="alg-details" className="tab-panel">
-            <h2>Algorithm details</h2>
+          <div id="info-intro" className="tab-panel">
+            <h2>Introduction</h2>
             <p>This application is based on Genetic Algorithms, representing possible lives of startups.
                The algorithm improves startup choices over generations, to achieve the most successful outcome possible;
                in a map where investors, product launches, team members, sad news and sales, among other options, appear.</p>
-            <h3>Introduction to Genetic Algorithms</h3>
+            <h3>About Genetic Algorithms</h3>
             <p>In the field of artificial intelligence, Genetic algorithms are grouped in the larger class of evolutionary
               algorithms (EA). Are often used as a search heuristic, to generate solutions to optimization problems. </p>
             <p>Genetic Algorithms use techniques inspired by natural evolution, such as selection, crossover and mutation,
@@ -69,7 +70,7 @@ const Info = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div id="cell-types" className="tab-panel">
+          <div id="info-cell-types" className="tab-panel">
             <h2>The map</h2>
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
             life of your startup.</p>
@@ -87,6 +88,17 @@ const Info = () => {
             </div>
             <h3>Probabilities per quarter</h3>
             <p>The map is divided in quarters. Each quarter has different probabilities for the different types of cells: </p>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div id="info-alg-details" className="tab-panel">
+            <h2>Algorithm details</h2>
+            <p>The key aspects of applying genetic algorithms to this problem are:</p>
+            <ol>
+              <li>defining how individuals are represented,</li>
+              <li>defining the selection, crossover and mutation operations,</li>
+              <li>the fitness function, used to evaluate individuals</li>
+            </ol>
           </div>
         </TabPanel>
       </Tabs>
