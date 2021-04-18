@@ -45,6 +45,7 @@ const Info = () => {
           <Tab>Introduction</Tab>
           <Tab>The map</Tab>
           <Tab>Algorithm details</Tab>
+          <Tab>Architecture</Tab>
           <Tab>Using the application</Tab>
         </TabList>
 
@@ -100,6 +101,23 @@ const Info = () => {
               <li>defining the selection, crossover and mutation operations,</li>
               <li>the fitness function, used to evaluate individuals</li>
             </ol>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div id="info-architecture" className="tab-panel">
+            <h2>Architecture</h2>
+            <p>This application is composed of</p>
+            <ol>
+              <li>A Rails backend, providing a REST API; and</li>
+              <li>A React frontend</li>
+            </ol>
+            <h3>The Rails backend</h3>
+            <p>The backend Rails application includes the functionality to generate the random maps</p>
+            <p>It also exposes the "content" operation to generate the content of a random map, with the number of rows
+              and columns specified as parameters</p>
+            <h3>The React frontend</h3>
+            <p>The React applications is written in Javascript and is composed of several components, as described in
+              the following diagram:</p>
           </div>
         </TabPanel>
         <TabPanel>
