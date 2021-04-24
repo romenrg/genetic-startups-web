@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M16CYL4D4Z"></script>
+    <script>
+      const host = window.location.hostname;
+      if (host !== "localhost") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-M16CYL4D4Z');
+      }
+    </script>
     <title>Genetic Startups - Startup world navigated by genetic algorithms</title>
     <meta name="description" content="Application of Genetic Algorithms to navigate the bumpy world of startups,
                                       attempting to find the best path in random maps with different startup-related events">
