@@ -25,9 +25,9 @@ RUN bundle install
 
 COPY . /usr/src/app
 
-#RUN bundle exec bin/rake assets:precompile
+#RUN bundle exec rake assets:precompile
 
-#RUN bundle exec rake webpacker:install
+RUN bundle exec rake webpacker:install
 #RUN bundle exec rake webpacker:install:react
 
 EXPOSE 3000
