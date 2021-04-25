@@ -279,4 +279,10 @@ footer {
   #main .map .output {
     margin: 0;
   }
+  #main .map .action-buttons {
+    display: block;
+  }
+  .action-button {
+    width: 100%;
+  }
 }
