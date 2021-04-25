@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install && \
-    bundle exec rake assets:precompile
+    bundle exec bin/rake assets:precompile
 
 COPY . /usr/src/app
 
