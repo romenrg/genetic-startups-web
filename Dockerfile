@@ -3,7 +3,7 @@ FROM ruby:2.6.6
 # Install nodejs
 RUN apt-get update -qq && apt-get install -y nodejs
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
     nodejs \
   && apt-get clean \
