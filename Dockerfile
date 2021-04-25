@@ -1,5 +1,18 @@
 FROM ruby:2.6.6
 
+# Install nodejs
+RUN apt-get update -qq && apt-get install -y nodejs
+
+# Add Yarn repository
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# Update
+RUN apt-get update -y
+
+# Install Yarn
+RUN apt-get install yarn -y
+
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 
@@ -8,13 +21,14 @@ WORKDIR /usr/src/app
 
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
-RUN bundle install && \
-    bundle exec bin/rake assets:precompile
+RUN bundle install
 
 COPY . /usr/src/app
 
-#RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
-RUN apt-get update
+#RUN bundle exec bin/rake assets:precompile
+
+#RUN bundle exec rake webpacker:install
+#RUN bundle exec rake webpacker:install:react
 
 EXPOSE 3000
 
