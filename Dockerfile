@@ -10,7 +10,7 @@ COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install
 
-RUN bundle exec rails assets:precompile
+RUN NODE_ENV=test bundle exec rails assets:precompile
 
 COPY . /usr/src/app
 
