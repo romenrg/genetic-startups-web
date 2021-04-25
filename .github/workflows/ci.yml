@@ -16,6 +16,6 @@ jobs:
     - name: Bundle install
       run: bundle install
     - name: Webpacker compilation
-      run: NODE_ENV=test bundle exec rails webpacker:compile
+      run: NODE_ENV=test bundle exec rails assets:precompile
     - name: Run Ruby tests
       run: bundle exec rake
