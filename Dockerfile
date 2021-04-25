@@ -3,15 +3,13 @@ FROM ruby:2.6.6
 # Install nodejs
 RUN apt-get update -qq && apt-get install -y nodejs
 
-# Add Yarn repository
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
+    nodejs \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
-# Update
-RUN apt-get update -y
-
-# Install Yarn
-RUN apt-get install yarn -y
+RUN npm install -g yarn@1
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
