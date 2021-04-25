@@ -10,6 +10,8 @@ COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install
 
+RUN bundle exec rails assets:precompile
+
 COPY . /usr/src/app
 
 #RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
