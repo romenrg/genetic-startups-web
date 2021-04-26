@@ -31,13 +31,13 @@ describe("Algorithm tests", () => {
   })
   it("fitness",() => {
     let mapData = {numRows: 2, numCols: 2, cells: [0, 3, 6, 0]}
-    let score = Algorithm.fitness([0, 0, 1, 0, 0, 1, 1, 0, 0], mapData)
-    expect(score).toBe(32)
+    let score = Algorithm.fitness([0, 0, 1, 0, 0, 1, 1], mapData)
+    expect(score).toBe(87)
   })
   it("fitness (goes outside map after first move)",() => {
     let mapData = {numRows: 2, numCols: 2, cells: [0, 1, 2, 0]}
-    let score = Algorithm.fitness([0, 1, 1, 1, 1, 1, 1, 1, 1], mapData)
-    expect(score).toBe(-220)
+    let score = Algorithm.fitness([0, 1, 1, 1, 1, 1, 1], mapData)
+    expect(score).toBe(-165)
   })
   it("calculateScore", () =>{
     expect(Algorithm.calculateScore(0)).toBe(0)
