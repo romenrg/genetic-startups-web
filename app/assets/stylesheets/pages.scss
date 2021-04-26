@@ -141,13 +141,16 @@ nav {
 #info {
   .info-grid {
     background-color: #fff;
-    margin: 1.5rem 5rem;
-    padding: 1.75rem;
+    margin: 1.5rem auto;
+    padding: 1rem 0.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 5fr 1fr 3fr;
+    grid-template-columns: 2fr 2fr 7fr 2fr 5fr;
     border: 1px solid #eee;
+    box-sizing: border-box;
+    word-break: break-word;
+    font-size: 0.8rem;
     >span, >div {
-      padding: 0.5rem;
+      padding: 0.5rem 0.25rem;
       display: flex;
       align-items: center;
     }
@@ -165,21 +168,21 @@ nav {
         padding: 0.25rem;
       }
       .info-item-value-number {
-        flex: 0 0 3rem;
+        flex: 0 0 2rem;
       }
       .info-item-value-msg {
       }
     }
     .info-item-title {
       font-weight: 500;
-      font-size: 1.25rem;
-      padding: 0 0.25rem 1.75rem 0.25rem;
+      font-size: 0.9rem;
+      padding: 0 0.25rem 1rem 0.25rem;
     }
     .info-item-image {
       padding: 0;
-      width: 100px;
-      height: 100px;
-      background-size: 100px 100px;
+      width: 60px;
+      height: 60px;
+      background-size: 60px 60px;
     }
   }
   .tab-panel {
