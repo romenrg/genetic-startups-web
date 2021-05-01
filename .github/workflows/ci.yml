@@ -19,3 +19,5 @@ jobs:
       run: NODE_ENV=test bundle exec rails assets:precompile
     - name: Run Ruby tests
       run: bundle exec rake
+    - name: Run JS tests
+      run: npm test
