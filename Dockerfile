@@ -32,14 +32,6 @@ COPY . /usr/src/app
 
 RUN bundle exec rake assets:precompile
 
-#RUN bundle exec rake webpacker:install
-#RUN bundle exec rake webpacker:install:react
-
 EXPOSE 3000
 
-#CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
-#CMD ["rails", "server"]
-
-# Run detached as: docker run -d -p 3000:3000 firsttest
-# Run as: docker run -p 3000:3000 firsttest
