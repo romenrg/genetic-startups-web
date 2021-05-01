@@ -15,4 +15,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Run JS tests
-      - run: yarn test
+        run: yarn test
