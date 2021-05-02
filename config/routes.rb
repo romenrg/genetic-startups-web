@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
       namespace :v1 do
           resources :content, only: [:index]
+          resources :probabilities, only: [:index]
       end
   end
 end
