@@ -86,8 +86,9 @@ const Info = () => {
         <TabPanel>
           <div id="info-intro" className="tab-panel">
             <h2>Introduction</h2>
-            <p>This application is based on Genetic Algorithms, representing possible lives of startups.
-               The algorithm improves startup choices over generations, to achieve the most successful outcome possible;
+            <p>This application, by <a href="https://www.romenrg.com">romenrg</a>, is based on Genetic Algorithms and
+               represents possible lives of startups given a random reality as a map.</p>
+            <p>The algorithm improves startup choices over generations, to achieve the most successful outcome possible;
                in a map where investors, product launches, team members, sad news and sales, among other options, appear.</p>
             <h3>About Genetic Algorithms</h3>
             <p>In the field of artificial intelligence, Genetic algorithms are grouped in the larger class of evolutionary
