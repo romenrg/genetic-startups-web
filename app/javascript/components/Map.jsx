@@ -9,7 +9,7 @@ import DisplayOptions from "../algorithm/Display"
 
 const MapConsts = {
   DEFAULT_NUM_COLS: 16,
-  DEFAULT_NUM_ROWS: 8
+  DEFAULT_NUM_ROWS: 6
 }
 
 class Map extends Component {
