@@ -30,6 +30,18 @@ const Action = (props) => {
 };
 
 
+const ActionProbabilities = (props) => {
+  return (
+    <>
+      <div className={props.evenOrOddRow}>{ACTIONS[props.actionIndex].name}</div>
+      <div className={props.evenOrOddRow}>{props.probabilities[0][props.actionIndex]}%</div>
+      <div className={props.evenOrOddRow}>{props.probabilities[1][props.actionIndex]}%</div>
+      <div className={props.evenOrOddRow}>{props.probabilities[2][props.actionIndex]}%</div>
+      <div className={props.evenOrOddRow}>{props.probabilities[3][props.actionIndex]}%</div>
+    </>
+  )
+}
+
 
 const Info = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -51,20 +63,12 @@ const Info = () => {
 
   let probabilitiesInfo = []
   if (probabilities.length > 0) {
-    probabilities[0].forEach( (action, i) => {
+    for (let i = 0; i < probabilities[0].length; i++) {
       let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
-      probabilitiesInfo.push(
-        <>
-          <div className={evenOrOddRow}>{ACTIONS[i].name}</div>
-          <div className={evenOrOddRow}>{probabilities[0][i]}%</div>
-          <div className={evenOrOddRow}>{probabilities[1][i]}%</div>
-          <div className={evenOrOddRow}>{probabilities[2][i]}%</div>
-          <div className={evenOrOddRow}>{probabilities[3][i]}%</div>
-        </>
-      )
-    })
+      probabilitiesInfo.push(<ActionProbabilities evenOrOddRow={evenOrOddRow} probabilities={probabilities}
+                                                  actionIndex={i} key={i}></ActionProbabilities>)
+    }
   }
-
 
   return (
     <div id="info">
