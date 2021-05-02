@@ -4,6 +4,7 @@ import {Algorithm} from "../algorithm/Algorithm";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from "axios";
+import { HashLink } from 'react-router-hash-link';
 
 const Action = (props) => {
   let values = props.action.values.map((value, i) => {
@@ -108,8 +109,12 @@ const Info = () => {
           <div id="info-cell-types" className="tab-panel">
             <h2>The map</h2>
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
-            life of your startup.</p>
-            <h3>Cell types</h3>
+            life of your startup. The relevant pieces in the generation of the map are:</p>
+            <ul className="text-list">
+              <li><HashLink to="#cell-types">Cell types (actions)</HashLink></li>
+              <li><HashLink to="#action-probabilities">Action probabilities per quarter</HashLink></li>
+            </ul>
+            <h3 id="cell-types">Cell types (actions)</h3>
             <p>In the map, different cell types appear. Each one represents a possible event in the life of a
               startup, having a different impact. For that reason, each type has 10 possible values,
               and a score (calculated as the average of those possible values):</p>
@@ -121,7 +126,7 @@ const Info = () => {
               <span className="info-item-title">Description</span>
               {actionsInfo}
             </div>
-            <h3>Probabilities per quarter</h3>
+            <h3 id="action-probabilities">Action probabilities per quarter</h3>
             <p>The map is divided in quarters. Each quarter has different probabilities for the different types of cells: </p>
             <div className="info-grid probabilities-grid">
               <span className="info-item-title">Action</span>
