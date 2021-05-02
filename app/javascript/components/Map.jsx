@@ -268,25 +268,28 @@ class Map extends Component {
     let messages = this.writeMessages();
     let className = 'map';
     return (
-      <div className={className}>
-        <div className="grid-container" style={cssValues}>
-          {cells}
+      <>
+        <p>Here's the world your startup will learn to navigate:</p>
+        <div className={className}>
+          <div className="grid-container" style={cssValues}>
+            {cells}
+          </div>
+          <div className="action-buttons">
+            <ActionButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Start evolution" />
+            <ActionButton clickHandler={this.handleNewMapClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Generate new map" />
+          </div>
+          <Output>
+            {messages}
+          </Output>
+          <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
+                         display={this.state.display}
+                         isEvolutionInProgress={this.state.isEvolutionInProgress}
+                         handleSetRowsCols={this.handleSetRowsCols}
+                         handleDisplay={this.handleDisplay}
+                         areSettingsShown={this.props.areSettingsShown}
+                         setAreSettingsShown={this.props.setAreSettingsShown}/>
         </div>
-        <div className="action-buttons">
-          <ActionButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Start evolution" />
-          <ActionButton clickHandler={this.handleNewMapClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Generate new map" />
-        </div>
-        <Output>
-          {messages}
-        </Output>
-        <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
-                       display={this.state.display}
-                       isEvolutionInProgress={this.state.isEvolutionInProgress}
-                       handleSetRowsCols={this.handleSetRowsCols}
-                       handleDisplay={this.handleDisplay}
-                       areSettingsShown={this.props.areSettingsShown}
-                       setAreSettingsShown={this.props.setAreSettingsShown}/>
-      </div>
+      </>
     )
   }
 }
