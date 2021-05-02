@@ -144,7 +144,6 @@ nav {
     margin: 1.5rem auto;
     padding: 1rem 0.5rem;
     display: grid;
-    grid-template-columns: 2fr 2fr 7fr 2fr 5fr;
     border: 1px solid #eee;
     box-sizing: border-box;
     word-break: break-word;
@@ -184,6 +183,12 @@ nav {
       height: 60px;
       background-size: 60px 60px;
     }
+  }
+  .probabilities-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  .actions-grid {
+    grid-template-columns: 2fr 2fr 7fr 2fr 5fr;
   }
   .tab-panel {
     margin: 1.5rem 0.75rem 1rem 0.75rem;

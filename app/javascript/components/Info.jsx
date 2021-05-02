@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ACTIONS from "../algorithm/Actions";
 import {Algorithm} from "../algorithm/Algorithm";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import axios from "axios";
 
 const Action = (props) => {
   let values = props.action.values.map((value, i) => {
@@ -28,14 +29,42 @@ const Action = (props) => {
   );
 };
 
+
+
 const Info = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [probabilities, setProbabilities] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/v1/probabilities').then(
+      response => {
+        setProbabilities(response.data)
+      }
+    )
+  }, []);
 
   let actionsInfo = []
   ACTIONS.forEach( (action, i) => {
     let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
     actionsInfo.push(<Action action={action} evenOrOddRow={evenOrOddRow} actionIndex={i} key={i}/>)
   })
+
+  let probabilitiesInfo = []
+  if (probabilities.length > 0) {
+    probabilities[0].forEach( (action, i) => {
+      let evenOrOddRow = i % 2 ? "even-row" : "odd-row"
+      probabilitiesInfo.push(
+        <>
+          <div className={evenOrOddRow}>{ACTIONS[i].name}</div>
+          <div className={evenOrOddRow}>{probabilities[0][i]}%</div>
+          <div className={evenOrOddRow}>{probabilities[1][i]}%</div>
+          <div className={evenOrOddRow}>{probabilities[2][i]}%</div>
+          <div className={evenOrOddRow}>{probabilities[3][i]}%</div>
+        </>
+      )
+    })
+  }
+
 
   return (
     <div id="info">
@@ -80,7 +109,7 @@ const Info = () => {
             <p>In the map, different cell types appear. Each one represents a possible event in the life of a
               startup, having a different impact. For that reason, each type has 10 possible values,
               and a score (calculated as the average of those possible values):</p>
-            <div className="info-grid">
+            <div className="info-grid actions-grid">
               <span className="info-item-title">Element</span>
               <span className="info-item-title">Name</span>
               <span className="info-item-title">Possible values</span>
@@ -90,6 +119,14 @@ const Info = () => {
             </div>
             <h3>Probabilities per quarter</h3>
             <p>The map is divided in quarters. Each quarter has different probabilities for the different types of cells: </p>
+            <div className="info-grid probabilities-grid">
+              <span className="info-item-title">Action</span>
+              <span className="info-item-title">First quarter</span>
+              <span className="info-item-title">Second quarter</span>
+              <span className="info-item-title">Third quarter</span>
+              <span className="info-item-title">Fourth quarter</span>
+              {probabilitiesInfo}
+            </div>
           </div>
         </TabPanel>
         <TabPanel>
