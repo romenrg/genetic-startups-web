@@ -32,13 +32,13 @@ describe("Map component tests", () => {
   it("There should be a 'numRows * numCols' number of cells", async () => {
     const { container } = render(<Map areSettingsShown={false} setAreSettingsShown={undefined}/>)
     await waitFor(() => {
-      expect(container.querySelectorAll(".cell").length).toBe(128)
+      expect(container.querySelectorAll(".cell").length).toBe(126)
     })
   });
   it("There should be visited classes when evolution has started", async () => {
     const { container } = render(<Map areSettingsShown={false} setAreSettingsShown={undefined}/>)
     await waitFor(() => {
-      expect(container.querySelectorAll(".cell").length).toBe(128)
+      expect(container.querySelectorAll(".cell").length).toBe(126)
     })
     fireEvent.click(screen.getByText('Start evolution'))
     const visitedCells = await screen.findAllByTestId("visited-cell")
