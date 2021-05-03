@@ -77,19 +77,31 @@ nav {
       border-left: 1px solid #ddd;
       box-sizing: border-box;
       .cell.highlight-1 {
-        background: #a0c0f0;
+        background: #a0c0f0 !important;
       }
       .cell.highlight-2 {
-        background: darken(#a0c0f0, 10%);
+        background: darken(#a0c0f0, 10%) !important;
       }
       .cell.highlight-3 {
-        background: darken(#a0c0f0, 20%);
+        background: darken(#a0c0f0, 20%) !important;
       }
       .cell.highlight-4 {
-        background: darken(#a0c0f0, 30%);
+        background: darken(#a0c0f0, 30%) !important;
       }
       .cell.highlight-5 {
-        background: darken(#a0c0f0, 40%);
+        background: darken(#a0c0f0, 40%) !important;
+      }
+      .cell.highlight-6 {
+        background: darken(#a0c0f0, 45%) !important;
+      }
+      .cell.highlight-7 {
+        background: darken(#a0c0f0, 50%) !important;
+      }
+      .cell.highlight-8 {
+        background: darken(#a0c0f0, 55%) !important;
+      }
+      .cell[class*="highlight-"] {
+        background: darken(#a0c0f0, 60%);
       }
       .cell {
         background: #f5f5f5;
