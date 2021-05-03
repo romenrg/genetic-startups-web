@@ -1,10 +1,13 @@
 import React from "react";
 import ACTIONS from "./Actions";
 
+let AlgorithmVars = {
+  POPULATION_SIZE: 25,
+  NUM_GENERATIONS: 15
+}
+
 const AlgorithmConsts = {
-  DEFAULT_POPULATION_SIZE: 25,
   POSSIBLE_MOVES: 3,
-  NUM_GENERATIONS: 15,
   CELL_OUT_OF_MAP_ACTION: 9
 }
 
@@ -155,5 +158,6 @@ class Algorithm {
 
 export {
   Algorithm,
-  AlgorithmConsts
+  AlgorithmConsts,
+  AlgorithmVars
 }

@@ -2,17 +2,22 @@ import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import ActionButton from "./ActionButton";
 import DisplayOptions from "../algorithm/Display"
+import {AlgorithmVars} from "../algorithm/Algorithm";
 
 const SettingsPanel = (props) => {
   const [numRows, setNumRows] = useState(props.numRows);
   const [numCols, setNumCols] = useState(props.numCols);
   const [display, setDisplay] = useState(props.display);
+  const [populationSize, setPopulationSize] = useState(AlgorithmVars.POPULATION_SIZE);
+  const [numGenerations, setNumGenerations] = useState(AlgorithmVars.NUM_GENERATIONS);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleSetRowsCols(parseInt(numRows), parseInt(numCols));
     props.handleDisplay(parseInt(display));
     props.setAreSettingsShown(false);
+    AlgorithmVars.POPULATION_SIZE = populationSize;
+    AlgorithmVars.NUM_GENERATIONS = numGenerations;
   };
 
   let selectOptions = Object.keys(DisplayOptions).map(key => {
@@ -103,6 +108,23 @@ const SettingsPanel = (props) => {
                                   disabled={props.isEvolutionInProgress}>
                             {selectOptions}
                           </select>
+                        </div>
+                      </div>
+                      <div className="mb-6 settings-display">
+                        <h3 className="text-xl font-medium text-gray-900">Algorithm</h3>
+                        <div className="flex flex-col mb-4">
+                          <label htmlFor="population-size-input" className="mb-2 font-medium text-grey-darkest">Population size:</label>
+                          <input type="number" name="population-size-input" value={populationSize}
+                                 onChange={e => setPopulationSize(e.target.value)}
+                                 className="border py-2 px-3 text-grey-darkest cursor-text"
+                                 disabled={props.isEvolutionInProgress}/>
+                        </div>
+                        <div className="flex flex-col mb-4">
+                          <label htmlFor="num-generations-input" className="mb-2 font-medium text-grey-darkest">Number of generations:</label>
+                          <input type="number" name="num-generations-input" value={numGenerations}
+                                 onChange={e => setNumGenerations(e.target.value)}
+                                 className="border py-2 px-3 text-grey-darkest cursor-text"
+                                 disabled={props.isEvolutionInProgress}/>
                         </div>
                       </div>
                       <ActionButton clickHandler={handleSubmit} isEvolutionInProgress={props.isEvolutionInProgress}

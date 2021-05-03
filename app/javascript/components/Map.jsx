@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Algorithm, AlgorithmConsts} from "../algorithm/Algorithm";
+import {Algorithm, AlgorithmConsts, AlgorithmVars} from "../algorithm/Algorithm";
 import ActionButton from "./ActionButton";
 import Output from "./Output";
 import ACTIONS from "../algorithm/Actions";
@@ -115,7 +115,7 @@ class Map extends Component {
       individual: this.population[0],
       score: Algorithm.fitness(this.population[0], this.state.data)
     })
-    if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmConsts.NUM_GENERATIONS - 1) {
+    if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmVars.NUM_GENERATIONS - 1) {
       this.setState(state => {
         const outputMessages = [("Selected Individual for generation "+generation+": ["+
                                 this.selectedIndividualPerGen[generation].individual+"]. Score:"+
@@ -193,7 +193,7 @@ class Map extends Component {
         outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
     })
     this.selectedIndividualPerGen = [];
-    this.generatePopulation(AlgorithmConsts.DEFAULT_POPULATION_SIZE)
+    this.generatePopulation(AlgorithmVars.POPULATION_SIZE)
     let generation = 0;
     do {
       this.sortPopulationByScore()
@@ -201,7 +201,7 @@ class Map extends Component {
       await this.drawPathOfBestCandidate()
       this.createNewGeneration()
       generation++;
-    } while (generation < AlgorithmConsts.NUM_GENERATIONS)
+    } while (generation < AlgorithmVars.NUM_GENERATIONS)
     this.setState({isEvolutionInProgress: false})
   }
 
