@@ -77,7 +77,7 @@ const SettingsPanel = (props) => {
                   <div className="px-4 sm:px-6">
                     <Dialog.Title className="text-2xl font-medium text-gray-900">Settings</Dialog.Title>
                   </div>
-                  <div className="mt-5 relative flex-1 px-4 sm:px-6">
+                  <div className="mt-1 relative flex-1 px-4 sm:px-6">
                     <form className="m-4">
                       <div className="mb-6 settings-map-size">
                         <h3 className="text-xl font-medium text-gray-900">Map size</h3>
