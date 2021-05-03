@@ -201,8 +201,10 @@ class Map extends Component {
       this.sortPopulationByScore()
       this.storeBestCandidateOfGeneration(generation)
       await this.drawPathOfBestCandidate()
-      this.createNewGeneration()
       generation++;
+      if (generation < AlgorithmVars.NUM_GENERATIONS) {
+        this.createNewGeneration()
+      }
     } while (generation < AlgorithmVars.NUM_GENERATIONS)
     this.setState({isEvolutionInProgress: false, isEvolutionCompleted: true})
   }
