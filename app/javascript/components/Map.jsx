@@ -24,6 +24,7 @@ class Map extends Component {
       },
       selectedIndividualPath: new Array(MapConsts.DEFAULT_NUM_ROWS * MapConsts.DEFAULT_NUM_COLS).fill(0),
       isEvolutionInProgress: false,
+      isEvolutionCompleted: false,
       display: DisplayOptions.DISPLAY_GENERATIONS_QUICK.value,
       outputMessages: []
     }
@@ -32,6 +33,7 @@ class Map extends Component {
     this.handleNewMapClick = this.handleNewMapClick.bind(this);
     this.handleSetRowsCols = this.handleSetRowsCols.bind(this);
     this.handleDisplay = this.handleDisplay.bind(this)
+    this.handleStory = this.handleStory.bind(this)
   }
 
   componentDidMount() {
@@ -202,7 +204,7 @@ class Map extends Component {
       this.createNewGeneration()
       generation++;
     } while (generation < AlgorithmVars.NUM_GENERATIONS)
-    this.setState({isEvolutionInProgress: false})
+    this.setState({isEvolutionInProgress: false, isEvolutionCompleted: true})
   }
 
   async fetchCellsData(numRows, numCols) {
@@ -230,6 +232,7 @@ class Map extends Component {
   handleNewMapClick() {
     if (!this.state.isEvolutionInProgress) {
       this.generateNewMap(this.state.data.numRows, this.state.data.numCols);
+      this.setState({isEvolutionCompleted: false})
     }
     else {
       console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
@@ -257,6 +260,10 @@ class Map extends Component {
     })
   }
 
+  handleStory() {
+    console.log("The story")
+  }
+
   render() {
     const gridWidthInVW = 90
     const cssValues = {
@@ -267,6 +274,7 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
+    let storyButton = <ActionButton clickHandler={this.handleStory} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Tell the story" hide={!this.state.isEvolutionCompleted}/>
     return (
       <>
         <p>Here's the world your startup will learn to navigate:</p>
@@ -276,6 +284,7 @@ class Map extends Component {
           </div>
           <div className="action-buttons">
             <ActionButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Start evolution" />
+            {storyButton}
             <ActionButton clickHandler={this.handleNewMapClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Generate new map" />
           </div>
           <Output>
