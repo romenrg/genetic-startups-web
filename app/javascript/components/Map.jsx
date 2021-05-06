@@ -128,8 +128,8 @@ class Map extends Component {
     }
   }
 
-  async drawPathOfBestCandidate() {
-    if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+  async drawPathOfBestCandidate(storyCellValues) {
+    if (this.state.display === DisplayOptions.DISPLAY_ALL.value || storyCellValues) {
       await this.sleep(500)
     }
     else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
@@ -141,11 +141,21 @@ class Map extends Component {
     let cell = Algorithm.calculateStartingCell(this.population[0], this.state.data.numRows)
     do {
       if (Algorithm._isCellInMap(cell.row, cell.col, this.state.data)) {
-        if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY || (step === Algorithm.getNumSteps(this.state.data))) {
+        if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY || (step === Algorithm.getNumSteps(this.state.data)) || storyCellValues) {
           selectedIndividualPath[Algorithm.calculateOneDimensionalPos(cell.row, cell.col, this.state.data)] += 1
           this.setBestCandidatePath(selectedIndividualPath)
         }
-        if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+        if (storyCellValues) {
+          this.setState(state => {
+            const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
+              ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
+              storyCellValues[step].msg+" : "+
+              storyCellValues[step].score
+            )].concat(state.outputMessages)
+            return { outputMessages }
+          })
+        }
+        else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
           this.setState(state => {
             const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
                                     ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
@@ -164,7 +174,7 @@ class Map extends Component {
           return { outputMessages }
         })
       }
-      if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+      if (this.state.display === DisplayOptions.DISPLAY_ALL.value || storyCellValues) {
         await this.sleep(500)
       }
       else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
@@ -262,8 +272,25 @@ class Map extends Component {
     })
   }
 
-  handleStory() {
-    console.log("The story")
+  async handleStory() {
+    let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
+    let story = Algorithm.story(selectedIndividual.individual, this.state.data)
+    this.setState(state => {
+      const outputMessages = [("Story based on the selected individual: ["+
+        selectedIndividual.individual+"], which has an average score of:"+
+        selectedIndividual.score
+      )].concat(state.outputMessages)
+      return { outputMessages }
+    })
+    await this.drawPathOfBestCandidate(story.cellsValues)
+    this.setState(state => {
+      const outputMessages = [("Final story scores for: ["+
+        selectedIndividual.individual+"]. Started with an individual with average score:"+
+        selectedIndividual.score+"; And got an actual story score of:"+
+        story.totalStoryScore)
+      ].concat(state.outputMessages)
+      return { outputMessages }
+    })
   }
 
   render() {

@@ -12,6 +12,29 @@ const AlgorithmConsts = {
 }
 
 class Algorithm {
+
+  static selectRandomValue(action) {
+    let randomValueIndex = Math.floor(Math.random() * ACTIONS[action].values.length)
+    return ACTIONS[action].values[randomValueIndex]
+  }
+
+  static story(individual, mapData) {
+    let cellsValues = []
+    let totalStoryScore = 0;
+    let step = 0;
+    let cell = this.calculateStartingCell(individual, mapData.numRows)
+    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individual.length)
+    do {
+      let selectedRandomValue = this.selectRandomValue(Algorithm.getCellAction(cell.row, cell.col, mapData))
+      cellsValues.push(selectedRandomValue)
+      totalStoryScore += selectedRandomValue.score;
+      cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
+      movements = movements.slice(Algorithm.calculateNumBinaryDigitsForEachStep(), movements.length)
+      step++;
+    } while (step < Algorithm.getNumSteps(mapData) + 1)
+    return {cellsValues: cellsValues, totalStoryScore: totalStoryScore}
+  }
+
   static fitness(individual, mapData) {
     let score = 0;
     let step = 0;
@@ -67,7 +90,7 @@ class Algorithm {
       partialsum = {score: partialsum.score + nextValue.score}
       return partialsum
     });
-    return sumObj.score
+    return sumObj.score / ACTIONS[action].values.length
   }
 
   static calculateStartingCell(individual, numRows) {
