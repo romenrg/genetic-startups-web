@@ -95,8 +95,8 @@ const ACTIONS = [
       "emerge... But don't worry. This means you are moving forward. Now you know more about what the market really needs!",
     "values": [
       { "score": 10, "msg": "You included polls in your product" },
-      { "score": 20, "msg": "You learned by read customer emails and comments" },
-      { "score": 20, "msg": "You learned by read customer emails and comments" },
+      { "score": 20, "msg": "You learned by reading customer emails and comments" },
+      { "score": 20, "msg": "You learned by reading customer emails and comments" },
       { "score": 30, "msg": "You conducted one usability test with a friend" },
       { "score": 30, "msg": "You conducted one usability test with a friend" },
       { "score": 50, "msg": "You interviewed a potential customer" },
@@ -164,16 +164,16 @@ const ACTIONS = [
       "customers will churn, valuable team members may leave... You may run out of money, your relationships may " +
       "suffer... Bad news are learning opportunities, but I hope you receive as few as necessary.",
     "values": [
-      { "score": -150, "msg": "Bad news..." },
-      { "score": -100, "msg": "Bad news..." },
-      { "score": -50, "msg": "Bad news..." },
-      { "score": -50, "msg": "Bad news..." },
-      { "score": -50, "msg": "Bad news..." },
-      { "score": -50, "msg": "Bad news..." },
-      { "score": -50, "msg": "Bad news..." },
-      { "score": -20, "msg": "Bad news..." },
-      { "score": -20, "msg": "Bad news..." },
-      { "score": -10, "msg": "Bad news..." },
+      { "score": -150, "msg": "Very bad news. Your startup is almost bankrupt" },
+      { "score": -100, "msg": "Bad news. We are running out of cash" },
+      { "score": -50, "msg": "Bad news. A key team member left" },
+      { "score": -50, "msg": "Bad news. A key team member left" },
+      { "score": -50, "msg": "Bad news. You are selling much less than expected" },
+      { "score": -50, "msg": "Bad news. You are selling much less than expected" },
+      { "score": -50, "msg": "Bad news. You are selling much less than expected" },
+      { "score": -20, "msg": "Bad news. You are finding it hard to close a new funding round" },
+      { "score": -20, "msg": "Bad news. You are starting to experience burnout" },
+      { "score": -10, "msg": "Bad news. You need to hire more people, but have no money to invest" },
     ]
   }
 ]
