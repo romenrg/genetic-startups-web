@@ -23,7 +23,7 @@ class Map extends Component {
         cells: undefined
       },
       selectedIndividualPath: new Array(MapConsts.DEFAULT_NUM_ROWS * MapConsts.DEFAULT_NUM_COLS).fill(0),
-      isEvolutionInProgress: false,
+      isExecutionInProgress: false,
       isEvolutionCompleted: false,
       display: DisplayOptions.DISPLAY_GENERATIONS_QUICK.value,
       outputMessages: []
@@ -207,7 +207,7 @@ class Map extends Component {
   async handleStartEvolutionClick(e) {
     let oldData = JSON.parse(JSON.stringify(this.state.data));
     this.setState({
-        isEvolutionInProgress: true,
+        isExecutionInProgress: true,
         selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
         outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
     })
@@ -223,7 +223,7 @@ class Map extends Component {
         this.createNewGeneration()
       }
     } while (generation < AlgorithmVars.NUM_GENERATIONS)
-    this.setState({isEvolutionInProgress: false, isEvolutionCompleted: true})
+    this.setState({isExecutionInProgress: false, isEvolutionCompleted: true})
   }
 
   async fetchCellsData(numRows, numCols) {
@@ -249,7 +249,7 @@ class Map extends Component {
   }
 
   handleNewMapClick() {
-    if (!this.state.isEvolutionInProgress) {
+    if (!this.state.isExecutionInProgress) {
       this.generateNewMap(this.state.data.numRows, this.state.data.numCols);
       this.setState({isEvolutionCompleted: false})
     }
@@ -259,10 +259,10 @@ class Map extends Component {
   }
 
   handleSetRowsCols(numRows, numCols) {
-    if (!this.state.isEvolutionInProgress && (numRows !== this.state.data.numRows || numCols !== this.state.data.numCols)) {
+    if (!this.state.isExecutionInProgress && (numRows !== this.state.data.numRows || numCols !== this.state.data.numCols)) {
       this.generateNewMap(numRows, numCols)
     }
-    else if (this.state.isEvolutionInProgress) {
+    else if (this.state.isExecutionInProgress) {
       console.log("Cannot change number of rows and cols, since evolution is in progress. Please wait until it finishes.")
     }
     else {
@@ -280,6 +280,7 @@ class Map extends Component {
   }
 
   async handleStory() {
+    this.setState({isExecutionInProgress: true})
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual, this.state.data)
     this.setState(state => {
@@ -310,7 +311,7 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
-    let storyButton = <ActionButton clickHandler={this.handleStory} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Tell the story" hide={!this.state.isEvolutionCompleted}/>
+    let storyButton = <ActionButton clickHandler={this.handleStory} isExecutionInProgress={this.state.isExecutionInProgress} text="Tell the story" hide={!this.state.isEvolutionCompleted}/>
     return (
       <>
         <p>Here's the world your startup will learn to navigate:</p>
@@ -319,16 +320,16 @@ class Map extends Component {
             {cells}
           </div>
           <div className="action-buttons">
-            <ActionButton clickHandler={this.handleStartEvolutionClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Start evolution" />
+            <ActionButton clickHandler={this.handleStartEvolutionClick} isExecutionInProgress={this.state.isExecutionInProgress} text="Start evolution" />
             {storyButton}
-            <ActionButton clickHandler={this.handleNewMapClick} isEvolutionInProgress={this.state.isEvolutionInProgress} text="Generate new map" />
+            <ActionButton clickHandler={this.handleNewMapClick} isExecutionInProgress={this.state.isExecutionInProgress} text="Generate new map" />
           </div>
           <Output>
             {messages}
           </Output>
           <SettingsPanel numRows={this.state.data.numRows} numCols={this.state.data.numCols}
                          display={this.state.display}
-                         isEvolutionInProgress={this.state.isEvolutionInProgress}
+                         isExecutionInProgress={this.state.isExecutionInProgress}
                          handleSetRowsCols={this.handleSetRowsCols}
                          handleDisplay={this.handleDisplay}
                          areSettingsShown={this.props.areSettingsShown}

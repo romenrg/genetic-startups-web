@@ -87,7 +87,7 @@ const SettingsPanel = (props) => {
                           <input type="number" name="num-rows-input" value={numRows}
                                  onChange={e => setNumRows(e.target.value)}
                                  className="border py-2 px-3 text-grey-darkest cursor-text"
-                                 disabled={props.isEvolutionInProgress}/>
+                                 disabled={props.isExecutionInProgress}/>
                         </div>
                         <div className="flex flex-col mb-4">
                           <label htmlFor="num-cols-input" className="mb-2 font-medium text-grey-darkest">Number of
@@ -95,7 +95,7 @@ const SettingsPanel = (props) => {
                           <input type="number" name="num-cols-input" value={numCols}
                                  onChange={e => setNumCols(e.target.value)}
                                  className="border py-2 px-3 text-grey-darkest cursor-text"
-                                 disabled={props.isEvolutionInProgress}/>
+                                 disabled={props.isExecutionInProgress}/>
                         </div>
                       </div>
                       <div className="mb-6 settings-display">
@@ -105,7 +105,7 @@ const SettingsPanel = (props) => {
                             information to display:</label>
                           <select name="display-select" className="border py-2 px-3 text-grey-darkest cursor-pointer"
                                   value={display} onChange={e => setDisplay(e.target.value)}
-                                  disabled={props.isEvolutionInProgress}>
+                                  disabled={props.isExecutionInProgress}>
                             {selectOptions}
                           </select>
                         </div>
@@ -117,17 +117,17 @@ const SettingsPanel = (props) => {
                           <input type="number" name="population-size-input" value={populationSize}
                                  onChange={e => setPopulationSize(e.target.value)}
                                  className="border py-2 px-3 text-grey-darkest cursor-text"
-                                 disabled={props.isEvolutionInProgress}/>
+                                 disabled={props.isExecutionInProgress}/>
                         </div>
                         <div className="flex flex-col mb-4">
                           <label htmlFor="num-generations-input" className="mb-2 font-medium text-grey-darkest">Number of generations:</label>
                           <input type="number" name="num-generations-input" value={numGenerations}
                                  onChange={e => setNumGenerations(e.target.value)}
                                  className="border py-2 px-3 text-grey-darkest cursor-text"
-                                 disabled={props.isEvolutionInProgress}/>
+                                 disabled={props.isExecutionInProgress}/>
                         </div>
                       </div>
-                      <ActionButton clickHandler={handleSubmit} isEvolutionInProgress={props.isEvolutionInProgress}
+                      <ActionButton clickHandler={handleSubmit} isExecutionInProgress={props.isExecutionInProgress}
                                     text="Save changes"/>
                     </form>
                   </div>

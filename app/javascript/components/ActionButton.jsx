@@ -1,13 +1,13 @@
 import React from 'react'
 
 function ActionButton(props) {
-  const isEvolutionInProgress = props.isEvolutionInProgress;
+  const isExecutionInProgress = props.isExecutionInProgress;
   const clickHandler = props.clickHandler;
   let storyButtonDisplay = props.hide ? { visibility: "hidden" } : {}
-  if (isEvolutionInProgress) {
+  if (isExecutionInProgress) {
     return (
       <button className="action-button" onClick={clickHandler} disabled style={storyButtonDisplay}>
-        Evolution in progress...
+        Execution in progress...
       </button>
     )
   }
