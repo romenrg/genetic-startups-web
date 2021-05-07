@@ -299,6 +299,7 @@ class Map extends Component {
       ].concat(state.outputMessages)
       return { outputMessages }
     })
+    this.setState({isExecutionInProgress: false})
   }
 
   render() {
