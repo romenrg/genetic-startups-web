@@ -281,6 +281,10 @@ class Map extends Component {
 
   async handleStory() {
     this.setState({isExecutionInProgress: true})
+    this.setState(state => {
+      const outputMessages = ["-----------------------------------"].concat(state.outputMessages)
+      return { outputMessages }
+    })
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual, this.state.data)
     this.setState(state => {
