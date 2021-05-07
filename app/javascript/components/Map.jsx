@@ -129,13 +129,17 @@ class Map extends Component {
   }
 
   async drawPathOfBestCandidate(storyCellValues) {
-    if (this.state.display === DisplayOptions.DISPLAY_ALL.value || storyCellValues) {
+    let selectedIndividualPath = new Array(this.state.data.numRows * this.state.data.numCols).fill(0)
+    this.setBestCandidatePath(selectedIndividualPath)
+    if (storyCellValues) {
+      await this.sleep(1500)
+    }
+    if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
       await this.sleep(500)
     }
     else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
       await this.sleep(50)
     }
-    let selectedIndividualPath = new Array(this.state.data.numRows * this.state.data.numCols).fill(0)
     let step = 0
     let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].length)
     let cell = Algorithm.calculateStartingCell(this.population[0], this.state.data.numRows)
@@ -174,7 +178,10 @@ class Map extends Component {
           return { outputMessages }
         })
       }
-      if (this.state.display === DisplayOptions.DISPLAY_ALL.value || storyCellValues) {
+      if (storyCellValues) {
+        await this.sleep(1500)
+      }
+      else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
         await this.sleep(500)
       }
       else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
