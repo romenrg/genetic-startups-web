@@ -311,7 +311,7 @@ class Map extends Component {
     let cells = this.drawBoard();
     let messages = this.writeMessages();
     let className = 'map';
-    let storyButton = <ActionButton clickHandler={this.handleStory} isExecutionInProgress={this.state.isExecutionInProgress} text="Tell the story" hide={!this.state.isEvolutionCompleted}/>
+    let storyButton = <ActionButton clickHandler={this.handleStory} isExecutionInProgress={this.state.isExecutionInProgress} text="Tell story" hide={!this.state.isEvolutionCompleted}/>
     return (
       <>
         <p>Here's the world your startup will learn to navigate:</p>
