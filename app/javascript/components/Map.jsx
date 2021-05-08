@@ -290,7 +290,7 @@ class Map extends Component {
     await this.drawPathOfBestCandidate(story.cellsValues)
     this.setState(state => {
       const outputMessages = [(<>Final story scores for [{selectedIndividual.individual}]:<br/>
-        - Its calculated average score is {selectedIndividual.score};<br/>
+        - Its calculated average score was {selectedIndividual.score};<br/>
         - But actual story score has been {story.totalStoryScore}</>)
       ].concat(state.outputMessages)
       return { outputMessages }
