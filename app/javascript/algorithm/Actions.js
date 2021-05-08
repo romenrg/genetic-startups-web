@@ -1,6 +1,6 @@
 const ACTIONS = [
   {
-    "name": "none",
+    "name": "None",
     "description": "There are some quieter days during the startup journey. You might have different energy in each of " +
       "those. Ranging from \"feeling one day closer to success\" to \"feeling that things are not going as expected\". " +
       "...Or most likely, it is \"just another day in the startup world\".",
@@ -18,7 +18,7 @@ const ACTIONS = [
     ],
   },
   {
-    "name": "advisor",
+    "name": "Advisor",
     "description": "In the startup world, some individuals present themselves as \"advisors\" while, in reality, many " +
       "are simply trying to sell you their services, or trying to take equity for nothing in return. Be careful, " +
       "useful advisors are very limited. Pick them wisely.",
@@ -36,7 +36,7 @@ const ACTIONS = [
     ],
   },
   {
-    "name": "circus",
+    "name": "Circus",
     "description": "In the last decade, tons of \"startup events\" have emerged. Unfortunately, most of them have " +
       "become some sort of \"circuses\", in which entrepreneurs are the clowns. A few may be useful, but in many " +
       "them you will be wasting your time. Choose carefully.",
@@ -54,7 +54,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "team",
+    "name": "Team",
     "description": "A new team member joined. Finding the right people for your startup is an extremely difficult " +
       "task. However, on-boarding valuable teammates is worth the effort, since building a great team is key to success.",
     "values": [
@@ -71,7 +71,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "product",
+    "name": "Product",
     "description": "When you release your MVP (or a new feature), you often feel like a fool; since, in most cases, " +
       "it doesn't go as planned. But relax, learning from the market is key. The sooner you release your MVP (or " +
       "new features), the sooner you'll collect feedback that will let you learn and adapt to the real needs.",
@@ -89,7 +89,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "feedback",
+    "name": "Feedback",
     "description": "Once you start receiving feedback from real customers, you typically feel astonished. Many use " +
       "your product in unexpected ways, weird bugs appear; some users request new features, new possible business models " +
       "emerge... But don't worry. This means you are moving forward. Now you know more about what the market really needs!",
@@ -107,7 +107,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "investor",
+    "name": "Investor",
     "description": "Most startups are always in need of cash. Marketing actions typically require a lot of money, as " +
       "well as developing your product and pivoting. Investors can be your allies at this point.",
     "values": [
@@ -124,7 +124,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "doubts",
+    "name": "Doubts",
     "description": "During your entrepreneurial journey, many days you feel lost. Sometimes you don't know which way " +
       "to go, who to hire, which feature to build, how to increase sales,...",
     "values": [
@@ -141,7 +141,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "sales",
+    "name": "Sales",
     "description": "The single most important thing you should be doing as an entrepreneur: selling. It's the only " +
       "real way to test your product/market fit. And it is definitely the best way to get the fuel (money) you need to " +
       "keep going... It is always better to get money from customers than from investors.",
@@ -159,7 +159,7 @@ const ACTIONS = [
     ]
   },
   {
-    "name": "badnews",
+    "name": "Bad news",
     "description": "Sadly, as an entrepreneur you will receive bad news often. Many of your ideas will fail, " +
       "customers will churn, valuable team members may leave... You may run out of money, your relationships may " +
       "suffer... Bad news are learning opportunities, but I hope you receive as few as necessary.",
