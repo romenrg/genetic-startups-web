@@ -120,9 +120,9 @@ class Map extends Component {
     })
     if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmVars.NUM_GENERATIONS - 1) {
       this.setState(state => {
-        const outputMessages = [("Selected Individual for generation "+generation+": ["+
-                                this.selectedIndividualPerGen[generation].individual+"]. Score:"+
-                                this.selectedIndividualPerGen[generation].score)
+        const outputMessages = [<>Selected Individual for generation {generation}: [
+                                 {this.selectedIndividualPerGen[generation].individual}], <br/>
+                                 score: {this.selectedIndividualPerGen[generation].score}</>
                                ].concat(state.outputMessages)
         return { outputMessages }
       })
