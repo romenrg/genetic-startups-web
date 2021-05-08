@@ -45,7 +45,8 @@ class Map extends Component {
             numRows: MapConsts.DEFAULT_NUM_ROWS,
             cells: response.data
           },
-          outputMessages: ["Map of "+MapConsts.DEFAULT_NUM_COLS+" cols x "+MapConsts.DEFAULT_NUM_ROWS+" rows. Cells values are: ["+response.data+"]"]
+          outputMessages: [<>Map of {MapConsts.DEFAULT_NUM_COLS} columns and {MapConsts.DEFAULT_NUM_ROWS} rows.<br/>
+            Its cell values in row-major order: [{response.data.toString()}]</>]
         })
       }
     )
