@@ -78,8 +78,8 @@ class Algorithm {
     for (let i = 0; i < numIndividuals; i++) {
       let randomIndexIndividualToMutate = Math.floor(Math.random() * sortedPopulation.length)
       let tmpIndividualToMutate = [...sortedPopulation[randomIndexIndividualToMutate]]
-      let randomIndexChromosomeToMutate = Math.floor(Math.random() * tmpIndividualToMutate.length)
-      tmpIndividualToMutate[randomIndexChromosomeToMutate] = (1 - tmpIndividualToMutate[randomIndexChromosomeToMutate])
+      let indexOfRandomGeneToMutate = Math.floor(Math.random() * tmpIndividualToMutate.length)
+      tmpIndividualToMutate[indexOfRandomGeneToMutate] = (1 - tmpIndividualToMutate[indexOfRandomGeneToMutate])
       resultingIndividuals.push(tmpIndividualToMutate)
     }
     return resultingIndividuals

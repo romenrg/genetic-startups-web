@@ -90,8 +90,8 @@ class Map extends Component {
     for (let i = 0; i < populationSize; i++) {
       let individual = []
       for (let j = 0; j < numOfBinaryDigitsForStartCells + numOfBinaryDigitsForSteps; j++) {
-        let chromosome = Math.round(Math.random())
-        individual.push(chromosome)
+        let gene = Math.round(Math.random())
+        individual.push(gene)
       }
       population.push(individual)
     }
