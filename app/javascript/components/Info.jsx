@@ -87,22 +87,22 @@ const Info = () => {
           <div id="info-intro" className="tab-panel">
             <h2>Introduction</h2>
             <p>This application, by <a href="https://www.romenrg.com">romenrg</a>, is based on Genetic Algorithms and
-               represents possible lives of startups given a random reality as a map.</p>
+               represents possible lives of startups, given a random reality represented as a map.</p>
             <p>The algorithm improves startup choices over generations, to achieve the most successful outcome possible;
                in a map where investors, product launches, team members, sad news and sales, among other options, appear.</p>
             <h3>About Genetic Algorithms</h3>
-            <p>In the field of artificial intelligence, Genetic algorithms are grouped in the larger class of evolutionary
-              algorithms (EA). Are often used as a search heuristic, to generate solutions to optimization problems. </p>
+            <p>Within the field of Artificial Intelligence (AI), Genetic Algorithms (GA) are grouped in the larger class of evolutionary
+              algorithms. And are often used as a search heuristic, to generate solutions to optimization problems. </p>
             <p>Genetic Algorithms use techniques inspired by natural evolution, such as selection, crossover and mutation,
               in order to evolve a random population of possible solutions into better and better solutions, over generations.</p>
-            <h3>The problem of Startup life evolution</h3>
-            <p>Startups are surrounded with huge uncertainty and have limited resources and time to find product/market-fit.
-              Besides, the life of a startup is full of challenges and tough choices. As founders, we must be very careful
-              when choosing one path or another.</p>
+            <h3>The problem of Startup lives and choices</h3>
+            <p>Startups are surrounded with huge uncertainty and have limited resources and time to find product/market-fit
+              and become sustainable businesses. Besides, the life of a startup is full of challenges and tough choices.
+              As founders, we must be very careful choosing one path or another when making decisions.</p>
             <p>In this application, we generate random "maps" that represent the space of possible choices for the
-              life of a startup. Since time and resources are limited, finding the best path possible is key to success.
-              Pursuing that goal, we have developed a genetic algorithm that tries to pick the best possible outcome
-              for the startup, learning with each new generation.</p>
+              life of a (your) startup. Since its time and resources are limited, finding the best path possible is key
+              to success. Pursuing that goal, we have developed a Genetic Algorithm that tries to achieve the best
+              possible outcome for the startup, learning to find a better path with each new generation.</p>
             <p>Learn more about the map the dedicated information tab <a onClick={() => setTabIndex(1)}>"The map"</a>.</p>
           </div>
         </TabPanel>
