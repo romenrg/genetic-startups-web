@@ -281,25 +281,17 @@ class Map extends Component {
 
   async handleStory() {
     this.setState({isExecutionInProgress: true})
-    this.setState(state => {
-      const outputMessages = ["-----------------------------------"].concat(state.outputMessages)
-      return { outputMessages }
-    })
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual, this.state.data)
-    this.setState(state => {
-      const outputMessages = [("Story based on the selected individual: ["+
-        selectedIndividual.individual+"], which has an average score of:"+
-        selectedIndividual.score
-      )].concat(state.outputMessages)
-      return { outputMessages }
+    this.setState({
+      outputMessages: [<>Story based on the selected individual: [{selectedIndividual.individual}],<br/>
+        which has an average score of: {selectedIndividual.score}</>]
     })
     await this.drawPathOfBestCandidate(story.cellsValues)
     this.setState(state => {
-      const outputMessages = [("Final story scores for: ["+
-        selectedIndividual.individual+"]. Started with an individual with average score:"+
-        selectedIndividual.score+"; And got an actual story score of:"+
-        story.totalStoryScore)
+      const outputMessages = [(<>Final story scores for [{selectedIndividual.individual}]:<br/>
+        - Its calculated average score is {selectedIndividual.score};<br/>
+        - But actual story score has been {story.totalStoryScore}</>)
       ].concat(state.outputMessages)
       return { outputMessages }
     })
