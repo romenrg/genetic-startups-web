@@ -52,8 +52,6 @@ class Map extends Component {
             the remaining {Algorithm.getNumSteps(this.state.data)} "step chromosomes" will be encoded.</>]
         })
       }
-    // let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows)
-    // let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.state.data)
     )
   }
 
