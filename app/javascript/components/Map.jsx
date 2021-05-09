@@ -46,7 +46,7 @@ class Map extends Component {
             cells: response.data
           },
           outputMessages: [<>Map of {MapConsts.DEFAULT_NUM_COLS} columns and {MapConsts.DEFAULT_NUM_ROWS} rows.<br/>
-            Its cell values in row-major order: [{response.data.toString()}]</>]
+            Its cell values, in row-major order, are: [{response.data.toString()}]</>]
         })
       }
     )
