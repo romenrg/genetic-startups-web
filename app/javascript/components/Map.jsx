@@ -46,15 +46,18 @@ class Map extends Component {
         }
         this.setState({
           data: newData,
-          //TODO: refactor outputMessages initialization to a single place
-          outputMessages: [<>Map of {newData.numCols} columns and {newData.numRows} rows.
-            Its cell values, in row-major order, are: [{response.data.toString()}]<br/>
-            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(newData.numRows)} genes
-            will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
-            the remaining {Algorithm.getNumSteps(newData)} "step chromosomes" will be encoded.</>]
+          outputMessages: this.initialOutputMessage(newData)
         })
       }
     )
+  }
+
+  initialOutputMessage(data) {
+    return [<>Map of {data.numCols} columns and {data.numRows} rows.
+      Its cell values, in row-major order, are: [{data.cells.toString()}]<br/>
+      For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(data.numRows)} genes
+      will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
+      the remaining {Algorithm.getNumSteps(data)} "step chromosomes" will be encoded.</>]
   }
 
   cellTagFromActionValue(action) {
@@ -247,12 +250,7 @@ class Map extends Component {
         this.setState({
           data: newData,
           selectedIndividualPath: new Array(numRows * numCols).fill(0),
-          //TODO: refactor outputMessages initialization to a single place
-          outputMessages: [<>Map of {numCols} columns and {numRows} rows.
-            Its cell values, in row-major order, are: [{response.data.toString()}]<br/>
-            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(numRows)} genes
-            will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
-            the remaining {Algorithm.getNumSteps(newData)} "step chromosomes" will be encoded.</>]
+          outputMessages: this.initialOutputMessage(newData)
         })
         this.selectedIndividualPerGen = [];
       }
@@ -279,12 +277,7 @@ class Map extends Component {
     else {
       this.setState({
         selectedIndividualPath: new Array(numRows * numCols).fill(0),
-        //TODO: refactor outputMessages initialization to a single place
-        outputMessages: [<>Map of {numCols} columns and {numRows} rows.
-          Its cell values, in row-major order, are: [{this.state.data.cells.toString()}]<br/>
-          For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(numRows)} genes
-          will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
-          the remaining {Algorithm.getNumSteps({numCols: numCols})} "step chromosomes" will be encoded.</>]
+        outputMessages: this.initialOutputMessage({numCols: numCols, numRows: numRows, cells: this.state.data.cells})
       })
     }
   }
