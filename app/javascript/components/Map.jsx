@@ -39,17 +39,19 @@ class Map extends Component {
   componentDidMount() {
     this.fetchCellsData(MapConsts.DEFAULT_NUM_ROWS, MapConsts.DEFAULT_NUM_COLS).then(
       response => {
+        let newData = {
+          numCols: MapConsts.DEFAULT_NUM_COLS,
+          numRows: MapConsts.DEFAULT_NUM_ROWS,
+          cells: response.data
+        }
         this.setState({
-          data: {
-            numCols: MapConsts.DEFAULT_NUM_COLS,
-            numRows: MapConsts.DEFAULT_NUM_ROWS,
-            cells: response.data
-          },
-          outputMessages: [<>Map of {MapConsts.DEFAULT_NUM_COLS} columns and {MapConsts.DEFAULT_NUM_ROWS} rows.
+          data: newData,
+          //TODO: refactor outputMessages initialization to a single place
+          outputMessages: [<>Map of {newData.numCols} columns and {newData.numRows} rows.
             Its cell values, in row-major order, are: [{response.data.toString()}]<br/>
-            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows)} genes
+            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(newData.numRows)} genes
             will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
-            the remaining {Algorithm.getNumSteps(this.state.data)} "step chromosomes" will be encoded.</>]
+            the remaining {Algorithm.getNumSteps(newData)} "step chromosomes" will be encoded.</>]
         })
       }
     )
@@ -213,7 +215,7 @@ class Map extends Component {
     this.setState({
         isExecutionInProgress: true,
         selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
-        outputMessages: ["Map of "+oldData.numCols+" cols x "+oldData.numRows+" rows. Cells values are: ["+oldData.cells+"]"]
+        outputMessages: this.state.outputMessages[this.state.outputMessages.length - 1]
     })
     this.selectedIndividualPerGen = [];
     this.generatePopulation(AlgorithmVars.POPULATION_SIZE)
@@ -245,7 +247,12 @@ class Map extends Component {
         this.setState({
           data: newData,
           selectedIndividualPath: new Array(numRows * numCols).fill(0),
-          outputMessages: ["Map of "+newData.numCols+" cols x "+newData.numRows+" rows. Cells values are: ["+newData.cells+"]"]
+          //TODO: refactor outputMessages initialization to a single place
+          outputMessages: [<>Map of {numCols} columns and {numRows} rows.
+            Its cell values, in row-major order, are: [{response.data.toString()}]<br/>
+            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(numRows)} genes
+            will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
+            the remaining {Algorithm.getNumSteps(newData)} "step chromosomes" will be encoded.</>]
         })
         this.selectedIndividualPerGen = [];
       }
@@ -272,7 +279,12 @@ class Map extends Component {
     else {
       this.setState({
         selectedIndividualPath: new Array(numRows * numCols).fill(0),
-        outputMessages: ["Map of "+numCols+" cols x "+numRows+" rows. Cells values are: ["+this.state.data.cells+"]"]
+        //TODO: refactor outputMessages initialization to a single place
+        outputMessages: [<>Map of {numCols} columns and {numRows} rows.
+          Its cell values, in row-major order, are: [{this.state.data.cells.toString()}]<br/>
+          For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(numRows)} genes
+          will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
+          the remaining {Algorithm.getNumSteps({numCols: numCols})} "step chromosomes" will be encoded.</>]
       })
     }
   }
@@ -287,9 +299,10 @@ class Map extends Component {
     this.setState({isExecutionInProgress: true})
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual, this.state.data)
-    this.setState({
-      outputMessages: [<>Story based on the selected individual: [{selectedIndividual.individual}],<br/>
-        which has an average score of: {selectedIndividual.score}</>]
+    this.setState(state => {
+      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual}],<br/>
+        which has an average score of: {selectedIndividual.score}</>].concat(state.outputMessages[state.outputMessages.length - 1])
+      return { outputMessages }
     })
     await this.drawPathOfBestCandidate(story.cellsValues)
     this.setState(state => {
