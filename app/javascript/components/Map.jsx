@@ -45,10 +45,15 @@ class Map extends Component {
             numRows: MapConsts.DEFAULT_NUM_ROWS,
             cells: response.data
           },
-          outputMessages: [<>Map of {MapConsts.DEFAULT_NUM_COLS} columns and {MapConsts.DEFAULT_NUM_ROWS} rows.<br/>
-            Its cell values, in row-major order, are: [{response.data.toString()}]</>]
+          outputMessages: [<>Map of {MapConsts.DEFAULT_NUM_COLS} columns and {MapConsts.DEFAULT_NUM_ROWS} rows.
+            Its cell values, in row-major order, are: [{response.data.toString()}]<br/>
+            For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows)} genes
+            will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
+            the remaining {Algorithm.getNumSteps(this.state.data)} "step chromosomes" will be encoded.</>]
         })
       }
+    // let numOfBinaryDigitsForStartCells = Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows)
+    // let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.state.data)
     )
   }
 
