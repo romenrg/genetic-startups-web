@@ -198,16 +198,33 @@ const Info = () => {
         <TabPanel>
           <div id="info-using-app" className="tab-panel">
             <h2>Using the application</h2>
-            <p>The main features opf this application are:</p>
+            <p>The main features of this application are:</p>
             <ol className="text-list">
-              <li>Generating a random map (either reloading the page or clicking the "Generate new map" button</li>
-              <li>Customize settings: map size (rows and columns) and information to display:</li>
+              <li>Generating a random map by either:</li>
               <ul className="text-list">
-                <li>Show all information: </li>
-                <li>Quick loop over generations: </li>
-                <li>Only show final individual: </li>
+                <li>Reloading the page</li>
+                <li>Or clicking the "Generate new map" button</li>
               </ul>
-              <li>Start the evolution, clicking the corresponding button</li>
+              <li>Customize settings:</li>
+              <ul className="text-list">
+                <li>Map size (rows and columns)</li>
+                <li>Information to display (all details, quick loop per generation, only final solution) </li>
+                <li>Algorithm config (population size and number of generations)</li>
+              </ul>
+              <li>Start the evolution, clicking the corresponding button. This will:</li>
+              <ul className="text-list">
+                <li>Generate a random population of solutions for the given map</li>
+                <li>Iterate over the population for the given number of generations</li>
+                <li>For each generation, selection, crossover and mutation will occur</li>
+              </ul>
+              <li>Tell a story:</li>
+              <ul className="text-list">
+                <li>After the evolution has finished, a final solution will be selected as the best candidate</li>
+                <li>During the evolution, we are using the average scores for each cell action, but in this case we will
+                use specific cases, describing what a real story would be</li>
+                <li>An actual score for the solution will be provided, which will differ from the average obtained during
+                  evolution</li>
+              </ul>
             </ol>
           </div>
         </TabPanel>
