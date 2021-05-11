@@ -18,12 +18,12 @@ class Algorithm {
     return ACTIONS[action].values[randomValueIndex]
   }
 
-  static story(individual, mapData) {
+  static story(individualGenotype, mapData) {
     let cellsValues = []
     let totalStoryScore = 0;
     let step = 0;
-    let cell = this.calculateStartingCell(individual, mapData.numRows)
-    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individual.length)
+    let cell = this.calculateStartingCell(individualGenotype, mapData.numRows)
+    let movements = individualGenotype.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individualGenotype.length)
     do {
       let selectedRandomValue = this.selectRandomValue(Algorithm.getCellAction(cell.row, cell.col, mapData))
       cellsValues.push(selectedRandomValue)
@@ -35,11 +35,11 @@ class Algorithm {
     return {cellsValues: cellsValues, totalStoryScore: totalStoryScore}
   }
 
-  static fitness(individual, mapData) {
+  static fitness(individualGenotype, mapData) {
     let score = 0;
     let step = 0;
-    let cell = this.calculateStartingCell(individual, mapData.numRows)
-    let movements = individual.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individual.length)
+    let cell = this.calculateStartingCell(individualGenotype, mapData.numRows)
+    let movements = individualGenotype.slice(this.calculateNumOfBinaryDigitsForStartCell(mapData.numRows), individualGenotype.length)
     do {
       score += Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, mapData));
       cell = Algorithm.calculateNextCell(cell, movements.slice(0, this.calculateNumBinaryDigitsForEachStep()))
@@ -50,25 +50,28 @@ class Algorithm {
   }
 
   static selection(numIndividuals, sortedPopulation) {
-    return sortedPopulation.slice(0, numIndividuals)
+    return sortedPopulation.slice(0, numIndividuals).map( x => {
+      x.from = "selection"
+      return x
+    })
   }
 
   static crossover(numIndividuals, sortedPopulation) {
-    let individualLength = sortedPopulation[0].length
+    let individualLength = sortedPopulation[0].genotype.length
     let splitIndex = Math.floor(individualLength / 2)
     let resultingIndividuals = []
     for (let i = 0; i < numIndividuals; i+=2) {
-      let tmpCrossedIndividual
+      let tmpCrossedIndividualGenotype
       let randomIndexFirstIndividual = Math.floor(Math.random() * sortedPopulation.length)
       let randomIndexSecondIndividual = Math.floor(Math.random() * sortedPopulation.length)
       while (sortedPopulation.length > 1 && randomIndexSecondIndividual === randomIndexFirstIndividual)
         randomIndexSecondIndividual = Math.floor(Math.random() * sortedPopulation.length)
-      tmpCrossedIndividual = sortedPopulation[randomIndexFirstIndividual].slice(0, splitIndex)
-      tmpCrossedIndividual = tmpCrossedIndividual.concat(sortedPopulation[randomIndexSecondIndividual].slice(splitIndex, individualLength))
-      resultingIndividuals.push(tmpCrossedIndividual)
-      tmpCrossedIndividual = sortedPopulation[randomIndexSecondIndividual].slice(0, splitIndex)
-      tmpCrossedIndividual = tmpCrossedIndividual.concat(sortedPopulation[randomIndexFirstIndividual].slice(splitIndex, individualLength))
-      resultingIndividuals.push(tmpCrossedIndividual)
+      tmpCrossedIndividualGenotype = sortedPopulation[randomIndexFirstIndividual].genotype.slice(0, splitIndex)
+      tmpCrossedIndividualGenotype = tmpCrossedIndividualGenotype.concat(sortedPopulation[randomIndexSecondIndividual].genotype.slice(splitIndex, individualLength))
+      resultingIndividuals.push({genotype: tmpCrossedIndividualGenotype, from: "crossover"})
+      tmpCrossedIndividualGenotype = sortedPopulation[randomIndexSecondIndividual].genotype.slice(0, splitIndex)
+      tmpCrossedIndividualGenotype = tmpCrossedIndividualGenotype.concat(sortedPopulation[randomIndexFirstIndividual].genotype.slice(splitIndex, individualLength))
+      resultingIndividuals.push({genotype: tmpCrossedIndividualGenotype, from: "crossover"})
     }
     return resultingIndividuals
   }
@@ -77,10 +80,10 @@ class Algorithm {
     let resultingIndividuals = []
     for (let i = 0; i < numIndividuals; i++) {
       let randomIndexIndividualToMutate = Math.floor(Math.random() * sortedPopulation.length)
-      let tmpIndividualToMutate = [...sortedPopulation[randomIndexIndividualToMutate]]
-      let indexOfRandomGeneToMutate = Math.floor(Math.random() * tmpIndividualToMutate.length)
-      tmpIndividualToMutate[indexOfRandomGeneToMutate] = (1 - tmpIndividualToMutate[indexOfRandomGeneToMutate])
-      resultingIndividuals.push(tmpIndividualToMutate)
+      let tmpIndividualGenotypeToMutate = [...sortedPopulation[randomIndexIndividualToMutate].genotype]
+      let indexOfRandomGeneToMutate = Math.floor(Math.random() * tmpIndividualGenotypeToMutate.length)
+      tmpIndividualGenotypeToMutate[indexOfRandomGeneToMutate] = (1 - tmpIndividualGenotypeToMutate[indexOfRandomGeneToMutate])
+      resultingIndividuals.push({genotype: tmpIndividualGenotypeToMutate, from: "mutation"})
     }
     return resultingIndividuals
   }
@@ -93,9 +96,9 @@ class Algorithm {
     return sumObj.score / ACTIONS[action].values.length
   }
 
-  static calculateStartingCell(individual, numRows) {
+  static calculateStartingCell(individualGenotype, numRows) {
     let numOfBinaryDigitsForStartingRow = this.calculateNumOfBinaryDigitsForStartCell(numRows)
-    let startRowInBinary = individual.slice(0,numOfBinaryDigitsForStartingRow)
+    let startRowInBinary = individualGenotype.slice(0,numOfBinaryDigitsForStartingRow)
     let potentialStartRowInDecimal = this.binaryToDecimal(startRowInBinary)
     let startRowInDecimal = potentialStartRowInDecimal % numRows
     let startCell = { row: startRowInDecimal, col: 0}

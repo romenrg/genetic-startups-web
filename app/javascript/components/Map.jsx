@@ -97,10 +97,13 @@ class Map extends Component {
     let numOfBinaryDigitsForSteps = Algorithm.calculateNumBinaryDigitsForEachStep() * Algorithm.getNumSteps(this.state.data)
     let population = []
     for (let i = 0; i < populationSize; i++) {
-      let individual = []
+      let individual = {
+        genotype: [],
+        from: "initialization"
+      }
       for (let j = 0; j < numOfBinaryDigitsForStartCells + numOfBinaryDigitsForSteps; j++) {
         let gene = Math.round(Math.random())
-        individual.push(gene)
+        individual.genotype.push(gene)
       }
       population.push(individual)
     }
@@ -108,7 +111,7 @@ class Map extends Component {
   }
 
   sortPopulationByScore() {
-    this.population.sort((a, b) => Algorithm.fitness(b, this.state.data) - Algorithm.fitness(a, this.state.data))
+    this.population.sort((a, b) => Algorithm.fitness(b.genotype, this.state.data) - Algorithm.fitness(a.genotype, this.state.data))
   }
 
   setBestCandidatePath(selectedIndividualPath) {
@@ -124,12 +127,13 @@ class Map extends Component {
   storeBestCandidateOfGeneration(generation) {
     this.selectedIndividualPerGen.push({
       individual: this.population[0],
-      score: Algorithm.fitness(this.population[0], this.state.data)
+      score: Algorithm.fitness(this.population[0].genotype, this.state.data)
     })
     if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmVars.NUM_GENERATIONS - 1) {
       this.setState(state => {
-        const outputMessages = [<>Selected Individual for generation {generation}: [
-                                 {this.selectedIndividualPerGen[generation].individual}], <br/>
+        const outputMessages = [<>Selected Individual for generation {generation}:
+                                 [{this.selectedIndividualPerGen[generation].individual.genotype}], <br/>
+                                 came from {this.selectedIndividualPerGen[generation].individual.from}, <br/>
                                  score: {this.selectedIndividualPerGen[generation].score}</>
                                ].concat(state.outputMessages)
         return { outputMessages }
@@ -150,8 +154,8 @@ class Map extends Component {
       await this.sleep(50)
     }
     let step = 0
-    let movements = this.population[0].slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].length)
-    let cell = Algorithm.calculateStartingCell(this.population[0], this.state.data.numRows)
+    let movements = this.population[0].genotype.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].genotype.length)
+    let cell = Algorithm.calculateStartingCell(this.population[0].genotype, this.state.data.numRows)
     do {
       if (Algorithm._isCellInMap(cell.row, cell.col, this.state.data)) {
         if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY || (step === Algorithm.getNumSteps(this.state.data)) || storyCellValues) {
@@ -291,17 +295,18 @@ class Map extends Component {
   async handleStory() {
     this.setState({isExecutionInProgress: true})
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
-    let story = Algorithm.story(selectedIndividual.individual, this.state.data)
+    let story = Algorithm.story(selectedIndividual.individual.genotype, this.state.data)
     this.setState(state => {
-      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual}],<br/>
-        which has an average score of: {selectedIndividual.score}</>].concat(state.outputMessages[state.outputMessages.length - 1])
+      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual.genotype}],<br/>
+        which has an average score of: {selectedIndividual.score}</>]
+        .concat(state.outputMessages[state.outputMessages.length - 1])
       return { outputMessages }
     })
     await this.drawPathOfBestCandidate(story.cellsValues)
     this.setState(state => {
-      const outputMessages = [(<>Final story scores for [{selectedIndividual.individual}]:<br/>
+      const outputMessages = [(<>Final story scores for [{selectedIndividual.individual.genotype}]:<br/>
         - Its calculated average score was {selectedIndividual.score};<br/>
-        - But actual story score has been {story.totalStoryScore}</>)
+        - But its actual story score has been {story.totalStoryScore}</>)
       ].concat(state.outputMessages)
       return { outputMessages }
     })

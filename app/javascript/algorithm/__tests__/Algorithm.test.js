@@ -52,23 +52,29 @@ describe("Algorithm tests", () => {
     expect(Algorithm.calculateScore(9)).toBe(-55)
   })
   it("selection", () => {
-    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1, 1]]
-    expect(Algorithm.selection(1, population)).toEqual([[0, 0, 1, 0, 0, 1, 1, 0, 0]])
+    let population = [
+      {genotype: [0, 0, 1, 0, 0, 1, 1, 0, 0], from: "initialization"},
+      {genotype: [1, 0, 0, 0, 1, 1, 1, 0, 0], from: "initialization"},
+      {genotype: [0, 1, 1, 1, 1, 1, 1, 1, 1], from: "initialization"}]
+    expect(Algorithm.selection(1, population)).toEqual([{genotype: [0, 0, 1, 0, 0, 1, 1, 0, 0], from: "selection"}])
   })
   it("crossover", () => {
-    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0]]
+    let population = [
+      {genotype: [0, 0, 1, 0, 0, 1, 1, 0, 0], from: "initialization"},
+      {genotype: [1, 0, 0, 0, 1, 1, 1, 0, 0], from: "initialization"}]
     let crossoverResult = Algorithm.crossover(2, population)
     expect(crossoverResult.length).toBe(2)
-    expect(crossoverResult).toContainEqual([0, 0, 1, 0, 1, 1, 1, 0, 0])
-    expect(crossoverResult).toContainEqual([1, 0, 0, 0, 0, 1, 1, 0, 0])
+    expect(crossoverResult).toContainEqual({genotype: [0, 0, 1, 0, 1, 1, 1, 0, 0], from: "crossover"})
+    expect(crossoverResult).toContainEqual({genotype: [1, 0, 0, 0, 0, 1, 1, 0, 0], from: "crossover"})
   })
   it("mutation", () => {
-    let population = [[0, 0, 1, 0, 0, 1, 1, 0, 0]]
+    let population = [{genotype: [0, 0, 1, 0, 0, 1, 1, 0, 0], from: "initialization"}]
     let mutationResult = Algorithm.mutation(1, population)
     expect(mutationResult.length).toBe(1)
+    expect(mutationResult[0].from).toBe("mutation")
     let countDifferences = 0
-    for (let i = 0; i < population[0].length; i++) {
-      if (population[0][i] !== mutationResult[0][i]) {
+    for (let i = 0; i < population[0].genotype.length; i++) {
+      if (population[0].genotype[i] !== mutationResult[0].genotype[i]) {
         countDifferences++
       }
     }
