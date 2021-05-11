@@ -18,7 +18,7 @@ const Action = (props) => {
   return (
     <>
       <div className={"info-item-image-container "+props.evenOrOddRow}>
-        <div className={"info-item-image cell-"+props.action.name}/>
+        <div className={"info-item-image cell-"+props.action.name.toLowerCase().replace(/\s/g, '')}/>
       </div>
       <span className={props.evenOrOddRow}>{props.action.name}</span>
       <div className={"info-item-values-list "+props.evenOrOddRow}>
