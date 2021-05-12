@@ -81,6 +81,7 @@ const Info = () => {
           <Tab>Algorithm details</Tab>
           <Tab>Architecture</Tab>
           <Tab>Using the application</Tab>
+          <Tab>Contributing</Tab>
         </TabList>
 
         <TabPanel>
@@ -226,6 +227,15 @@ const Info = () => {
                   evolution</li>
               </ul>
             </ol>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div id="contributing" className="tab-panel">
+            <h2>Contributing</h2>
+            <p>Genetic Startups is open source software. It is also a work in progress and a hobby project, so many
+               improvements can be made.</p>
+            <p>Constructive contributions are welcome. Please <a href="https://github.com/romenrg/genetic-startups-web/blob/main/CONTRIBUTING.md">
+               refer to the contributing guidelines in our GitHub repo</a> for more information on how to contribute.</p>
           </div>
         </TabPanel>
       </Tabs>
