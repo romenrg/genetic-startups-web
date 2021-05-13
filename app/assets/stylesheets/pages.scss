@@ -114,9 +114,9 @@ nav {
         align-items: center;
         justify-content: center;
         .cell-content {
-          width: calc(var(--cellWidth) - 1vw);
-          height: calc(var(--cellWidth) - 1vw);
-          background-size: calc(var(--cellWidth) - 1vw) calc(var(--cellWidth) - 1vw);
+          width: calc(var(--cellWidth) - (var(--cellWidth) * 0.15));
+          height: calc(var(--cellWidth) - (var(--cellWidth) * 0.15));
+          background-size: calc(var(--cellWidth) - (var(--cellWidth) * 0.15)) calc(var(--cellWidth) - (var(--cellWidth) * 0.15));
         }
       }
     }
