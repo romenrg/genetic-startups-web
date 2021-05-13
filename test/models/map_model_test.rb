@@ -8,10 +8,10 @@ class MapModelTest < ActiveSupport::TestCase
     assert_equal ProbabilitiesModel::ACTIONS["None"], action
   end
 
-  test "advisor is the second action for second q" do
+  test "circus is the action to which '60' belongs, for second q" do
     @map = MapModel.new 3, 40
     action = @map.get_action_from_q_and_num(1, 60)
-    assert_equal ProbabilitiesModel::ACTIONS["Advisor"], action
+    assert_equal ProbabilitiesModel::ACTIONS["Circus"], action
   end
 
   test "badnews is the last action for last q" do
