@@ -182,14 +182,25 @@ class Map extends Component {
           })
         }
       }
-      else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
-        this.setState(state => {
-          const outputMessages = [("Cell: [Out of bounds] : "+
-            ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
-            Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
-          ].concat(state.outputMessages)
-          return { outputMessages }
-        })
+      else {
+        if (storyCellValues) {
+          this.setState(state => {
+            const outputMessages = [("Cell: [Out of bounds] : " +
+              "You don't know where you are anymore : " +
+              Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
+            ].concat(state.outputMessages)
+            return {outputMessages}
+          })
+        }
+        else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
+          this.setState(state => {
+            const outputMessages = [("Cell: [Out of bounds] : " +
+              ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name + " : " +
+              Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
+            ].concat(state.outputMessages)
+            return {outputMessages}
+          })
+        }
       }
       if (storyCellValues) {
         await this.sleep(1500)
