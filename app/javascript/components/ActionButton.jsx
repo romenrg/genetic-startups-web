@@ -3,17 +3,17 @@ import React from 'react'
 function ActionButton(props) {
   const isExecutionInProgress = props.isExecutionInProgress;
   const clickHandler = props.clickHandler;
-  let storyButtonDisplay = props.hide ? { visibility: "hidden" } : {}
+  let storyButtonHiddenClass = props.hide ? "action-button-hidden" : ""
   if (isExecutionInProgress) {
     return (
-      <button className="action-button" onClick={clickHandler} disabled style={storyButtonDisplay}>
+      <button className={"action-button " + storyButtonHiddenClass} onClick={clickHandler} disabled>
         Execution in progress...
       </button>
     )
   }
   else {
     return (
-      <button className="action-button" onClick={clickHandler} style={storyButtonDisplay}>
+      <button className={"action-button " + storyButtonHiddenClass} onClick={clickHandler}>
         {props.text}
       </button>
     )

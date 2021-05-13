@@ -295,6 +295,10 @@ footer {
   }
 }
 
+.action-button.action-button-hidden {
+  visibility: hidden;
+}
+
 @media (max-width: 480px) {
   #main .map .output {
     margin: 0;
@@ -304,5 +308,8 @@ footer {
   }
   .action-button {
     width: 100%;
+  }
+  .action-button.action-button-hidden {
+    display: none;
   }
 }
