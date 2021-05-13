@@ -145,7 +145,7 @@ class Map extends Component {
     let selectedIndividualPath = new Array(this.state.data.numRows * this.state.data.numCols).fill(0)
     this.setBestCandidatePath(selectedIndividualPath)
     if (storyCellValues) {
-      await this.sleep(1500)
+      await this.sleep(2000)
     }
     if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
       await this.sleep(500)
@@ -203,7 +203,7 @@ class Map extends Component {
         }
       }
       if (storyCellValues) {
-        await this.sleep(1500)
+        await this.sleep(3000)
       }
       else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
         await this.sleep(500)
