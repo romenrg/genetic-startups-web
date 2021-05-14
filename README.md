@@ -25,4 +25,5 @@ in a map where investors, product launches, team members, sad news and sales, am
 ### In a container
  * First build it:  `docker build -t <imageName> .`
  * Then run it: `docker run -p 3000:3000 <imageName>`
-    * Redirecting logs example: `nohup docker run -p 3000:3000 romenrg/geneticstartups:0.0.1 > ../logs/logs.log 2>&1 &`
+    * Running in background and redirecting logs example:
+      `nohup docker run -p 3000:3000 romenrg/geneticstartups:0.0.1 > ../logs/logs.log 2>&1 & disown`
