@@ -5,6 +5,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from "axios";
 import { HashLink } from 'react-router-hash-link';
+import {
+  Link,
+  withRouter
+} from "react-router-dom";
 
 const Action = (props) => {
   let values = props.action.values.map((value, i) => {
@@ -44,8 +48,7 @@ const ActionProbabilities = (props) => {
 }
 
 
-const Info = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+const Info = (props) => {
   const [probabilities, setProbabilities] = useState([]);
 
   useEffect(() => {
@@ -71,9 +74,32 @@ const Info = () => {
     }
   }
 
+  const changeTabs = (index) => {
+    switch (index) {
+      case 0:
+        props.history.push("/info");
+        break;
+      case 1:
+        props.history.push("/info/map");
+        break;
+      case 2:
+        props.history.push("/info/algorithm");
+        break;
+      case 3:
+        props.history.push("/info/architecture");
+        break;
+      case 4:
+        props.history.push("/info/usage");
+        break;
+      case 5:
+        props.history.push("/info/contributing");
+        break;
+    }
+  }
+
   return (
     <div id="info">
-      <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
+      <Tabs selectedIndex={parseInt(props.initialTabIndex)} onSelect={index => changeTabs(index)}>
         <h2 className="section-title">Information</h2>
         <TabList>
           <Tab>Introduction</Tab>
@@ -104,7 +130,7 @@ const Info = () => {
             <p>In this application, we generate random maps that represent the space of possible choices for the
               life of the startup. Since finding the best path possible is key to success, we have developed a Genetic
               Algorithm that improves choices over generations.</p>
-            <p>Learn more about the map the dedicated information tab <a onClick={() => setTabIndex(1)}>"The map"</a>.</p>
+            <p>Learn more about the map the dedicated information tab <Link to="/info/map">"The map"</Link>.</p>
           </div>
         </TabPanel>
         <TabPanel>
@@ -243,4 +269,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default withRouter(Info);
