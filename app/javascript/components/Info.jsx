@@ -138,7 +138,7 @@ const Info = (props) => {
           <div id="info-cell-types" className="tab-panel">
             <h2>The map</h2>
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
-            life of your startup. The relevant pieces in the generation of the map are:</p>
+            life of the startup. The relevant aspects of the creation of the map are:</p>
             <ul className="text-list">
               <li><HashLink to="#cell-types">Cell types (actions)</HashLink></li>
               <li><HashLink to="#action-probabilities">Action probabilities per quarter</HashLink></li>
