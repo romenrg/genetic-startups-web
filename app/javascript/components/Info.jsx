@@ -217,13 +217,13 @@ const Info = (props) => {
             <h2>Architecture</h2>
             <p>This application is composed of</p>
             <ol className="text-list">
-              <li>A Rails backend, providing a REST API; and</li>
+              <li>A Rails backend application, which exposes a REST API; and</li>
               <li>A React frontend application</li>
             </ol>
             <h3>The Rails backend</h3>
-            <p>The backend Rails application includes the functionality to generate the random maps</p>
-            <p>It also exposes the "content" operation to generate the content of a random map, with the number of rows
-              and columns specified as parameters</p>
+            <p>The backend Rails application includes the functionality to generate the random maps.</p>
+            <p>It also exposes the API, which includes the main "content" operation, used to generate the content of a
+               random map, with the number of rows and columns specified as parameters.</p>
             <h3>The React frontend</h3>
             <p>The React applications is written in Javascript and is composed of several components, as described in
               the following diagram:</p>
