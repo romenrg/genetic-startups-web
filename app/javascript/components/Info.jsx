@@ -234,30 +234,32 @@ const Info = (props) => {
             <h2>Using the application</h2>
             <p>The main features of this application are:</p>
             <ol className="text-list">
-              <li>Generating a random map by either:</li>
+              <li>Generating a random map, by either:</li>
               <ul className="text-list">
-                <li>Reloading the page</li>
-                <li>Or clicking the "Generate new map" button</li>
+                <li>Reloading the page; or</li>
+                <li>Clicking the "Generate new map" button</li>
               </ul>
-              <li>Customize settings:</li>
+              <li>Customizing settings:</li>
               <ul className="text-list">
                 <li>Map size (rows and columns)</li>
-                <li>Information to display (all details, quick loop per generation, only final solution) </li>
+                <li>Information to display (all details, quick loop per generation or only final solution) </li>
                 <li>Algorithm config (population size and number of generations)</li>
               </ul>
-              <li>Start the evolution, clicking the corresponding button. This will:</li>
+              <li>Starting the evolution, by clicking the corresponding button. This will:</li>
               <ul className="text-list">
                 <li>Generate a random population of solutions for the given map</li>
                 <li>Iterate over the population for the given number of generations</li>
-                <li>For each generation, selection, crossover and mutation will occur</li>
+                <li>For each generation, selection, crossover and mutation will occur, producing a new population</li>
               </ul>
-              <li>Tell a story:</li>
+              <li>Telling a story:</li>
               <ul className="text-list">
-                <li>After the evolution has finished, a final solution will be selected as the best candidate</li>
-                <li>During the evolution, we are using the average scores for each cell action, but in this case we will
-                use specific cases, describing what a real story would be</li>
-                <li>An actual score for the solution will be provided, which will differ from the average obtained during
-                  evolution</li>
+                <li>After the evolution has finished, a final solution will be selected as the best candidate life (set
+                    of choices) for the startup</li>
+                <li>During the evolution, we are using the average scores for each cell action, but for the story we will
+                    use specific values for each action, describing what a real life story could be for the startup</li>
+                <li>As a result, an actual score for the story will be provided, which will differ from the score
+                    obtained during evolution. This actual score represents a unique story for the startup, calculated
+                    by picking specific values for events (actions), rather than the average action scores</li>
               </ul>
             </ol>
           </div>
