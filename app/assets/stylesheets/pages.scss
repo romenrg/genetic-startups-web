@@ -28,6 +28,11 @@ body {
     font-weight: 500;
     margin: 0.5rem 0;
   }
+  h4 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+  }
 }
 
 nav {
@@ -214,6 +219,9 @@ nav {
   }
   ul.text-list {
     list-style-type: circle;
+  }
+  h2, h3, h4 {
+    margin: 1.25rem 0 0.75rem 0;
   }
 }
 

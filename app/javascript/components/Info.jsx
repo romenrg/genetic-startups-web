@@ -112,19 +112,19 @@ const Info = (props) => {
 
         <TabPanel>
           <div id="info-intro" className="tab-panel">
-            <h2>Introduction</h2>
+            <h3>Introduction</h3>
             <p>This application, by <a href="https://www.romenrg.com">romenrg</a>, is based on Genetic Algorithms. It
                calculates possible lives of a startup, given a random reality represented as a map.</p>
             <p>The algorithm improves choices over generations, trying to achieve the most successful outcome possible
                for the startup; in a map where investors, product launches, team members, sad news and sales, among
               other events, appear.</p>
-            <h3>About Genetic Algorithms</h3>
+            <h4>About Genetic Algorithms</h4>
             <p>Within the field of Artificial Intelligence (AI), Genetic Algorithms (GA) are grouped in the larger class of evolutionary
               algorithms. And are often used as a search heuristic, to generate solutions to optimization problems. </p>
             <p>Genetic Algorithms use techniques inspired by natural evolution, such as selection, crossover and mutation;
               in order to evolve a random population of possible solutions into better ones, over generations.</p>
             <p>Learn more about our implementation in the <Link to="/info/map">"Algorithm details"</Link> tab.</p>
-            <h3>The problem of Startup life choices</h3>
+            <h4>The problem of Startup life choices</h4>
             <p>Startups are surrounded with huge uncertainty and have limited resources and time to find product/market-fit
               and become sustainable businesses. Besides, the life of a startup is full of challenges and tough choices.
               As founders, we must be very careful choosing one path over another, when making decisions.</p>
@@ -136,14 +136,14 @@ const Info = (props) => {
         </TabPanel>
         <TabPanel>
           <div id="info-cell-types" className="tab-panel">
-            <h2>The map</h2>
+            <h3>The map</h3>
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
             life of the startup. The relevant aspects of the creation of the map are:</p>
             <ul className="text-list">
               <li><HashLink to="#cell-types">Cell types (actions)</HashLink></li>
               <li><HashLink to="#action-probabilities">Action probabilities per quarter</HashLink></li>
             </ul>
-            <h3 id="cell-types">Cell types (actions)</h3>
+            <h4 id="cell-types">Cell types (actions)</h4>
             <p>In the map, different cell types appear. Each one represents a possible event in the life of a
               startup, having a different impact. For that reason, each type has 10 possible values,
               and a score (calculated as the average of those possible values):</p>
@@ -155,7 +155,7 @@ const Info = (props) => {
               <span className="info-item-title">Description</span>
               {actionsInfo}
             </div>
-            <h3 id="action-probabilities">Action probabilities per quarter</h3>
+            <h4 id="action-probabilities">Action probabilities per quarter</h4>
             <p>The map is divided in quarters. Each quarter has different probabilities for the different types of cells: </p>
             <div className="info-grid probabilities-grid">
               <span className="info-item-title">Action</span>
@@ -169,14 +169,14 @@ const Info = (props) => {
         </TabPanel>
         <TabPanel>
           <div id="info-alg-details" className="tab-panel">
-            <h2>Algorithm details</h2>
+            <h3>Algorithm details</h3>
             <p>The key aspects of applying genetic algorithms to this problem are:</p>
             <ol className="text-list">
               <li>Defining how individuals are represented,</li>
               <li>Designing the selection, crossover and mutation operations, and</li>
               <li>Building the fitness function, used to evaluate individuals</li>
             </ol>
-            <h3>Population: defining chromosomes (encoding start cell & movements in genes)</h3>
+            <h4>Population: defining chromosomes (encoding start cell & movements in genes)</h4>
             <p>Our evolutionary algorithm starts by defining a random population of individual potential solutions at
                the beginning.</p>
             <p>Each one of those potential solutions (each individual) is defined as a binary array, represented as a set
@@ -190,7 +190,7 @@ const Info = (props) => {
                first two genes represent. The rest of the genes, in pairs, represent the movements chromosomes. Since
                moving backwards is not allowed, we have decided that both "00" and "10" mean "move right"; while "01"
                means "move down" and "11" means "move up".</p>
-            <h3>Operations: selection, crossover and mutation</h3>
+            <h4>Operations: selection, crossover and mutation</h4>
             <p>After the initial random population is created, the elements are evaluated and sorted based on their
               "fitness". The best candidate is selected and displayed.</p>
             <p>Then, a new generation has to be created. Every new generation is calculated by
@@ -207,31 +207,31 @@ const Info = (props) => {
                   individuals. In our case, the mutation consists of changing a random gene to them; producing
                   mutated individuals.</li>
             </ul>
-            <h3>Fitness function</h3>
+            <h4>Fitness function</h4>
             <p>The fitness function gives a score to each candidate individual, by taking into account the scores of the
                cells that the individual would visit (based on their chromosomes configuration, as explained above).</p>
           </div>
         </TabPanel>
         <TabPanel>
           <div id="info-architecture" className="tab-panel">
-            <h2>Architecture</h2>
+            <h3>Architecture</h3>
             <p>This application is composed of</p>
             <ol className="text-list">
               <li>A Rails backend application, which exposes a REST API; and</li>
               <li>A React frontend application</li>
             </ol>
-            <h3>The Rails backend</h3>
+            <h4>The Rails backend</h4>
             <p>The backend Rails application includes the functionality to generate the random maps.</p>
             <p>It also exposes the API, which includes the main "content" operation, used to generate the content of a
                random map, with the number of rows and columns specified as parameters.</p>
-            <h3>The React frontend</h3>
+            <h4>The React frontend</h4>
             <p>The React applications is written in Javascript and is composed of several components, as described in
               the following diagram:</p>
           </div>
         </TabPanel>
         <TabPanel>
           <div id="info-using-app" className="tab-panel">
-            <h2>Using the application</h2>
+            <h3>Using the application</h3>
             <p>The main features of this application are:</p>
             <ol className="text-list">
               <li>Generating a random map, by either:</li>
@@ -266,7 +266,7 @@ const Info = (props) => {
         </TabPanel>
         <TabPanel>
           <div id="contributing" className="tab-panel">
-            <h2>Contributing</h2>
+            <h3>Contributing</h3>
             <p>Genetic Startups is open source software. It is also a work in progress and a hobby project, so many
                improvements can be made.</p>
             <p>Constructive contributions are welcome. Please refer to the <a href="https://github.com/romenrg/genetic-startups-web/blob/main/CONTRIBUTING.md">
