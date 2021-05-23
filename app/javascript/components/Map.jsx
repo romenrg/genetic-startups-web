@@ -314,8 +314,8 @@ class Map extends Component {
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual.genotype, this.state.data)
     this.setState(state => {
-      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual.genotype}],<br/>
-        which has an average score of: {selectedIndividual.score}</>]
+      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual.genotype}].<br/>
+        Average score: {selectedIndividual.score}</>]
         .concat(state.outputMessages[state.outputMessages.length - 1])
       return { outputMessages }
     })
