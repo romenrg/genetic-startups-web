@@ -51,6 +51,10 @@ const App = () => {
               </Route>
             </Switch>
           </div>
+          <footer>
+            Genetic Algorithms learning to navigate the bumpy worlds of startups, by <a href="https://www.romenrg.com">romenrg</a>.
+            Refer to <Link to="/info">information</Link> for more details.
+          </footer>
         </div>
       </Router>
     </>
