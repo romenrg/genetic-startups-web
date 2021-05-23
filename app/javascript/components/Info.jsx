@@ -237,7 +237,7 @@ const Info = (props) => {
               <li>Generating a random map, by either:</li>
               <ul className="text-list">
                 <li>Reloading the page; or</li>
-                <li>Clicking the "Generate new map" button</li>
+                <li>Clicking the "New map" button</li>
               </ul>
               <li>Customizing settings:</li>
               <ul className="text-list">
@@ -245,11 +245,11 @@ const Info = (props) => {
                 <li>Information to display (all details, quick loop per generation or only final solution) </li>
                 <li>Algorithm config (population size and number of generations)</li>
               </ul>
-              <li>Starting the evolution, by clicking the corresponding button. This will:</li>
+              <li>Running the algorithm, by clicking the corresponding button. This will:</li>
               <ul className="text-list">
                 <li>Generate a random population of solutions for the given map</li>
-                <li>Iterate over the population for the given number of generations</li>
-                <li>For each generation, selection, crossover and mutation will occur, producing a new population</li>
+                <li>Iterate, evolving the population for the given number of generations</li>
+                <li>For each generation, selection, crossover and mutation will occur, producing an updated population</li>
               </ul>
               <li>Telling a story:</li>
               <ul className="text-list">

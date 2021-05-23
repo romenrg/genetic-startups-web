@@ -151,7 +151,7 @@ class Map extends Component {
       await this.sleep(500)
     }
     else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
-      await this.sleep(50)
+      await this.sleep(75)
     }
     let step = 0
     let movements = this.population[0].genotype.slice(Algorithm.calculateNumOfBinaryDigitsForStartCell(this.state.data.numRows), this.population[0].genotype.length)
@@ -230,11 +230,16 @@ class Map extends Component {
 
   async handleStartEvolutionClick(e) {
     let oldData = JSON.parse(JSON.stringify(this.state.data));
+    const startAlgorithmMsg = [(<>Running our genetic algorithm:<br/>
+      - Evolving over {AlgorithmVars.NUM_GENERATIONS} generations,<br/>
+      - Displaying the best candidate of each generation</>)
+    ]
     this.setState({
         isExecutionInProgress: true,
         selectedIndividualPath: new Array(oldData.numRows * oldData.numCols).fill(0),
-        outputMessages: this.state.outputMessages[this.state.outputMessages.length - 1]
+        outputMessages: startAlgorithmMsg.concat(this.state.outputMessages[this.state.outputMessages.length - 1])
     })
+    await this.sleep(3500)
     this.selectedIndividualPerGen = [];
     this.generatePopulation(AlgorithmVars.POPULATION_SIZE)
     let generation = 0;
@@ -343,9 +348,9 @@ class Map extends Component {
             {cells}
           </div>
           <div className="action-buttons">
-            <ActionButton clickHandler={this.handleStartEvolutionClick} isExecutionInProgress={this.state.isExecutionInProgress} text="Start evolution" />
+            <ActionButton clickHandler={this.handleStartEvolutionClick} isExecutionInProgress={this.state.isExecutionInProgress} text="Run algorithm" />
             {storyButton}
-            <ActionButton clickHandler={this.handleNewMapClick} isExecutionInProgress={this.state.isExecutionInProgress} text="Generate new map" />
+            <ActionButton clickHandler={this.handleNewMapClick} isExecutionInProgress={this.state.isExecutionInProgress} text="New map" />
           </div>
           <Output>
             {messages}
