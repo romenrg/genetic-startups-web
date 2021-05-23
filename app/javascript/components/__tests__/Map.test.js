@@ -43,7 +43,7 @@ describe("Map component tests", () => {
     await waitFor(() => {
       expect(container.querySelectorAll(".cell").length).toBe(160)
     })
-    fireEvent.click(screen.getByText('Start evolution'))
+    fireEvent.click(screen.getByText('Run algorithm'))
     const visitedCells = await screen.findAllByTestId("visited-cell")
     let numVisitedCells = visitedCells.length
     expect(numVisitedCells).toBeGreaterThan(0)
