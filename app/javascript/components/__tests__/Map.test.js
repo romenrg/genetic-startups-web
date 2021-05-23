@@ -44,6 +44,9 @@ describe("Map component tests", () => {
       expect(container.querySelectorAll(".cell").length).toBe(160)
     })
     fireEvent.click(screen.getByText('Run algorithm'))
+    await waitFor(() => {
+      screen.getAllByTestId("visited-cell")
+    }, {timeout: 4000})
     const visitedCells = await screen.findAllByTestId("visited-cell")
     let numVisitedCells = visitedCells.length
     expect(numVisitedCells).toBeGreaterThan(0)
