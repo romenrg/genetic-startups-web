@@ -53,14 +53,14 @@ class ProbabilitiesModel
     # Fourth Q
     @action_probabilities_per_q[3][ACTIONS["None"]] = 55
     @action_probabilities_per_q[3][ACTIONS["Advisor"]] = 2
-    @action_probabilities_per_q[3][ACTIONS["Circus"]] = 2
+    @action_probabilities_per_q[3][ACTIONS["Circus"]] = 3
     @action_probabilities_per_q[3][ACTIONS["Team"]] = 6
     @action_probabilities_per_q[3][ACTIONS["Product"]] = 4
     @action_probabilities_per_q[3][ACTIONS["Feedback"]] = 7
     @action_probabilities_per_q[3][ACTIONS["Investor"]] = 5
     @action_probabilities_per_q[3][ACTIONS["Doubts"]] = 2
-    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 15
-    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 2
+    @action_probabilities_per_q[3][ACTIONS["Sales"]] = 13
+    @action_probabilities_per_q[3][ACTIONS["BadNews"]] = 3
   end
 
   attr_reader :action_probabilities_per_q
