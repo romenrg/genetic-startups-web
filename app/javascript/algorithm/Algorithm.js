@@ -2,8 +2,8 @@ import React from "react";
 import ACTIONS from "./Actions";
 
 let AlgorithmVars = {
-  POPULATION_SIZE: 50,
-  NUM_GENERATIONS: 15
+  POPULATION_SIZE: 100,
+  NUM_GENERATIONS: 20
 }
 
 const AlgorithmConsts = {
