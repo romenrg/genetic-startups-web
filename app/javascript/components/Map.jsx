@@ -337,7 +337,7 @@ class Map extends Component {
     let storyButton = <ActionButton clickHandler={this.handleStory} isExecutionInProgress={this.state.isExecutionInProgress} text="Tell story" hide={!this.state.isEvolutionCompleted}/>
     return (
       <>
-        <p>Here's the world your startup will learn to navigate:</p>
+        <p>Here's a bumpy world for startups to navigate:</p>
         <div className={className}>
           <div className="grid-container" style={cssValues}>
             {cells}
