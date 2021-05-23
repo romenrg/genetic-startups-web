@@ -2,7 +2,7 @@ import React from "react";
 import ACTIONS from "./Actions";
 
 let AlgorithmVars = {
-  POPULATION_SIZE: 25,
+  POPULATION_SIZE: 50,
   NUM_GENERATIONS: 15
 }
 
