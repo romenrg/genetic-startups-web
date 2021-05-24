@@ -148,7 +148,7 @@ class Map extends Component {
       await this.sleep(2000)
     }
     if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
-      await this.sleep(500)
+      await this.sleep(1000)
     }
     else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
       await this.sleep(75)
@@ -203,10 +203,10 @@ class Map extends Component {
         }
       }
       if (storyCellValues) {
-        await this.sleep(3000)
+        await this.sleep(3500)
       }
       else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
-        await this.sleep(500)
+        await this.sleep(750)
       }
       else if (this.state.display === DisplayOptions.DISPLAY_GENERATIONS_QUICK.value) {
         await this.sleep(50)
