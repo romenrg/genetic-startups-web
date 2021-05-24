@@ -230,10 +230,14 @@ class Map extends Component {
 
   async handleStartEvolutionClick(e) {
     let oldData = JSON.parse(JSON.stringify(this.state.data));
+    let bestCandidateOfMsg = ""
+    if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value) {
+      bestCandidateOfMsg = " of each generation"
+    }
     const startAlgorithmMsg = [(<>Running our genetic algorithm:<br/>
       - Evolving over {AlgorithmVars.NUM_GENERATIONS} generations,<br/>
       - With a population of {AlgorithmVars.POPULATION_SIZE} individuals,<br/>
-      - Displaying the best candidate of each generation</>)
+      - Displaying the best candidate {bestCandidateOfMsg}</>)
     ]
     this.setState({
         isExecutionInProgress: true,
