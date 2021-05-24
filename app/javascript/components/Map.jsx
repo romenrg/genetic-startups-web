@@ -131,7 +131,7 @@ class Map extends Component {
     })
     if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmVars.NUM_GENERATIONS - 1) {
       this.setState(state => {
-        const outputMessages = [<>Selected Individual for generation {generation}:
+        const outputMessages = [<>Selected Individual for generation {generation+1}:
                                  [{this.selectedIndividualPerGen[generation].individual.genotype}], <br/>
                                  came from {this.selectedIndividualPerGen[generation].individual.from}, <br/>
                                  score: {this.selectedIndividualPerGen[generation].score}</>
@@ -164,7 +164,7 @@ class Map extends Component {
         }
         if (storyCellValues) {
           this.setState(state => {
-            const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
+            const outputMessages = [("Cell: ["+(cell.row+1)+","+(cell.col+1)+"] : "+
               ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
               storyCellValues[step].msg+" : "+
               storyCellValues[step].score
@@ -174,7 +174,7 @@ class Map extends Component {
         }
         else if (this.state.display === DisplayOptions.DISPLAY_ALL.value) {
           this.setState(state => {
-            const outputMessages = [("Cell: ["+cell.row+","+cell.col+"] : "+
+            const outputMessages = [("Cell: ["+(cell.row+1)+","+(cell.col+1)+"] : "+
                                     ACTIONS[Algorithm.getCellAction(cell.row, cell.col, this.state.data)].name+" : "+
                                     Algorithm.calculateScore(Algorithm.getCellAction(cell.row, cell.col, this.state.data)))
                                    ].concat(state.outputMessages)
