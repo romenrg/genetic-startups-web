@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M16CYL4D4Z"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHE8M2FJ4X"></script>
     <script>
       const host = window.location.hostname;
       if (host !== "localhost") {
@@ -11,7 +11,11 @@
           dataLayer.push(arguments);
         }
         gtag('js', new Date());
+        // Old property GA4 code
         gtag('config', 'G-M16CYL4D4Z');
+        // New property with both GA4 + UA linked codes
+        gtag('config', 'G-CHE8M2FJ4X');
+        gtag('config', 'UA-195383087-1');
       }
     </script>
     <title>Genetic Startups - Startup world navigated by genetic algorithms</title>
