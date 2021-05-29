@@ -9,6 +9,7 @@ import {
   Link,
   withRouter
 } from "react-router-dom";
+import FrontEndDiagram from "images/GeneticStartups_ReactComponents.png"
 
 const Action = (props) => {
   let values = props.action.values.map((value, i) => {
@@ -227,6 +228,7 @@ const Info = (props) => {
             <h4>The React frontend</h4>
             <p>The React applications is written in Javascript and is composed of several components, as described in
               the following diagram:</p>
+            <img src={FrontEndDiagram}/>
           </div>
         </TabPanel>
         <TabPanel>
