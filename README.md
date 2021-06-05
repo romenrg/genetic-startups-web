@@ -11,9 +11,6 @@ This application, is running in [www.geneticstartups.com](https://www.geneticsta
 genetic algorithms, the problem of startup life choices; the map generation; the algorithm; the architecture; and the 
 usage; can be found in the [info section](https://geneticstartups.com/info) of the site.
 
-The algorithm improves choices over generations, trying to achieve the most successful outcome possible for the startup; 
-in a map where investors, product launches, team members, sad news and sales, among other events, appear.
-
 ## Technical documentation
 
 ### Configuration
@@ -42,5 +39,5 @@ in a map where investors, product launches, team members, sad news and sales, am
       
 ## Contribute
 
-Any constructive contributions (i.e. PRs or issues) are welcome. Please feel free to propose changes following 
+Any constructive contributions (e.g. PRs or issues) are welcome. Please feel free to propose changes following 
 [the contributing guideline](CONTRIBUTING.md).
