@@ -10,6 +10,7 @@ import {
   withRouter
 } from "react-router-dom";
 import FrontEndDiagram from "images/GeneticStartups_ReactComponents.png"
+import BackEndDiagram from "images/GeneticStartups_RailsComponents.png"
 
 const Action = (props) => {
   let values = props.action.values.map((value, i) => {
@@ -222,13 +223,19 @@ const Info = (props) => {
               <li>A React frontend application</li>
             </ol>
             <h4>The Rails backend</h4>
-            <p>The backend Rails application includes the functionality to generate the random maps.</p>
-            <p>It also exposes the API, which includes the main "content" operation, used to generate the content of a
-               random map, with the number of rows and columns specified as parameters.</p>
+            <p>The backend Rails application includes the functionality to generate random maps and is also in
+               charge of rendering the index page, which then will load the React application.</p>
+            <p>It also exposes the API. Its operations include the "probabilities" endpoint, that returns the
+               probabilities each action has of appearing, per quarter of the map. And it also includes the main
+               "content" endpoint (the one used to generate the random content of a map, given the number of rows and
+               columns, as parameters).</p>
+            <img src={BackEndDiagram}/>
             <h4>The React frontend</h4>
             <p>The React applications is written in Javascript and is composed of several components, as described in
               the following diagram:</p>
             <img src={FrontEndDiagram}/>
+            <p>On the styling side, the Sass CSS pre-processor is used, along with our custom styles and the Tailwind
+               CSS and UI frameworks.</p>
           </div>
         </TabPanel>
         <TabPanel>
