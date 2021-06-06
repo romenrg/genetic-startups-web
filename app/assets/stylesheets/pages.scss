@@ -67,6 +67,16 @@ nav {
 
 #main {
   padding: 1rem;
+  .intro-container {
+    display: flex;
+    span {
+      flex-grow: 1;
+    }
+    .intro-help {
+      text-align: right;
+      color: #0d6efd
+    }
+  }
   .map {
     padding: 1rem 0;
     .grid-container {

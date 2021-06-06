@@ -6,6 +6,9 @@ import ACTIONS from "../algorithm/Actions";
 import axios from "axios";
 import SettingsPanel from "./SettingsPanel";
 import DisplayOptions from "../algorithm/Display"
+import {
+  Link
+} from "react-router-dom";
 
 const MapConsts = {
   DEFAULT_NUM_COLS: 20,
@@ -347,7 +350,10 @@ class Map extends Component {
     let storyButton = <ActionButton clickHandler={this.handleStory} isExecutionInProgress={this.state.isExecutionInProgress} text="Tell story" hide={!this.state.isEvolutionCompleted}/>
     return (
       <>
-        <span>Here's a map for startups to navigate:</span>
+        <div className="intro-container">
+          <span className="intro-text">Here's a map for startups to navigate:</span>
+          <Link to="/info/map"><span className="intro-help material-icons material-icons-outlined">help_outline</span></Link>
+        </div>
         <div className={className}>
           <div className="grid-container" style={cssValues}>
             {cells}
