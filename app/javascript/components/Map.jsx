@@ -62,7 +62,7 @@ class Map extends Component {
 
   cellTagFromActionValue(action) {
     let cellClass = "cell-content cell-"+ACTIONS[action].name.toLowerCase().replace(/\s/g, '');
-    return <div className={cellClass}/>
+    return <div role="img" aria-label={ACTIONS[action].name} title={ACTIONS[action].name} className={cellClass}/>
   }
 
   drawBoard() {
