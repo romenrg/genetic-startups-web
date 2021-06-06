@@ -2,6 +2,9 @@ import React from 'react'
 import { render, fireEvent, screen, waitForElement, waitFor } from '@testing-library/react'
 import Map from "../Map";
 import { createServer } from "miragejs"
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 let server
 
@@ -33,13 +36,13 @@ afterAll(() => {
 
 describe("Map component tests", () => {
   it("There should be a 'numRows * numCols' number of cells", async () => {
-    const { container } = render(<Map areSettingsShown={false} setAreSettingsShown={undefined}/>)
+    const { container } = render(<Router><Map areSettingsShown={false} setAreSettingsShown={undefined}/></Router>)
     await waitFor(() => {
       expect(container.querySelectorAll(".cell").length).toBe(160)
     })
   });
   it("There should be visited classes when evolution has started", async () => {
-    const { container } = render(<Map areSettingsShown={false} setAreSettingsShown={undefined}/>)
+    const { container } = render(<Router><Map areSettingsShown={false} setAreSettingsShown={undefined}/></Router>)
     await waitFor(() => {
       expect(container.querySelectorAll(".cell").length).toBe(160)
     })
