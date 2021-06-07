@@ -57,7 +57,7 @@ class Map extends Component {
 
   initialOutputMessage(data) {
     return [<>Map of {data.numCols} columns and {data.numRows} rows.
-      Its cell values, in row-major order, are: <span className="array-data">[{data.cells.toString()}]</span>.
+      Its cell values, in column-major order, are: <span className="array-data">[{data.cells.toString()}]</span>.
       <Link to="/info/map"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>
       <br/>
       For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(data.numRows)} genes
