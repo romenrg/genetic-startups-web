@@ -57,10 +57,14 @@ class Map extends Component {
 
   initialOutputMessage(data) {
     return [<>Map of {data.numCols} columns and {data.numRows} rows.
-      Its cell values, in row-major order, are: [{data.cells.toString()}]<br/>
+      Its cell values, in row-major order, are: <span className="array-data">[{data.cells.toString()}]</span>.
+      <Link to="/info/map"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>
+      <br/>
       For each individual solution, the first {Algorithm.calculateNumOfBinaryDigitsForStartCell(data.numRows)} genes
       will encode the "starting cell chromosome". Then, in groups of {Algorithm.calculateNumBinaryDigitsForEachStep()} genes,
-      the remaining {Algorithm.getNumSteps(data)} "step chromosomes" will be encoded.</>]
+      the remaining {Algorithm.getNumSteps(data)} "step chromosomes" will be encoded.
+      <Link to="/info/algorithm"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>
+      </>]
   }
 
   cellTagFromActionValue(action) {
@@ -134,8 +138,11 @@ class Map extends Component {
     })
     if (this.state.display !== DisplayOptions.DISPLAY_FINAL_INDIVIDUAL_ONLY.value || generation === AlgorithmVars.NUM_GENERATIONS - 1) {
       this.setState(state => {
-        const outputMessages = [<>Selected Individual for generation {generation+1}:
-                                 [{this.selectedIndividualPerGen[generation].individual.genotype}], <br/>
+        const outputMessages = [<>Selected Individual for generation {generation+1}:&nbsp;
+                                 <span className="array-data">
+                                   [{this.selectedIndividualPerGen[generation].individual.genotype}]
+                                 </span>
+                                 <Link to="/info/algorithm"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>, <br/>
                                  came from {this.selectedIndividualPerGen[generation].individual.from}, <br/>
                                  score: {this.selectedIndividualPerGen[generation].score}</>
                                ].concat(state.outputMessages)
@@ -321,14 +328,24 @@ class Map extends Component {
     let selectedIndividual = this.selectedIndividualPerGen[AlgorithmVars.NUM_GENERATIONS - 1];
     let story = Algorithm.story(selectedIndividual.individual.genotype, this.state.data)
     this.setState(state => {
-      const outputMessages = [<>Story based on the selected individual: [{selectedIndividual.individual.genotype}].<br/>
+      const outputMessages = [<>Story based on the selected individual:
+        <span className="array-data">
+          [{selectedIndividual.individual.genotype}]
+        </span>
+        <Link to="/info/algorithm"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>
+        .<br/>
         Average score: {selectedIndividual.score}</>]
         .concat(state.outputMessages[state.outputMessages.length - 1])
       return { outputMessages }
     })
     await this.drawPathOfBestCandidate(story.cellsValues)
     this.setState(state => {
-      const outputMessages = [(<>Final story scores for [{selectedIndividual.individual.genotype}]:<br/>
+      const outputMessages = [(<>Final story scores for&nbsp;
+        <span className="array-data">
+          [{selectedIndividual.individual.genotype}]
+        </span>
+        <Link to="/info/algorithm"><span className="output-help material-icons material-icons-outlined">help_outline</span></Link>
+        :<br/>
         - Its calculated average score was {selectedIndividual.score};<br/>
         - But its actual story score has been {story.totalStoryScore}</>)
       ].concat(state.outputMessages)
@@ -352,7 +369,7 @@ class Map extends Component {
       <>
         <div className="intro-container">
           <span className="intro-text">Here's a map for startups to navigate:</span>
-          <Link to="/info/map"><span className="intro-help material-icons material-icons-outlined">help_outline</span></Link>
+          <Link className="intro-help" to="/info/map"><span className="material-icons material-icons-outlined">help_outline</span></Link>
         </div>
         <div className={className}>
           <div className="grid-container" style={cssValues}>

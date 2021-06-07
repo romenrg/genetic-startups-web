@@ -69,13 +69,19 @@ nav {
   padding: 1rem;
   .intro-container {
     display: flex;
-    span {
+    align-items: center;
+    justify-content: center;
+    span, a {
       flex-grow: 1;
     }
     .intro-help {
-      text-align: right;
-      color: #0d6efd
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+  }
+  .intro-help, .output-help {
+    text-align: right;
   }
   .map {
     padding: 1rem 0;
@@ -151,11 +157,25 @@ nav {
         display: block;
         margin-bottom: 1rem;
         color: #666;
+        .output-help {
+          font-size: 0.9rem;
+          vertical-align: text-bottom;
+          margin-left: 0.15rem;
+          padding-bottom: 0.05rem;
+          color: #666;
+        }
+        .array-data {
+          font-size: 0.8rem;
+          color: #666;
+        }
         &:first-child {
           opacity: 0.0;
           animation: fadeIn ease-in 0.75s forwards;
           font-weight: 500;
           color: #333;
+          .output-help {
+            color: #0d6efd;
+          }
         }
         &:last-child {
           margin-bottom: 0;
