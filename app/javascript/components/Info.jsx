@@ -140,13 +140,18 @@ const Info = (props) => {
           <div id="info-cell-types" className="tab-panel">
             <h3>The map</h3>
             <p>As a starting point, we generate a random map that represents the space of possible choices for the
-            life of the startup. The relevant aspects of the creation of the map are:</p>
+            life of the startup.</p>
+            <p>From an implementation perspective, this map is represented as an array of integers. The array actually
+               represents a matrix, in <a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order#:~:text=In%20row%2Dmajor%20order%2C%20the,column%20in%20column%2Dmajor%20order.">
+               column-major order</a>. The values of its elements represent the actions, based on their order in the
+               "cell-types" table below <em>(e.g. 0 = "none"; 1 = "advisor",...).</em></p>
+            <p>The key aspects of the creation of the map are:</p>
             <ul className="text-list">
               <li><HashLink to="#cell-types">Cell types (actions)</HashLink></li>
               <li><HashLink to="#action-probabilities">Action probabilities per quarter</HashLink></li>
             </ul>
             <h4 id="cell-types">Cell types (actions)</h4>
-            <p>In the map, different cell types appear. Each one represents a possible event in the life of a
+            <p>In the map, different cell types (faces / "emojis") appear. Each one represents a possible event in the life of a
               startup, having a different impact. For that reason, each type has 10 possible values,
               and a score (calculated as the average of those possible values):</p>
             <div className="info-grid actions-grid">
