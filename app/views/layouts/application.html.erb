@@ -25,6 +25,9 @@
     <meta name="author" content="Romén Rodríguez-Gil">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <meta name="turbolinks-visit-control" content="reload">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -38,7 +41,7 @@
           rel="stylesheet">
   </head>
 
-  <body>
+  <body data-turbolinks="false">
     <%= yield %>
   </body>
 </html>

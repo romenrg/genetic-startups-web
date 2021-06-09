@@ -7,7 +7,8 @@ import axios from "axios";
 import SettingsPanel from "./SettingsPanel";
 import DisplayOptions from "../algorithm/Display"
 import {
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 
 const MapConsts = {
@@ -396,4 +397,4 @@ class Map extends Component {
   }
 }
 
-export default Map
+export default withRouter(Map)
