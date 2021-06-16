@@ -240,7 +240,8 @@ const Info = (props) => {
               the following diagram:</p>
             <img src={FrontEndDiagram}/>
             <p>On the styling side, the Sass CSS pre-processor is used, along with our custom styles and the Tailwind
-               CSS and UI frameworks.</p>
+               CSS and UI frameworks. Also, for the custom styles, modern layouts are used: the responsive map uses a
+               grid layout and several other elements use a flex layout.</p>
           </div>
         </TabPanel>
         <TabPanel>
