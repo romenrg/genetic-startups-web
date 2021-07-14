@@ -13,6 +13,17 @@ usage; can be found in the [info section](https://geneticstartups.com/info) of t
 
 ## Technical documentation
 
+### Architecture
+
+Below a front-end and a back-end diagram are displayed. Please refer to the 
+[architecture piece](https://geneticstartups.com/info/architecture) in the info section of the app for more details.
+
+#### Front-end
+![Front-end diagram](app/assets/images/GeneticStartups_RailsComponents.png)
+
+#### Back-end
+![Back-end diagram](app/assets/images/GeneticStartups_ReactComponents.png)
+
 ### Configuration
 
  * This project was created with: `rails new . --webpack=react`
