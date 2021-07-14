@@ -3,7 +3,7 @@
 of startups. The algorithm improves startup choices over generations, to achieve the most successful outcome possible; 
 in a map where investors, product launches, team members, sad news and sales, among other options, appear.
 
-![Showing a startup story in the web app: geneticstartups.com](https://s3-eu-west-1.amazonaws.com/genetic-startups/info/gs-web-ran-story.png "Showing story option of best candidate in web app")
+![Showing a startup story in the web app: geneticstartups.com](https://s3-eu-west-1.amazonaws.com/genetic-startups/info/gs-web-ran-algorithm-story.png "Showing story option of best candidate in web app")
 
 ## Introduction
 
