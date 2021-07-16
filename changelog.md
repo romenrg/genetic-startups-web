@@ -19,11 +19,35 @@ placeholder for the next version.
 
 ## Release Change History
 
-### [Unreleased] [1.0.0] - YYYY-MM-DD (First version)
+### [Unreleased] [X.Y.Z] - YYYY-MM-DD (Placeholder for next version)
 
 #### Added
 
 * .
+
+#### Changed
+
+* .
+
+#### Removed
+
+* .
+
+### [1.0.0] - 2021-07-15 (First version)
+
+#### Added
+
+* Front-end (React):
+  * Map generate on load
+  * Action buttons for "running algorithm" and "generating new map"
+  * Output section below the map to provide information on the map, its encoding; and the different candidate paths 
+  defined by the algorithm in each iteration; as well as the description of the story
+  * Information section in a separate path, describing the algorithm, the map, usage, architecture and contributing
+  guidelines
+* API (REST):
+  * Including 2 endpoints: content and probabilities
+* Backend (Rails):
+  * Controllers for serving pages and for the API endpoints
 
 #### Changed
 
