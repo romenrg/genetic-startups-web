@@ -24,7 +24,8 @@ To submit changes:
  * Make sure your local copy is updated.
  * From your updated master branch, create a new dedicated branch locally (`git checkout -b <name-of-new-branch>`).
  * Add your changes (and/or new tests cases), ideally doing [_micro commits_](https://lucasr.org/2011/01/29/micro-commits/).
- * Make sure tests are passing, running `python3 -m unittest`
+ * Make sure tests are passing (refer to README)
+ * Make the necessary changes to the changelog, proposing a new version (if applicable), following semantic versioning  
  * Once your changes are completed, push them to your fork.
  * Finally, create a [GitHub Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) from your fork, by using GitHub's web interface.
 
