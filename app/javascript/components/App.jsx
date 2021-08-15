@@ -16,7 +16,10 @@ const App = () => {
       <Router>
         <div className="react-app">
           <nav>
-            <h1><Link to="/">Genetic Startups</Link></h1>
+            <div className="title-div">
+              <h1><Link to="/">Genetic Startups</Link></h1>
+              <span className="caption">Genetic Algorithms learning to navigate the bumpy world of startups</span>
+            </div>
             <ul>
               <li>
                 <Link to="/info">Information</Link>
