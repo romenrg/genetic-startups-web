@@ -61,10 +61,10 @@ Below a front-end and a back-end diagram are displayed. Please refer to the
 [architecture piece](https://geneticstartups.com/info/architecture) in the info section of the app for more details.
 
 #### Front-end
-![Front-end diagram](app/assets/images/GeneticStartups_RailsComponents.png)
+![Front-end diagram](app/assets/images/GeneticStartups_ReactComponents.png)
 
 #### Back-end
-![Back-end diagram](app/assets/images/GeneticStartups_ReactComponents.png)
+![Back-end diagram](app/assets/images/GeneticStartups_RailsComponents.png)
 
 ### Development
 
