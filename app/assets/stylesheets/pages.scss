@@ -206,8 +206,8 @@ nav {
     display: grid;
     border: 1px solid #eee;
     box-sizing: border-box;
-    word-break: break-word;
     font-size: 0.8rem;
+    overflow-x: auto;
     >span, >div {
       padding: 0.5rem 0.25rem;
       display: flex;
