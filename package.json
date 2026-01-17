@@ -41,5 +41,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "resolutions": {
+    "node-sass": "npm:sass@^1.49.0"
   }
 }

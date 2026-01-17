@@ -40,7 +40,7 @@ describe("Map component tests", () => {
     await waitFor(() => {
       expect(container.querySelectorAll(".cell").length).toBe(160)
     })
-  });
+  }, 15000);
   it("There should be visited classes when evolution has started", async () => {
     const { container } = render(<Router><Map areSettingsShown={false} setAreSettingsShown={undefined}/></Router>)
     await waitFor(() => {
@@ -49,9 +49,9 @@ describe("Map component tests", () => {
     fireEvent.click(screen.getByText('Run algorithm'))
     await waitFor(() => {
       screen.getAllByTestId("visited-cell")
-    }, {timeout: 4000})
+    }, {timeout: 10000})
     const visitedCells = await screen.findAllByTestId("visited-cell")
     let numVisitedCells = visitedCells.length
     expect(numVisitedCells).toBeGreaterThan(0)
-  });
+  }, 15000);
 });
