@@ -5,16 +5,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [ '2.6', '2.7' ]
+        ruby-version: [ '2.7', '3.0' ]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Bundle install
-      run: bundle install
+        bundler-cache: true
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '16.x'
+    - name: Install JS dependencies
+      run: yarn install
     - name: Webpacker compilation
       run: NODE_ENV=test bundle exec rails assets:precompile
     - name: Run Ruby tests
