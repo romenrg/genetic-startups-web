@@ -1,0 +1,14 @@
+.git
+.gitignore
+node_modules
+tmp
+log
+.bundle
+vendor/bundle
+public/assets
+public/packs
+coverage
+.env*
+*.log
+.DS_Store
+out

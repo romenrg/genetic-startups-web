@@ -2,6 +2,7 @@
   "name": "genetic-startups-web",
   "private": true,
   "dependencies": {
+    "sass": "^1.49.0",
     "@babel/preset-react": "^7.12.10",
     "@headlessui/react": "^1.0.0",
     "@rails/actioncable": "^6.0.0",

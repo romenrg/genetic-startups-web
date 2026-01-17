@@ -1,11 +1,9 @@
-FROM ruby:2.6.6
+FROM ruby:2.7
 
-# Install nodejs
-RUN apt-get update -qq && apt-get install -y nodejs
-
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
-    nodejs \
+# Install nodejs 16 (compatible with node-sass)
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+  && apt-get update -qq \
+  && apt-get install -qq --no-install-recommends nodejs \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
