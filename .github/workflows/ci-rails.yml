@@ -1,5 +1,8 @@
 name: CI - Rails Tests
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, master]
+  pull_request:
 jobs:
   test-ruby:
     runs-on: ubuntu-latest
