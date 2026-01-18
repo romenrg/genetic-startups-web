@@ -28,6 +28,7 @@ RUN bundle install
 
 COPY . /usr/src/app
 
+RUN yarn config set network-timeout 120000
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
