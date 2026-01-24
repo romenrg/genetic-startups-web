@@ -7,6 +7,23 @@ in a map where investors, product launches, team members, sad news and sales, am
 
 This application, is running in [www.geneticstartups.com](https://www.geneticstartups.com)
 
+## Quick Start
+
+**Using Docker** (recommended):
+```bash
+docker build -t genetic-startups .
+docker run -p 3000:3000 genetic-startups
+```
+
+**From source** (requires Ruby 2.7+, Node.js 16+):
+```bash
+bundle install
+yarn install
+rails s
+```
+
+Then visit http://localhost:3000
+
 ## Introduction: Genetic Algorithms
 
 Within the field of Artificial Intelligence (AI), Genetic Algorithms (GA) are grouped in the larger class of evolutionary algorithms. And are often used as a search heuristic, to generate solutions to optimization problems.
@@ -81,14 +98,10 @@ Below a front-end and a back-end diagram are displayed. Please refer to the
 
 #### Deploying the application
 
-##### Locally, for development
-`rails s`
+See [Quick Start](#quick-start) for basic usage. Additional options:
 
-##### In a container
- * First build it:  `docker build -t <imageName> .`
- * Then run it: `docker run -p 3000:3000 <imageName>`
-    * Running in background and redirecting logs example:
-      `nohup docker run -p 3000:3000 romenrg/geneticstartups:0.0.1 > ../logs/logs.log 2>&1 & disown`
+ * Running container in background with logs:
+   `nohup docker run -p 3000:3000 genetic-startups > logs.log 2>&1 & disown`
 
 ## Contribute
 Any constructive contributions (e.g. PRs or issues) are welcome. Please feel free to propose changes following 
