@@ -2,11 +2,11 @@
 
 This page provides information about contributing code to this repository.
 
-The preferred way of contributing is by means of [Pull Requests](#pull-requests-creation-guidelines) (PRs), but if you cannot afford the time, [issues](https://github.com/romenrg/genetic-startups-web/issues) are also welcome, provided you follow the Code of Conduct as mentioned below.
+The preferred way of contributing is by means of [Pull Requests](#pull-requests-creation-guidelines) (PRs), but if you cannot afford the time, issues are also welcome, provided you follow the Code of Conduct as mentioned below.
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the following [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact@romenrg.com](mailto:contact@romenrg.com).
+This project and everyone participating in it is governed by the following [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to the project maintainers.
 
 ## Pull Requests creation guidelines
 

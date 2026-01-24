@@ -115,7 +115,7 @@ const Info = (props) => {
         <TabPanel>
           <div id="info-intro" className="tab-panel">
             <h3>Introduction</h3>
-            <p>This application, by <a href="https://www.romenrg.com">romenrg</a>, is based on Genetic Algorithms. It
+            <p>This application is based on Genetic Algorithms. It
                calculates possible lives of a startup, given a random reality represented as a map.</p>
             <p>The algorithm improves choices over generations, trying to achieve the most successful outcome possible
                for the startup; in a map where investors, product launches, team members, sad news and sales, among
@@ -284,8 +284,7 @@ const Info = (props) => {
             <h3>Contributing</h3>
             <p>Genetic Startups is open source software. It is also a work in progress and a hobby project, so many
                improvements can be made.</p>
-            <p>Constructive contributions are welcome. Please refer to the <a href="https://github.com/romenrg/genetic-startups-web/blob/main/CONTRIBUTING.md">
-               contributing guidelines in the GitHub repository</a> for more information on how to contribute.</p>
+            <p>Constructive contributions are welcome. Please refer to the contributing guidelines (CONTRIBUTING.md) for more information on how to contribute.</p>
           </div>
         </TabPanel>
       </Tabs>
